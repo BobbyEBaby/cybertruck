@@ -29,5 +29,25 @@ Tiny single-page web tools that solve one annoying problem. Examples in the wild
 ## First concrete experiment idea
 "AI Prompt Cleaner" — paste a messy LLM prompt, get a normalized version (strip markdown noise, collapse whitespace, optionally rephrase). Targets the AI tooling subreddit audience which is large and growing.
 
-## Refreshed
-_(pending B-004)_
+## Refreshed 2026-04-10
+
+**Donation conversion rates for free indie tools** (verified 2026-04-10):
+- **Free games:** 1–3% of *downloads* convert to a tip (10k downloads → 100–300 tippers). This is the *high* end because games create emotional engagement. Tools convert worse.
+- **Free browser tools / utilities:** typical conversion is **0.1%–0.5%**. One Indie Hackers writeup reported **1 tip per 4,206 visitors** (~0.024%) on Buy Me a Coffee — this is more representative for utility tools than the game numbers above.
+- Implication: a browser tool needs **high four-digit visits per month** to make even modest tip income ($10–50). A *viral* moment (~50k visits) might net ~$100. This is order-of-magnitude expectations, not a forecast.
+
+**Best tip rail for browser tools** (lowest fees, simplest setup):
+1. **Ko-fi** — 0% on direct support. Best.
+2. **Buy Me a Coffee** — 5% flat. Acceptable.
+3. **Gumroad** — 10%+ + $0.50, only good for *paid* products not tips.
+4. **GitHub Sponsors** — 0% from GitHub, but eligibility-gated and slow.
+
+**Strategy for prompt-cleaner specifically:**
+- Embed a Ko-fi link in the footer (not a popup, not a paywall)
+- Add a USDC tip option pointing at the Kraken Solana address (`EQwtTPe3GfcAGAiQAh3AxmCZ1WAyCviDsNnBmfCaQwf7`) for crypto-native users
+- Honest expectation: first 30 days probably $0–$5 in tips. Real signal is *traffic*, not money.
+
+**Sources:**
+- [Indie Hackers — 1/4206 BMaC conversion rate](https://www.indiehackers.com/post/1-4206-conversion-rate-on-buy-me-a-coffee-1ed21a2288)
+- [Itch.io revenue guide 2026 — generalistprogrammer.com](https://generalistprogrammer.com/tutorials/how-to-make-money-on-itchio-indie-game-guide)
+- [Buy Me a Coffee alternatives 2026 — fourthwall](https://fourthwall.com/blog/buy-me-a-coffee-alternatives-for-creators)

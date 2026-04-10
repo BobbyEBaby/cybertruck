@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Prompt Cleaner — strip the fluff, keep the signal</title>
+<meta name="description" content="A free browser tool that cleans messy AI prompts: strips markdown, normalizes whitespace, removes filler, and estimates token count. 100% client-side, no signup, no tracking.">
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1d222c;
+    --border: #2a313d;
+    --text: #e7ebf3;
+    --text-dim: #8b94a7;
+    --accent: #7cf9c7;
+    --accent-dim: #2c5e4a;
+    --warn: #ffb86b;
+    --danger: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    padding: 1.5rem 1.25rem 0.75rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 {
+    margin: 0 0 0.25rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent { color: var(--accent); }
+  .tagline {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 760px) {
+    main { grid-template-columns: 1fr; }
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+  }
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+  }
+  .panel-head h2 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .stats {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .stats span { color: var(--text); }
+  textarea {
+    flex: 1;
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+    font-size: 0.88rem;
+    resize: vertical;
+    min-height: 280px;
+  }
+  textarea:focus {
+    outline: none;
+    border-color: var(--accent-dim);
+  }
+  .controls {
+    grid-column: 1 / -1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem;
+  }
+  .controls h3 {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+    margin-bottom: 0.85rem;
+  }
+  .toggles label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggles input { accent-color: var(--accent); }
+  .button-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  button {
+    background: var(--accent);
+    color: #0a1410;
+    border: 0;
+    border-radius: 6px;
+    padding: 0.55rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  button:hover { filter: brightness(1.07); }
+  button.secondary {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  button.secondary:hover { background: #232936; }
+  button.ghost {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.25rem 2.5rem;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .copied {
+    color: var(--accent);
+    font-size: 0.82rem;
+    margin-left: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .copied.show { opacity: 1; }
+  details {
+    margin-top: 0.85rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+  details summary {
+    cursor: pointer;
+    color: var(--text-dim);
+    user-select: none;
+  }
+  details summary:hover { color: var(--text); }
+  details p { margin: 0.6rem 0 0; color: var(--text-dim); }
+  details code {
+    background: var(--bg);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI <span class="accent">Prompt</span> Cleaner</h1>
+  <p class="tagline">Strip the fluff, keep the signal. 100% client-side. No signup. No tracking.</p>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Input</h2>
+      <div class="stats" id="inStats">0 chars · ~0 tokens</div>
+    </div>
+    <textarea id="input" placeholder="Paste your messy prompt here. Markdown headers, code fences, &quot;could you please&quot; filler, double spaces, blank lines — whatever you've got. Then hit Clean."></textarea>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Cleaned</h2>
+      <div class="stats" id="outStats">0 chars · ~0 tokens · <span id="saved">0%</span> saved</div>
+    </div>
+    <textarea id="output" readonly placeholder="Your cleaned prompt will appear here."></textarea>
+  </section>
+
+  <section class="controls">
+    <h3>Cleaning options</h3>
+    <div class="toggles">
+      <label><input type="checkbox" id="opt-md" checked> Strip markdown</label>
+      <label><input type="checkbox" id="opt-ws" checked> Normalize whitespace</label>
+      <label><input type="checkbox" id="opt-blank" checked> Collapse blank lines</label>
+      <label><input type="checkbox" id="opt-filler" checked> Remove filler phrases</label>
+      <label><input type="checkbox" id="opt-quotes"> Smart→straight quotes</label>
+      <label><input type="checkbox" id="opt-trim" checked> Trim line edges</label>
+    </div>
+    <div class="button-row">
+      <button id="clean">Clean ↓</button>
+      <button id="copy" class="secondary">Copy cleaned</button>
+      <span id="copied" class="copied">copied</span>
+      <button id="swap" class="ghost">Use cleaned as input</button>
+      <button id="clear" class="ghost">Clear</button>
+    </div>
+    <details>
+      <summary>What does each option do?</summary>
+      <p><strong>Strip markdown</strong> — removes <code>**bold**</code>, <code>*italic*</code>, <code># headers</code>, code fences, <code>[links](url)</code>, list bullets. Keeps the actual text.</p>
+      <p><strong>Normalize whitespace</strong> — collapses runs of spaces and tabs into single spaces.</p>
+      <p><strong>Collapse blank lines</strong> — at most one blank line in a row.</p>
+      <p><strong>Remove filler phrases</strong> — strips polite hedging like "could you please", "I would like you to", "I was wondering if", "kindly", etc. Saves tokens, doesn't change meaning.</p>
+      <p><strong>Smart→straight quotes</strong> — converts curly quotes/apostrophes to ASCII. Useful for code prompts.</p>
+      <p><strong>Trim line edges</strong> — removes leading/trailing whitespace per line.</p>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <p>
+    Token counts are rough estimates (chars ÷ 4). Real tokenizers vary by model.
+    Built as part of an experiment in <a href="https://github.com/BobbyEBaby/cybertruck">honest automated indie shipping</a>.
+    No analytics, no cookies, no upload — your text never leaves this tab.
+  </p>
+</footer>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const input = $('input');
+  const output = $('output');
+  const inStats = $('inStats');
+  const outStats = $('outStats');
+  const saved = $('saved');
+  const copied = $('copied');
+
+  // Filler phrases — case-insensitive, whole-phrase, common LLM-prompt politeness
+  const FILLERS = [
+    /\b(could you|can you|would you|will you)\s+(please\s+)?/gi,
+    /\bplease\s+/gi,
+    /\bkindly\s+/gi,
+    /\bi (would|'d) (like|love|appreciate)( it)?( if you( could| would)?)?\s+(to\s+)?/gi,
+    /\bi (was|am) wondering (if|whether)\s+(you (could|would|might)\s+)?/gi,
+    /\bif (it'?s|it is) not too much (trouble|to ask)\b[, ]*/gi,
+    /\bif you don'?t mind\b[, ]*/gi,
+    /\bthanks? (in advance|so much|a lot)\b[!. ]*/gi,
+    /\bthank you( very much)?\b[!. ]*/gi,
+    /\bjust\s+/gi,
+    /\bsimply\s+/gi,
+    /\bbasically\s+/gi,
+    /\bactually\s+/gi,
+    /\bobviously\s+/gi,
+  ];
+
+  function stripMarkdown(s) {
+    // code fences ```...```
+    s = s.replace(/```[\s\S]*?```/g, (m) => m.replace(/```/g, '').replace(/^\w*\n?/, ''));
+    // inline code `x`
+    s = s.replace(/`([^`]+)`/g, '$1');
+    // images ![alt](url) → alt
+    s = s.replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1');
+    // links [text](url) → text
+    s = s.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
+    // headers
+    s = s.replace(/^#{1,6}\s+/gm, '');
+    // bold + italic
+    s = s.replace(/\*\*([^*]+)\*\*/g, '$1');
+    s = s.replace(/__([^_]+)__/g, '$1');
+    s = s.replace(/\*([^*]+)\*/g, '$1');
+    s = s.replace(/_([^_]+)_/g, '$1');
+    // bullets and ordered list markers
+    s = s.replace(/^\s*[-*+]\s+/gm, '');
+    s = s.replace(/^\s*\d+\.\s+/gm, '');
+    // blockquotes
+    s = s.replace(/^\s*>\s?/gm, '');
+    // horizontal rules
+    s = s.replace(/^\s*[-*_]{3,}\s*$/gm, '');
+    return s;
+  }
+
+  function normalizeWhitespace(s) {
+    return s.replace(/[ \t]+/g, ' ');
+  }
+
+  function collapseBlankLines(s) {
+    return s.replace(/\n{3,}/g, '\n\n');
+  }
+
+  function removeFiller(s) {
+    let out = s;
+    for (const re of FILLERS) out = out.replace(re, '');
+    // tidy any double spaces or stray punctuation we left behind
+    out = out.replace(/\s{2,}/g, ' ');
+    out = out.replace(/\s+([.,!?;:])/g, '$1');
+    return out;
+  }
+
+  function straightenQuotes(s) {
+    return s
+      .replace(/[\u2018\u2019\u201A\u201B]/g, "'")
+      .replace(/[\u201C\u201D\u201E\u201F]/g, '"')
+      .replace(/[\u2013\u2014]/g, '-')
+      .replace(/\u2026/g, '...');
+  }
+
+  function trimLines(s) {
+    return s.split('\n').map((l) => l.replace(/[ \t]+$/g, '').replace(/^[ \t]+/g, '')).join('\n');
+  }
+
+  function clean(text) {
+    let out = text;
+    if ($('opt-md').checked) out = stripMarkdown(out);
+    if ($('opt-quotes').checked) out = straightenQuotes(out);
+    if ($('opt-filler').checked) out = removeFiller(out);
+    if ($('opt-ws').checked) out = normalizeWhitespace(out);
+    if ($('opt-trim').checked) out = trimLines(out);
+    if ($('opt-blank').checked) out = collapseBlankLines(out);
+    return out.trim();
+  }
+
+  function tokens(s) { return Math.ceil(s.length / 4); }
+  function fmtStats(s) { return `${s.length.toLocaleString()} chars · ~${tokens(s).toLocaleString()} tokens`; }
+
+  function updateInputStats() { inStats.textContent = fmtStats(input.value); }
+  function updateOutputStats() {
+    const inLen = input.value.length || 1;
+    const pct = Math.max(0, Math.round((1 - output.value.length / inLen) * 100));
+    outStats.innerHTML = `${output.value.length.toLocaleString()} chars · ~${tokens(output.value).toLocaleString()} tokens · <span>${pct}%</span> saved`;
+  }
+
+  function run() {
+    output.value = clean(input.value);
+    updateOutputStats();
+  }
+
+  $('clean').addEventListener('click', run);
+  input.addEventListener('input', updateInputStats);
+
+  $('copy').addEventListener('click', async () => {
+    if (!output.value) return;
+    try {
+      await navigator.clipboard.writeText(output.value);
+      copied.classList.add('show');
+      setTimeout(() => copied.classList.remove('show'), 1200);
+    } catch (e) {
+      output.select();
+      document.execCommand('copy');
+    }
+  });
+
+  $('swap').addEventListener('click', () => {
+    if (!output.value) return;
+    input.value = output.value;
+    updateInputStats();
+    output.value = '';
+    updateOutputStats();
+  });
+
+  $('clear').addEventListener('click', () => {
+    input.value = '';
+    output.value = '';
+    updateInputStats();
+    updateOutputStats();
+  });
+
+  // Recompute on option change if there's already cleaned output
+  document.querySelectorAll('.toggles input').forEach((el) =>
+    el.addEventListener('change', () => { if (input.value) run(); })
+  );
+
+  // Init
+  updateInputStats();
+  updateOutputStats();
+})();
+</script>
+</body>
+</html>

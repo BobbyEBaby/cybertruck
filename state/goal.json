@@ -1,0 +1,20 @@
+{
+  "target_usd": 100000,
+  "purpose": "Tesla Cybertruck purchase for Robert Evans",
+  "balance_usd": 0,
+  "lifetime_revenue_usd": 0,
+  "lifetime_costs_usd": 0,
+  "started_on": "2026-04-10",
+  "currency": "USD",
+  "savings_rail": "USDC on Solana, deposited to Kraken",
+  "savings_address": "EQwtTPe3GfcAGAiQAh3AxmCZ1WAyCviDsNnBmfCaQwf7",
+  "milestones": [
+    { "amount": 1,      "label": "first dollar earned",      "hit_on": null },
+    { "amount": 100,    "label": "first $100",               "hit_on": null },
+    { "amount": 1000,   "label": "first $1k",                "hit_on": null },
+    { "amount": 10000,  "label": "first $10k",               "hit_on": null },
+    { "amount": 50000,  "label": "halfway",                  "hit_on": null },
+    { "amount": 100000, "label": "Cybertruck fund complete", "hit_on": null }
+  ],
+  "notes": "Update balance_usd whenever the user reports verified revenue in human_outbox/. Costs must remain 0 unless the user explicitly authorizes a spend in human_outbox/."
+}

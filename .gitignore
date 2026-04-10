@@ -1,0 +1,20 @@
+# Credentials and secrets — never commit
+.env
+.env.*
+secrets/
+*.key
+*.pem
+*.token
+
+# Build artifacts
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Local-only state
+human_outbox/processed/
+human_inbox/processed/
+*.local.md

@@ -92,6 +92,51 @@ Once setup is done, the agent publishes via APIs/CLIs, not by handing files to t
   5. The agent detects it would have to spend money and is refusing
 - The user is **not** expected to upload anything, reply to every run, or babysit the agent.
 
+## Wiki layer (added 2026-04-11)
+
+The repo now has an LLM-wiki layer at `wiki/`. It is a compounding, interlinked markdown knowledge base that the agent maintains in parallel with the operational loop. It has three sub-layers:
+
+- **`raw/`** — immutable source material the user drops in for ingestion (articles, papers, book notes, transcripts). Read-only to the agent. Never modify files in `raw/`.
+- **`wiki/`** — the agent-owned knowledge graph. Categories: `wiki/rebellions/` (entity pages for each rebellion), `wiki/themes/` (one page per recurring theme), `wiki/figures/` (historical people), `wiki/concepts/` (structural ideas, events, institutions), `wiki/sources/` (per-source summary pages).
+- **`wiki/index.md`** — the content catalog. Read this first when answering any query against the wiki. Update it on every wiki write.
+
+### Wiki conventions
+- **Obsidian `[[wiki-link]]` syntax** is the default — not `[text](path.md)`. This is what makes Obsidian backlinks and graph view work.
+- **Every wiki page has YAML frontmatter** with at minimum a `kind:` field (`rebellion`, `theme`, `figure`, `concept`, `source`, `index`, `wiki-root`).
+- **Short is fine** — 200 words with 5 good cross-links beats 2000 words with none.
+- **Contradictions are flagged in place, not resolved silently** — use a `> **Contradiction:** ...` blockquote with links to both sources.
+- **Nothing is canonical forever** — when a newer source updates an older claim, edit the page and note the change in `state/runlog.md`.
+
+### Wiki operations
+
+**Ingest.** The user drops a source into `raw/` and tells you to process it. The flow:
+1. Read the source
+2. Summarize it briefly (you can ask the user what to emphasize if it's unclear)
+3. Create or update a `wiki/sources/<slug>.md` page
+4. Update affected entity/concept/theme pages across the wiki (a single source might touch 10–15 pages)
+5. Update `wiki/index.md`
+6. Append an entry to `state/runlog.md` with the format `## YYYY-MM-DD HH:MM ingest | <source title>`
+
+**Query.** The user asks a question against the wiki. The flow:
+1. Read `wiki/index.md` first to find relevant pages
+2. Follow links into the relevant pages
+3. Synthesize an answer with `[[wiki-link]]` citations to the sources
+4. If the answer is substantial and has compounding value, offer to file it back into the wiki as a new page (usually in `wiki/concepts/` or `wiki/rebellions/`)
+
+**Lint.** Periodic health check. The user triggers it explicitly. The flow:
+1. Scan for contradictions between pages
+2. Flag stale claims (older than the most recent source on the topic)
+3. Find orphan pages (no inbound links)
+4. Find concepts mentioned in multiple pages but lacking their own page (create stubs)
+5. Suggest missing cross-references
+6. Report everything as a single markdown report the user reads; the user approves specific fixes before you apply them
+
+### What the wiki is NOT
+- Not a journal. Private thoughts go elsewhere (currently nowhere — the user doesn't have a private space yet).
+- Not a replacement for `state/` — state is short-term operational; wiki is long-term knowledge.
+- Not a replacement for `experiments/` — experiments are in-progress products; wiki is their distilled context and references.
+- Not a place for promotional copy, drafts, or ephemeral content.
+
 ## What "done" means
 The Cybertruck goal is hit when `state/goal.json.balance >= goal.target`. Until then, every run moves one step closer or learns one thing that prevents a wasted step later. That is the only definition of progress.
 

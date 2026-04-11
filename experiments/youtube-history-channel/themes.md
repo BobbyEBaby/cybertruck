@@ -4,12 +4,14 @@ Every episode of Breaking Points is analyzed across **six recurring themes** tha
 
 ## The six themes
 
-1. **Economy** — inflation, price shocks, food scarcity, taxation, wealth concentration
-2. **Royalty / leadership** — legitimacy crisis, succession disputes, absent or weak ruler, visible excess
-3. **Government** — corruption, failed justice, representation denied, bureaucratic overreach
-4. **Wars** — military overreach, veteran grievances, conscription, border losses
-5. **Environment** — famine, plague, weather shocks, resource depletion
-6. **Debt** — sovereign, personal, religious (indulgences, tithes)
+Each theme has a dedicated wiki page that accumulates observations across every rebellion added to the database:
+
+1. **[[../../wiki/themes/economy|Economy]]** — inflation, price shocks, food scarcity, taxation, wealth concentration
+2. **[[../../wiki/themes/royalty|Royalty / leadership]]** — legitimacy crisis, succession disputes, absent or weak ruler, visible excess
+3. **[[../../wiki/themes/government|Government]]** — corruption, failed justice, representation denied, bureaucratic overreach
+4. **[[../../wiki/themes/wars|Wars]]** — military overreach, veteran grievances, conscription, border losses
+5. **[[../../wiki/themes/environment|Environment]]** — famine, plague, weather shocks, resource depletion
+6. **[[../../wiki/themes/debt|Debt]]** — sovereign, personal, religious (indulgences, tithes)
 
 ## Intensity scale
 For each theme, rate **0–3**:
@@ -22,7 +24,7 @@ For each theme, rate **0–3**:
 
 | # | Episode | Year | Place | Econ | Royal | Govt | War | Env | Debt | Total | Outcome |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Peasants' Revolt (Wat Tyler) | 1381 | England | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
+| 1 | [[../../wiki/rebellions/peasants-revolt-1381\|Peasants' Revolt (Wat Tyler)]] | 1381 | England | 3 | 1 | 3 | 2 | 3 | 2 | **14** | `partial_win` |
 
 _(more episodes will fill this table as they ship)_
 

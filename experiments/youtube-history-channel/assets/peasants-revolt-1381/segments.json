@@ -1,6 +1,6 @@
 {
   "slug": "peasants-revolt-1381",
-  "generated_at": "2026-04-11T18:06:24Z",
+  "generated_at": "2026-04-11T19:37:46Z",
   "segments": [
     {
       "index": 1,
@@ -8,7 +8,7 @@
       "voice": "xtts-v2-clone-hoch",
       "section": "Script",
       "file": "segment_01_narrator.mp3",
-      "char_count": 0
+      "char_count": 1479
     },
     {
       "index": 2,
@@ -16,7 +16,7 @@
       "voice": "xtts-v2-clone-hoch",
       "section": "Script",
       "file": "segment_02_narrator.mp3",
-      "char_count": 0
+      "char_count": 1719
     },
     {
       "index": 3,
@@ -24,7 +24,7 @@
       "voice": "xtts-v2-clone-hoch",
       "section": "Script",
       "file": "segment_03_narrator.mp3",
-      "char_count": 0
+      "char_count": 1392
     },
     {
       "index": 4,
@@ -32,7 +32,7 @@
       "voice": "xtts-v2-clone-hoch",
       "section": "Script",
       "file": "segment_04_narrator.mp3",
-      "char_count": 0
+      "char_count": 1468
     },
     {
       "index": 5,
@@ -40,7 +40,7 @@
       "voice": "xtts-v2-clone-hoch",
       "section": "Script",
       "file": "segment_05_narrator.mp3",
-      "char_count": 0
+      "char_count": 1651
     },
     {
       "index": 6,
@@ -48,7 +48,7 @@
       "voice": "xtts-v2-clone-hoch",
       "section": "Script",
       "file": "segment_06_narrator.mp3",
-      "char_count": 0
+      "char_count": 1761
     },
     {
       "index": 7,
@@ -56,10 +56,9 @@
       "voice": "xtts-v2-clone-hoch",
       "section": "Script",
       "file": "segment_07_narrator.mp3",
-      "char_count": 0
+      "char_count": 1348
     }
   ],
-  "voice_clone_source": "Hoch/@hoch-01/an3h8u7okLY at 00:30 (12s sample)",
-  "spoken_name": "Breaking Points",
-  "note": "Voice clone sanity check. Audio still contains the old series name because the XTTS process loaded the script into memory before the rename. Regenerate with the Popular Uprisings script after voice is confirmed."
+  "voice_clone_source": "Hoch/@hoch-01/an3h8u7okLY at 00:30",
+  "spoken_name": "Popular Uprisings"
 }

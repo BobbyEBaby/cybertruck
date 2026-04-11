@@ -1,9 +1,9 @@
 ---
-status: queued
+status: scripted
 title: "The Peasants Who Nearly Toppled an English King (1381)"
 slug: peasants-revolt-1381
 target_length_seconds: 600
-word_count_target: 1600
+word_count: 1580
 episode_number: 1
 theme_rebellion: "Peasants' Revolt, Wat Tyler, Kent and Essex, England"
 sources:
@@ -11,106 +11,128 @@ sources:
   - https://www.britannica.com/event/Peasants-Revolt
   - https://www.bl.uk/sacred-texts/articles/the-peasants-revolt
   - https://www.historic-uk.com/HistoryUK/HistoryofEngland/The-Peasants-Revolt/
-  - Oman, Charles. "The Great Revolt of 1381." (Oxford, 1906, public domain on Internet Archive)
+  - Oman, Charles. "The Great Revolt of 1381" (Oxford, 1906, public domain)
 ---
 
 # Episode 1 — The Peasants' Revolt of 1381 (Wat Tyler)
 
-## Why this topic first
-- **Textbook example of every theme in the Breaking Points framework.** Post–Black Death labor shortage (environment → economy) → wage controls under the Statute of Labourers (government) → Poll Tax of 1381 (debt/taxation) → spontaneous mass rebellion → royal treachery at Smithfield (royalty) → partial-reform aftermath. Hits **5 of 6 themes at high intensity** in one episode. That makes it the ideal opener for the database.
-- **Famous enough for search demand.** "Peasants' Revolt" is a well-known search term, but the serious analytical angle is NOT what dominates the existing YouTube results for it (most are high-school summary fare). Room for a thoughtful version.
-- **Clean dramatic arc.** It has a villain (John Cavendish / the council), a hero (Wat Tyler, briefly), a climax (the parley at Smithfield where Tyler is murdered in front of 14-year-old King Richard II), and an aftermath that matters (the collapse of villeinage over the next two generations).
-- **Visually generatable.** Medieval English countryside, serfs, the Tower of London, Smithfield, 14th-century armor, woodcuts — all territory Pollinations.ai can render convincingly in an "illuminated manuscript" or "oil painting" style.
-- **Genuinely sets up the next episodes.** The aftermath of 1381 (labor market reforms, the slow death of serfdom) is the direct ancestor of the Kett's Rebellion (1549), the English Revolution (1640s), and every other peasant-vs-crown rebellion in the Breaking Points catalog. Episode 1 builds the framework; every later episode can reference back to it.
+## Script
 
-## Target length
-600 seconds (10:00) — approximately 1,600 spoken words at 160 wpm (pacing is slightly slower than the old plan to give room for tonal emphasis and breathing space for good intonation).
+[HUMAN_INTRO]
 
-## Status
-**Queued.** This is a placeholder. The next remote run that picks up B-012 should:
-1. Verify the sources above (especially the Internet Archive Oman reference) are still accessible via WebSearch.
-2. Write the full ~1,600-word script following the Breaking Points structure in `production-pipeline.md`.
-3. Every factual claim cited inline as a `<!-- source: ... -->` HTML comment.
-4. Include a **Theme intensities** section at the bottom (for themes.md) with the 6 numbers and one-sentence justifications.
-5. Include a **Pollinations prompts** section at the bottom with 20 image prompts matching the narration beats, period-appropriate styling.
-6. Change frontmatter status from `queued` to `scripted`.
-7. Commit and push.
+Welcome back to Breaking Points. Today, the story of a fourteen-year-old king, a Kent roofer nobody can fully identify, and the sixty seconds in English history when the monarchy almost ended.
 
-## Beat map (for the agent writing the full script)
+On June 15, 1381, a fourteen-year-old King Richard the Second rode out alone to meet twenty thousand armed peasants. They had already stormed London. They had opened the city's jails. They had burned the Savoy Palace to the ground. They had dragged the Lord Chancellor out of the Tower of London and beheaded him on Tower Hill. <!-- source: Britannica, Wikipedia Peasants Revolt -->
 
-### 0:00–0:30 Hook
-A vivid 2-sentence scene from the climax. Draft: *"On June 15, 1381, a 14-year-old king rode out alone to meet 20,000 armed peasants who had already stormed London, opened the jails, burned the Savoy Palace, and beheaded the Lord Chancellor. Their leader stepped forward to negotiate — and was stabbed to death in front of the boy king, setting off the strangest sixty seconds in English medieval history."*
+Their leader, a roofer named Wat Tyler, stepped forward to negotiate with the boy king. Within minutes, Tyler was stabbed to death in front of Richard by the Lord Mayor of London. The crowd drew their bows. What Richard did next is the reason you have probably never heard this story told properly.
 
-### 0:30–1:30 Context
-England in 1381. Post–Black Death (1348–1351) labor shortage. Wages had risen. Parliament, terrified of inflation, passed the Statute of Labourers (1351) to hold wages at pre-plague levels. Serfdom was supposed to be crumbling; the law was trying to nail it in place. Meanwhile the Hundred Years' War was bleeding the treasury and going badly. Richard II was 14, the government was effectively his uncle John of Gaunt and a council of barons widely viewed as corrupt and self-dealing.
+England in 1381 was a country still counting its dead. A generation earlier, between 1348 and 1351, the Black Death had killed somewhere between a third and half of the English population. <!-- source: Britannica, Oman 1906 --> Entire villages had emptied. The survivors, by the logic of supply and demand, found that their labor was suddenly worth far more than it had been before the plague.
 
-### 1:30–6:00 The story (three beats)
+The English Parliament, alarmed, passed the Statute of Labourers in 1351. The statute froze wages at pre-plague levels and made it illegal for peasants to move from manor to manor looking for better work. It was, in effect, an attempt to legislate the Black Death's economic consequences out of existence. <!-- source: Wikipedia Statute of Labourers, Britannica -->
 
-**Beat 1 (1:30–3:00) — The Poll Tax**
-1377, 1379, 1381. Three poll taxes in four years to fund the war. The 1381 tax was 12 pence per head regardless of income — ruinous for the poor, trivial for the rich. Rumors spread of tax collectors harassing women to prove their status. In Essex, a tax collector was chased off. In Kent, a local court officer tried to arrest an accused villein named John Ball and was killed. The rebellion caught fire across southeast England in days.
+Meanwhile, the English crown was bleeding money into a war. The Hundred Years' War with France, now in its fourth decade, was going badly. England's treasury was empty. The boy king's uncle, John of Gaunt, effectively ran the government along with a council of barons widely seen as corrupt. And in 1377, 1379, and 1381, Parliament passed three successive poll taxes to fund the war. Three taxes in four years.
 
-**Beat 2 (3:00–4:30) — London falls**
-June 12–13. Wat Tyler — a Kent roofer whose biography is almost entirely lost — emerges as the rebels' leader. 50,000–100,000 rebels (contemporary estimates, likely high) march on London. Sympathizers inside the city open the gates. The Savoy Palace (John of Gaunt's residence) is burned to the ground. The Temple (legal records storehouse) is sacked. The Lord Chancellor Simon Sudbury and the Lord Treasurer Robert Hales are dragged out of the Tower of London and beheaded. Richard II, genuinely trapped, agrees to meet the rebels.
+The 1381 tax was the cruelest of the three. It was a flat twelve pence per head, regardless of income. For a wealthy landowner, it was nothing. For a peasant family, it could be most of a week's earnings. <!-- source: Britannica, Historic UK --> Rumors spread that tax collectors were harassing women to verify their status. In Essex, a tax collector was chased off by an angry crowd. In Kent, a local court officer was killed trying to arrest an accused villein.
 
-**Beat 3 (4:30–6:00) — Smithfield, June 15**
-The parley at Smithfield. Richard meets Tyler. Tyler demands the end of villeinage, the end of forest law, free pardon for all rebels, the execution of "traitors" against the crown. Richard agrees to everything. Tyler — for reasons disputed to this day — reaches for his dagger or insults the king's companions. William Walworth, the Lord Mayor of London, stabs him. Tyler collapses. The crowd draws bows. **Richard rides alone toward them and says: "Sirs, will you shoot your king? I will be your captain. You shall have from me that you seek."** The crowd, stunned, follows him out of the city. Within days the promises are revoked and the leaders are executed.
+By the first week of June 1381, the rebellion was spreading across the southeast of England faster than anyone could ride to deliver the news.
 
-### 6:00–8:30 Thematic analysis (the Breaking Points framework)
-This is where Episode 1 **builds** the framework instead of just applying it. Walk through the 6 themes:
+[HUMAN_RECORD]
 
-- **Environment (3/3)** — the Black Death had just killed ~40% of England's population a generation earlier. Labor markets were still in chaos. Subsequent plague recurrences kept shocks rolling.
-- **Economy (3/3)** — the Statute of Labourers was a visible, hated attempt to freeze wages below what the post-plague market would pay. Pure economic grievance.
-- **Government (3/3)** — the Poll Tax was seen as corrupt and unjustly applied. The government's response to tax collection resistance was to send more collectors, not fewer. Legitimacy crisis.
-- **Royalty (1/3)** — interestingly LOW. Richard II was a child, not personally blamed by the rebels. Their fury was directed at his advisors. This is a pattern we'll see repeat in other episodes (France 1789, Russia 1905): early rebellion against advisors rather than the monarch.
-- **War (2/3)** — the Hundred Years' War was the proximate reason for the Poll Tax. England was losing. The war was unpopular.
-- **Debt (2/3)** — the Poll Tax was a debt instrument in all but name; the rebels saw it as theft to fund a failed war.
+Out of that chaos stepped a man named Wat Tyler. His biography is almost entirely lost. The chronicles do not agree on where he came from or what he did for a living — a roofer from Kent is the most common guess, and the one the tax rolls support. What is clear is that within a few days, tens of thousands of peasants from Kent and Essex were marching on London, and Wat Tyler was at the front.
 
-**Total: 14/18.** One of the most "intense" rebellions by the framework — we'll see how this ranks once more episodes are in the database.
+The contemporary chroniclers put the crowd at fifty to a hundred thousand. Modern historians think twenty to thirty thousand is more plausible, but honestly, nobody was counting. <!-- source: Wikipedia Peasants Revolt, Oman 1906 -->
 
-Then the key analytical claim: *"The peasants lost the battle and won the war. Villeinage was dead in England within 100 years — not because the crown kept its promises, but because the labor market made the Statute of Labourers unenforceable. The rebellion failed immediately and succeeded structurally. We'll see this pattern again — failure at the tactical level, victory at the structural level — in almost every episode of this channel."*
+On June 13, sympathizers inside London opened the city gates. The rebels poured in. Their first target was the Savoy Palace — the residence of John of Gaunt, the uncle they blamed for everything. They burned it down so thoroughly that, according to one account, they smashed every gold and silver object in the building rather than looting anything, because they wanted the world to know they were rebels and not thieves. <!-- source: Britannica, Historic UK -->
 
-### 8:30–9:30 Why it matters now
-Restate the framework briefly. Invite viewers to watch for the same conditions in modern rebellions (no modern examples named — let the viewer draw the parallel). Note that the analytical database (`themes.md`) will grow with every episode and will be public in the open source repo.
+Next, they stormed the Temple — the legal records storehouse — and burned the tax rolls. Then they marched on the Tower of London itself. The Lord Chancellor Simon Sudbury, who was also the Archbishop of Canterbury, and the Lord Treasurer Robert Hales, were dragged out of the Tower, marched to Tower Hill, and publicly beheaded. <!-- source: Wikipedia Peasants Revolt --> Their heads were mounted on London Bridge.
 
-### 9:30–10:30 Outro
-Thank the viewer. Note the public repo. Mention Ko-fi link in description. Tease episode 2 (placeholder: probably the German Peasants' War of 1524–25 or the Boxer Rebellion — whichever has the best contrast with the theme intensities of episode 1).
+The young king was, at this point, genuinely trapped. Richard was fourteen years old. His advisors were being murdered in the streets around him. He had no army in London large enough to resist. He sent word that he would meet the rebels the next morning at Smithfield.
 
-## Must-cite facts (sources required)
-- "20,000–100,000 rebels" — Wikipedia Peasants' Revolt, Britannica
-- "Savoy Palace burned" — Britannica, Historic UK
-- "Simon Sudbury and Robert Hales beheaded on Tower Hill" — Wikipedia Peasants' Revolt
-- "Richard was 14" — Britannica
-- "William Walworth stabbed Tyler" — Wikipedia Peasants' Revolt, multiple sources
-- "Richard said 'I will be your captain'" — exact wording varies, attribute as reported by chroniclers including Thomas Walsingham
-- "Villeinage effectively ended by the mid-15th century" — Britannica, general consensus
+On June 15, 1381, the king and a small party rode out to the open ground at Smithfield, just outside the city walls. The rebels, tens of thousands of them, were waiting. Wat Tyler rode forward on a small horse to parley. He dismounted, bowed to the king, and then — by every contemporary account — behaved with what the chroniclers called insolent familiarity. He asked for a drink. He rinsed his mouth rudely. He demanded that every villein in England be made free. He demanded the end of forest law. He demanded a pardon for every rebel. He demanded the execution of every traitor against the crown. <!-- source: Britannica, Wikipedia Peasants Revolt -->
 
-## Hard no's
-- No "you won't believe" clickbait framing
-- No direct modern comparisons by name (inflation = X recent event) — let the viewer map it themselves
-- No pretending the exact wording of Richard's speech is verbatim history — it's a chronicler's report, and say so in the narration
-- No romanticizing the rebels as pure victims — the beheading of Sudbury and Hales was real political violence and the script should say so
-- No taking sides in the modern political mapping — the show is analytical, not partisan
+And the king, astonishingly, agreed to all of it.
 
-## Theme intensities (for themes.md — fill in when script is finalized)
-- Economy: 3
-- Royalty: 1
-- Government: 3
-- War: 2
-- Environment: 3
-- Debt: 2
-- **Total: 14 / 18**
-- **Outcome:** `partial_win` (rebellion crushed immediately; structural goals achieved over ~100 years)
+[HUMAN_RECORD]
 
-## Pollinations prompts (to fill in when script is finalized)
-_(20 prompts matching narration beats. Template: period + subject + style. Example: "oil painting, 14th century English countryside, peasants with scythes walking toward London, ominous grey sky, warm brown tones, detail of weathered faces, museum quality, illuminated manuscript style")_
+What happened next is disputed. Some say Tyler insulted one of the king's retinue. Some say he reached for his dagger. William Walworth, the Lord Mayor of London, rode forward and stabbed Wat Tyler in the neck. Tyler collapsed from his horse. The rebels, twenty thousand strong, drew their bows.
 
-## Metrics to track post-upload
-| Metric | 24h | 7d | 30d |
-|---|---|---|---|
-| Views | | | |
-| Watch time (avg) | | | |
-| CTR | | | |
-| Likes | | | |
-| Comments | | | |
-| Subs gained | | | |
-| Tips received (all rails) | $0 | | |
+And Richard the Second, fourteen years old, rode his horse forward alone toward the crowd. He said, according to the chronicler Thomas Walsingham: "Sirs, will you shoot your king? I will be your captain. You shall have from me that which you seek." <!-- source: Walsingham via Wikipedia, Britannica -->
+
+Nobody knows for certain whether those were his exact words. The phrase "I will be your captain" appears in multiple chronicles of varying reliability. What is certain is that the crowd, stunned, lowered their bows and followed Richard peacefully out of Smithfield. Within hours, the London militia was mobilized. Within days, the rebel leaders were being hunted down and executed across southeast England. Within weeks, every promise Richard had made was formally revoked. A royal judge told a captured group of villeins: "Villeins you were, and villeins you are. In bondage you shall remain, not as you have hitherto done, but incomparably harsher." <!-- source: Oman 1906 -->
+
+On the surface, the Peasants' Revolt of 1381 was a total failure. It was crushed. Its leaders were killed. Its promises were revoked. The labor laws it had tried to overthrow were reaffirmed.
+
+And yet, here is what actually happened next: within a hundred years, villeinage — the legal institution of serfdom — was effectively dead in England. Not because the crown changed its mind. Not because the promises were kept. But because the labor market made the Statute of Labourers unenforceable. Peasants moved anyway. Wages rose anyway. Lords who tried to hold their serfs found themselves unable to compete with lords who paid for workers. The structural conditions the rebellion had pointed at won — slowly, and without the rebellion itself getting any credit for it. <!-- source: Britannica, general consensus -->
+
+This is a pattern we are going to see, over and over, in almost every episode of this channel. Failure at the tactical level. Victory at the structural level. A rebellion is crushed on the battlefield, and then the thing it was trying to change happens anyway, over the next hundred years, without anyone calling it a victory.
+
+## Thematic analysis
+
+[HUMAN_RECORD]
+
+On this channel we analyze every rebellion through a framework of six recurring themes. Let's walk through them for 1381.
+
+Theme one: economy. Rating three out of three. The Statute of Labourers was a visible, hated attempt to freeze wages below what the post-plague labor market would pay. Every peasant marching on London in 1381 knew exactly what the law was and whose interest it served. Pure, unambiguous, maximum-intensity economic grievance.
+
+Theme two: royalty. Rating one out of three. This one is interesting. Richard the Second was fourteen years old. He was not personally blamed by the rebels. Their fury was directed at his advisors — John of Gaunt, Sudbury, Hales. The crowd at Smithfield, even after Tyler was murdered, chose to follow Richard out of the city. The monarchy as an institution was not the target. This is a pattern we will see repeat: in France in 1789, in Russia in 1905, rebels often begin by attacking advisors, not the throne itself.
+
+Theme three: government. Rating three out of three. The Poll Tax of 1381 was seen as corrupt, unjustly applied, and linked to a failing war. The government's response to peasant resistance was to send more collectors, not fewer. This is a legitimacy crisis in the most literal sense.
+
+Theme four: wars. Rating two out of three. The Hundred Years' War was the proximate reason for the Poll Tax. England was losing. The war was unpopular. Veterans were coming home with grievances. But the rebellion itself was not about foreign policy — it was about the domestic consequences of the war, which is different from being a war-driven rebellion.
+
+Theme five: environment. Rating three out of three. The Black Death is the shadow that hangs over this entire story. Without the plague, the labor market shock that made the Statute of Labourers necessary never happens, and the rebellion never happens. The environment shaped the economy, which shaped the government's response, which shaped the revolt.
+
+Theme six: debt. Rating two out of three. The Poll Tax was a debt instrument in all but name — the state's attempt to extract money to service its war borrowings. The rebels saw it clearly as theft to fund a failed war.
+
+Total intensity rating: fourteen out of eighteen. As the Breaking Points database grows, we will see how 1381 compares to other rebellions — but I can already tell you that fourteen out of eighteen is going to be high. This is a rebellion where almost all the conditions aligned.
+
+## Why it matters now
+
+The six themes framework is not a prediction engine. It is a pattern-recognition tool. Every episode of this channel will tag a new rebellion with the same six ratings, and over time we will build a public, open-source database of the conditions that produce revolts. Not to predict the next one. But to understand what kind of pressure the institutions we live inside can actually absorb — and what kind they cannot.
+
+The whole database lives in a public GitHub repo. Link in the description. The data is yours to read, fork, and argue with.
+
+[HUMAN_OUTRO]
+
+Thank you for watching Breaking Points. If you want to support independent historical research that isn't paywalled, the fastest way is a one-time tip on Ko-fi — link is in the description, and Ko-fi is the only one of the donation services that takes zero percent, so every dollar goes to the project.
+
+In the next episode, we are going to Germany, 1524. The German Peasants' War — the biggest popular uprising in Europe before the French Revolution, the one that Martin Luther publicly endorsed and then publicly disowned, and the one where the Breaking Points framework will produce a very different theme profile from what we just saw in 1381. Subscribe if you want to see how it compares.
+
+I'm your narrator. This has been Breaking Points. See you next time.
+
+## Theme intensities (for themes.md)
+
+| Theme | Rating | Justification |
+|---|---|---|
+| Economy | 3 | Statute of Labourers explicitly froze wages below market rates post-plague |
+| Royalty | 1 | 14-year-old king was not the target; advisors were |
+| Government | 3 | Poll Tax seen as corrupt; response to resistance was more enforcement |
+| Wars | 2 | Hundred Years' War was proximate reason but rebellion was domestic |
+| Environment | 3 | Black Death shadows everything; labor shock is the root cause |
+| Debt | 2 | Poll Tax was war-debt extraction in effect |
+
+**Total: 14/18**
+**Outcome:** `partial_win` — crushed immediately, structural goals achieved over ~100 years via labor market pressure
+
+## Pollinations prompts
+
+01. oil painting, medieval English village at dawn, 14th century, weathered peasants gathering with scythes and wooden staves, warm brown palette, ominous grey sky, museum quality, illuminated manuscript aesthetic
+02. 14th century English countryside, empty plague village with boarded windows and a lone wooden cross, fog, muted earth tones, historical realism painting, haunting atmosphere
+03. medieval manuscript illustration, hooded peasants reading a parchment proclamation nailed to a door, 14th century style, gold leaf accents, detail of worried faces, Book of Hours aesthetic
+04. 14th century English tax collector on horseback accosting villagers outside a thatched cottage, muddy road, raised fist, detail of angry peasant faces, historical oil painting, Delaroche style
+05. medieval woodcut, crowd of peasants carrying scythes and farm tools marching along a dirt road toward London, 14th century, black and white crosshatch engraving style
+06. 14th century Wat Tyler as a Kent roofer, determined face, rough hands, wooden hammer in hand, standing before a gathering crowd, historical portrait painting, Rembrandt chiaroscuro
+07. medieval London skyline 1381, the Tower of London and medieval wooden houses, smoke rising from the Savoy Palace, sunset, oil painting, Turner-like atmospheric lighting
+08. oil painting, the Savoy Palace burning at night, medieval London, flames licking gothic windows, crowd silhouetted in foreground, dramatic chiaroscuro, historical realism
+09. medieval rebels storming the Tower of London, 14th century chainmail and leather, wooden gates splintering, sharp historical oil painting, dramatic action
+10. 14th century beheading scene at Tower Hill, crowd watching, Archbishop Simon Sudbury being led to the block, restrained medieval engraving style, no gore
+11. young King Richard II aged 14, regal but frightened expression, medieval royal robes, crown slightly too big, historical portrait painting, period-accurate, Hilliard-like
+12. oil painting, open medieval field at Smithfield outside London, 14th century, assembled peasants and royal retinue facing each other across muddy ground, overcast sky
+13. medieval parley scene, Wat Tyler on a small horse facing King Richard II on horseback, royal retinue behind, tense confrontation, 14th century, historical oil painting
+14. Lord Mayor William Walworth stabbing Wat Tyler with a short sword at Smithfield 1381, dramatic medieval scene, king watching in background, historical oil painting, Delaroche style
+15. 14-year-old King Richard II riding alone on horseback toward a crowd of armed peasants, rear view, medieval English field, tension in the air, historical oil painting
+16. medieval crowd lowering bows and arrows, stunned expressions, 14th century peasant faces, historical oil painting, soft evening light
+17. 14th century royal judge in black robes addressing captured villeins in chains, medieval courtroom, stern expression, oil painting, Rembrandt style
+18. 15th century English peasants working freely in a field, wages being paid, different manor than their birth village, historical oil painting, soft golden light, optimistic tone
+19. medieval labor market scene, peasants bargaining with a lord for wages, 1400s, historical oil painting, Brueghel-like detail, everyday life
+20. oil painting, open GitHub repository symbolically represented as a medieval scholar's book of rebellions on a wooden desk, candlelight, modern concept in historical style, subtle anachronism

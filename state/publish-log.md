@@ -23,3 +23,11 @@ _(empty — first ship will populate this)_
 - url: https://bobbyebaby.github.io/llm-cost-calculator/
 - experiment: llm-cost-calculator
 - repo: https://github.com/BobbyEBaby/llm-cost-calculator
+
+## 2026-04-11 15:00
+- platform: youtube
+- url: https://www.youtube.com/watch?v=SFen0WYnBy4
+- video_id: SFen0WYnBy4
+- privacy: unlisted
+- experiment: youtube-history-channel
+- episode: peasants-revolt-1381

@@ -1,0 +1,70 @@
+{
+  "slug": "peasants-revolt-1381",
+  "generated_at": "2026-04-11T14:39:46Z",
+  "segments": [
+    {
+      "index": 1,
+      "role": "narrator",
+      "voice": "en-US-GuyNeural",
+      "section": "Script",
+      "file": "segment_01_narrator.mp3",
+      "char_count": 1485
+    },
+    {
+      "index": 2,
+      "role": "narrator",
+      "voice": "en-US-GuyNeural",
+      "section": "Script",
+      "file": "segment_02_narrator.mp3",
+      "char_count": 1556
+    },
+    {
+      "index": 3,
+      "role": "narrator",
+      "voice": "en-US-GuyNeural",
+      "section": "Script",
+      "file": "segment_03_narrator.mp3",
+      "char_count": 1721
+    },
+    {
+      "index": 4,
+      "role": "narrator",
+      "voice": "en-US-GuyNeural",
+      "section": "Script",
+      "file": "segment_04_narrator.mp3",
+      "char_count": 1391
+    },
+    {
+      "index": 5,
+      "role": "narrator",
+      "voice": "en-US-GuyNeural",
+      "section": "Script",
+      "file": "segment_05_narrator.mp3",
+      "char_count": 903
+    },
+    {
+      "index": 6,
+      "role": "thematic",
+      "voice": "en-US-JennyNeural",
+      "section": "Thematic analysis",
+      "file": "segment_06_thematic.mp3",
+      "char_count": 1610
+    },
+    {
+      "index": 7,
+      "role": "thematic",
+      "voice": "en-US-JennyNeural",
+      "section": "Thematic analysis",
+      "file": "segment_07_thematic.mp3",
+      "char_count": 855
+    },
+    {
+      "index": 8,
+      "role": "outro",
+      "voice": "en-US-AriaNeural",
+      "section": "Why it matters now",
+      "file": "segment_08_outro.mp3",
+      "char_count": 1307
+    }
+  ]
+}

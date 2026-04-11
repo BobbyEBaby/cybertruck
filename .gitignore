@@ -18,3 +18,6 @@ __pycache__/
 human_outbox/processed/
 human_inbox/processed/
 *.local.md
+
+# Large derived video artifacts (rebuildable from script + images + tools)
+experiments/youtube-history-channel/assets/**/final.mp4

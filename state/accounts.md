@@ -59,3 +59,11 @@ _(none yet — see human_inbox/0001-setup.md)_
 - Reddit — organic distribution, market research
 - An email used only for these signups (Gmail/Proton)
 - PayPal — needed by most payout flows above
+- **Ko-fi** (0% fee tip rail) — https://ko-fi.com/
+- **Buy Me a Coffee** (5% fee tip rail, wider audience) — https://buymeacoffee.com/
+
+## YouTube
+- **Channel URL:** https://studio.youtube.com/channel/UCv8vMc6ZN9Tkc0K5gx53iAA
+- **Channel ID:** UCv8vMc6ZN9Tkc0K5gx53iAA
+- **Proposed brand name:** Margins of History (niche: obscure/forgotten history)
+- **Needed for automation:** YouTube Data API v3 OAuth refresh token in `.env` as `YOUTUBE_OAUTH_REFRESH_TOKEN`. Until set, uploads are manual drag-and-drop (~2 min/video). See experiments/youtube-history-channel/.

@@ -90,5 +90,36 @@ Top scores from Phase 0:
 **Why:** B-002 (Claude Code Power Prompts) is a single product. Once it ships, having a second asset ready to upload back-to-back is the right move (one-product creators almost never make sales; clusters do). Candidates: "AI agent CLAUDE.md template pack", "Cybertruck-Autopilot-style operating-loop starter kit", "100 prompts for X niche".
 **Next concrete step:** Decide on the second product after B-002 is shipped and we have measurement data. Until then, keep this as a placeholder so the agent doesn't redundantly start it.
 
+### B-012 — Write full script for episode 1 (Dancing Plague of 1518)
+**Status:** [pending] — fully remote-doable, no creds needed
+**Why:** First video of the history channel. Placeholder + beat map already in `experiments/youtube-history-channel/scripts/01-dancing-plague-1518.md`. Agent must: verify sources via WebSearch, write the full ~1,350-word script following the structure in `experiments/youtube-history-channel/production-pipeline.md`, every factual claim cited inline as a comment, change frontmatter status to `scripted`, commit.
+**Definition of done:** `01-dancing-plague-1518.md` contains the full spoken-narration script, ~1,350 words, sectioned per the beat map, with inline source citations.
+
+### B-013 — Build tools/source_images.py (image sourcing helper)
+**Status:** [pending] — fully remote-doable (no creds for LoC/Wikimedia APIs)
+**Why:** Needed before any video can be produced. Given a list of search terms, queries Library of Congress API + Wikimedia Commons API + Internet Archive API, downloads 20+ public-domain images per video, writes a `sources.md` with attribution per image.
+**Next concrete step:** Research each API's endpoint + licensing metadata fields. Write `tools/source_images.py` that takes a video slug and search terms, pulls candidates, filters by license (PD or CC-BY only), downloads to `experiments/youtube-history-channel/assets/<slug>/`, writes `sources.md`.
+
+### B-014 — Build tools/narrate.sh (Edge TTS wrapper)
+**Status:** [pending] — remote-doable if the sandbox has Python + `edge-tts` available
+**Why:** Turns a script file into `narration.mp3`. Uses Microsoft Edge TTS (free, no signup, high quality).
+**Next concrete step:** Verify `edge-tts` pip package is installable in the remote sandbox. Write `tools/narrate.sh` that reads the spoken-narration section of a script file, strips comments/frontmatter, pipes to edge-tts with voice=en-US-GuyNeural, outputs to assets/<slug>/narration.mp3.
+
+### B-015 — Build tools/render_video.py (ffmpeg storyboard → MP4)
+**Status:** [pending] — depends on B-013 and B-014; may require local execution if remote sandbox lacks ffmpeg
+**Why:** Turns images + narration + music into the final 1080p MP4. Ken Burns pan/zoom via ffmpeg zoompan filter.
+**Next concrete step:** Check ffmpeg availability in remote sandbox. If unavailable, mark this task as local-only and flag it in the inbox.
+
+### B-016 — Build tools/youtube_upload.py (YouTube Data API v3 upload helper)
+**Status:** [blocked-on-human] — requires YOUTUBE_OAUTH_REFRESH_TOKEN in `.env`
+**Why:** Automates the upload step so videos ship end-to-end without Robert dragging files into YouTube Studio. Until the token exists, upload is manual.
+**Unblocks:** fully automated weekly video shipping.
+**Handoff:** see the `human_inbox/` note B-012 will write.
+
+### B-017 — Source public-domain images for episode 1 (Dancing Plague)
+**Status:** [pending] — depends on B-012 (script must exist first) AND B-013 (helper must exist first), OR can be done manually
+**Why:** Before rendering, we need ~20 images sourced and attributed. Agent can do this manually via WebSearch if B-013 isn't ready.
+**Next concrete step:** After B-012 is done, search Library of Congress, Wikimedia Commons, and Internet Archive for: "Strasbourg 16th century", "medieval woodcut dancing", "Saint Vitus dance", "16th century Europe engraving", "dance macabre". Download 20+ candidates, filter by license, save to `experiments/youtube-history-channel/assets/dancing-plague-1518/`, write `sources.md`.
+
 ## Done
 _(none yet — note: B-001 prompt-cleaner is shipped externally as of 2026-04-11, see runlog. Should be moved here on a future cleanup pass.)_

@@ -5,7 +5,7 @@ name: "Structural vs. tactical victory"
 
 # Structural vs. tactical victory
 
-The founding thesis of Breaking Points as a channel. Stated in full:
+The founding thesis of Popular Uprisings as a channel. Stated in full:
 
 > **Rebellions rarely win in their own time. But the conditions that cause them almost always win in the century that follows.**
 
@@ -20,7 +20,7 @@ The thesis is: **rebellions almost always lose on the tactical timescale and alm
 
 ## Why it might be true
 
-The six themes Breaking Points tracks ([[../themes/economy]], [[../themes/royalty]], [[../themes/government]], [[../themes/wars]], [[../themes/environment]], [[../themes/debt]]) are **structural**. They are not opinions. They are pressures. When the pressure exceeds what the system can absorb, a rebellion breaks out. Crushing the rebellion does not relieve the pressure. The pressure is still there.
+The six themes Popular Uprisings tracks ([[../themes/economy]], [[../themes/royalty]], [[../themes/government]], [[../themes/wars]], [[../themes/environment]], [[../themes/debt]]) are **structural**. They are not opinions. They are pressures. When the pressure exceeds what the system can absorb, a rebellion breaks out. Crushing the rebellion does not relieve the pressure. The pressure is still there.
 
 Over time, the system has to adapt to the pressure OR the pressure has to be reduced by something exogenous (a new war removes the surplus population, a new plague removes the surplus pressure, etc.). In most historical cases neither of those happens cleanly, and the system adapts — quietly, through a thousand individual decisions, without any single moment that can be called the victory.
 

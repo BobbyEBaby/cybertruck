@@ -1,6 +1,6 @@
 # Themes Tracker — cross-episode analysis database
 
-Every episode of Breaking Points is analyzed across **six recurring themes** that research suggests are the most predictive conditions for rebellion. This file is the accumulated database. **Every episode must update this file** — it's what makes the channel's analytical thesis real instead of just talked-about.
+Every episode of Popular Uprisings is analyzed across **six recurring themes** that research suggests are the most predictive conditions for rebellion. This file is the accumulated database. **Every episode must update this file** — it's what makes the channel's analytical thesis real instead of just talked-about.
 
 ## The six themes
 

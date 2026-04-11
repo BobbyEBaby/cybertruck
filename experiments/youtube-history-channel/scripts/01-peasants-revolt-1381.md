@@ -31,11 +31,11 @@ In the century that follows. Quietly. Without anyone calling it a victory. The t
 
 This channel is about that paradox.
 
-I'm your narrator. This is Breaking Points, episode one, and today we're going to watch twenty thousand peasants storm the greatest city in medieval England. We're going to watch them beheading the Archbishop of Canterbury on Tower Hill. We're going to watch a fourteen-year-old king ride out alone, unarmed, to meet them. And we're going to watch the rebellion collapse, entirely and completely, within twenty-four hours of its high water mark.
+I'm your narrator. This is Popular Uprisings, episode one, and today we're going to watch twenty thousand peasants storm the greatest city in medieval England. We're going to watch them beheading the Archbishop of Canterbury on Tower Hill. We're going to watch a fourteen-year-old king ride out alone, unarmed, to meet them. And we're going to watch the rebellion collapse, entirely and completely, within twenty-four hours of its high water mark.
 
 Then we're going to ask the question that makes this story matter. Because within a century of that defeat, every single thing those peasants were demanding — had happened. Not because the crown kept its word. It didn't. Because the conditions that produced the rebellion... didn't go away when the rebels did.
 
-This is the central thesis of Breaking Points as a channel. We are going to watch rebellion after rebellion fail in its own moment and succeed in the long run. And along the way, we're going to learn to see six recurring conditions that, when they line up, make a revolt almost inevitable. Economy. Royalty. Government. Wars. Environment. Debt. The same six, over and over, across two thousand years.
+This is the central thesis of Popular Uprisings as a channel. We are going to watch rebellion after rebellion fail in its own moment and succeed in the long run. And along the way, we're going to learn to see six recurring conditions that, when they line up, make a revolt almost inevitable. Economy. Royalty. Government. Wars. Environment. Debt. The same six, over and over, across two thousand years.
 
 Let's begin with 1381.
 
@@ -103,7 +103,7 @@ If you want to support independent history research that isn't paywalled, the ch
 
 In the next episode, we are going to Germany, 1524. The German Peasants' War — the largest popular uprising in Europe before the French Revolution. The one that Martin Luther publicly endorsed and then publicly disowned, in writing, within a single year. The intensities are going to look very different from what we just saw in 1381. Subscribe if you want to see the comparison.
 
-I'm your narrator. This has been Breaking Points. Until next time... think carefully about the pressures that haven't gone away.
+I'm your narrator. This has been Popular Uprisings. Until next time... think carefully about the pressures that haven't gone away.
 
 ## Theme intensities (for themes.md)
 

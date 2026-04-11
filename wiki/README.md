@@ -11,7 +11,7 @@ A compounding, interlinked knowledge base maintained by the autopilot. Read abou
 ## Layers
 
 - **[[index]]** — the content catalog. Start here if you're looking for something.
-- **[[rebellions/peasants-revolt-1381|rebellions/]]** — one page per rebellion. The primary entity type for Breaking Points. Each page is analyzed through the six-theme framework.
+- **[[rebellions/peasants-revolt-1381|rebellions/]]** — one page per rebellion. The primary entity type for Popular Uprisings. Each page is analyzed through the six-theme framework.
 - **[[themes/economy|themes/]]** — the six recurring conditions the channel tracks across all rebellions. Each page accumulates observations across every rebellion in the wiki.
 - **[[figures/wat-tyler|figures/]]** — historical people (rulers, rebels, chroniclers). Cross-referenced from rebellion pages.
 - **[[concepts/structural-vs-tactical-victory|concepts/]]** — structural ideas that recur across rebellions (e.g. the Black Death's knock-on effects, the idea that failed rebellions still win).

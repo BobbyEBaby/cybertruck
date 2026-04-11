@@ -15,7 +15,7 @@ The second plague pandemic to strike Europe, arriving in England in 1348 and run
 - Recurred in waves through the late 14th century, keeping mortality high for a generation
 - Left **whole villages empty**, farms untended, labour catastrophically scarce
 
-## Why it matters for Breaking Points
+## Why it matters for Popular Uprisings
 
 The Black Death is the canonical example of the [[../themes/environment]] theme operating at maximum intensity. It is the upstream cause of the [[../rebellions/peasants-revolt-1381]] through a chain of second-order effects:
 

@@ -5,7 +5,7 @@ aka: ["Great Rising", "Wat Tyler's Rebellion"]
 year: 1381
 place: "England (especially Kent and Essex, focused on London)"
 leader: "[[../figures/wat-tyler]]"
-episode: "[[../../experiments/youtube-history-channel/scripts/01-peasants-revolt-1381|Breaking Points Ep. 1]]"
+episode: "[[../../experiments/youtube-history-channel/scripts/01-peasants-revolt-1381|Popular Uprisings Ep. 1]]"
 outcome: partial_win
 intensity_total: 14
 intensities:
@@ -94,6 +94,6 @@ This is the channel's founding thesis, illustrated in purest form: see [[../conc
 
 ## Related content
 
-- Episode script: [[../../experiments/youtube-history-channel/scripts/01-peasants-revolt-1381|Breaking Points Ep. 1 — Why Failed Rebellions Still Win]]
+- Episode script: [[../../experiments/youtube-history-channel/scripts/01-peasants-revolt-1381|Popular Uprisings Ep. 1 — Why Failed Rebellions Still Win]]
 - Live video: https://youtu.be/sBUTZhrbMPU (unlisted, pending review)
 - Themes database: [[../../experiments/youtube-history-channel/themes|themes.md]]

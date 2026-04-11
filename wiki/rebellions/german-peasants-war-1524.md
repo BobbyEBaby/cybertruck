@@ -5,7 +5,7 @@ aka: ["Deutscher Bauernkrieg", "Peasants' War"]
 year: 1524-1525
 place: "Holy Roman Empire, especially Swabia, Franconia, Thuringia, Tyrol, Alsace"
 leader: "[[../figures/thomas-muntzer]] (in Thuringia); [[../figures/sebastian-lotzer]] and [[../figures/christoph-schappeler]] (as authors of the Twelve Articles, in Upper Swabia); no single overall leader"
-episode: "[[../../experiments/youtube-history-channel/scripts/02-german-peasants-war-1524|Breaking Points Ep. 2]]"
+episode: "[[../../experiments/youtube-history-channel/scripts/02-german-peasants-war-1524|Popular Uprisings Ep. 2]]"
 outcome: crushed
 intensity_total: 12
 intensities:
@@ -101,7 +101,7 @@ The [[../figures/martin-luther|Luther]] trajectory compounds this. His Reformati
 
 ## Related content
 
-- Episode script: [[../../experiments/youtube-history-channel/scripts/02-german-peasants-war-1524|Breaking Points Ep. 2 — When The Thesis Breaks]]
+- Episode script: [[../../experiments/youtube-history-channel/scripts/02-german-peasants-war-1524|Popular Uprisings Ep. 2 — When The Thesis Breaks]]
 - Previous episode: [[peasants-revolt-1381|Ep. 1 — Peasants' Revolt of 1381]]
 - Themes database: [[../../experiments/youtube-history-channel/themes|themes.md]]
 - Central concept: [[../concepts/structural-vs-tactical-victory]] (first case where it is stressed)

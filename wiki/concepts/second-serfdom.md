@@ -14,7 +14,7 @@ In much of Western Europe, serfdom had been quietly weakening since the [[black-
 
 In the east, the opposite happened. After the defeat of the [[../rebellions/german-peasants-war-1524|German Peasants' War]], East Prussian and Polish-Lithuanian landlords consolidated estates producing grain for export to Western Europe, and reinforced their legal power over peasant labour. By the 1570s, in some areas, rent and labour obligations reached **60–80% of the peasant's harvest**. <!-- source: https://jacobin.com/2023/12/german-peasants-war-feudalism-class-conflict-reformation --> Peasants were legally bound to the land, forbidden to leave, and required to deliver compulsory labour (robota) on the lord's demesne.
 
-## Why it matters for Breaking Points
+## Why it matters for Popular Uprisings
 
 The second serfdom is the central complication of [[structural-vs-tactical-victory]] as applied to 1525. The channel's thesis is that the pressure underlying a rebellion tends to win structurally in the century after the rebellion is tactically crushed. 1381 in England is the clean illustration. 1525 in the Holy Roman Empire is not — at least, not east of the Elbe. There, the pressure was pushed *harder* for another 250 years, not less hard.
 
@@ -29,7 +29,7 @@ Why the regional divergence? Several factors have been proposed by historians:
 
 The unsustainable rent burdens of the second serfdom eventually drove declining yields, malnutrition, famine, and the return of epidemic disease to Eastern Europe. Some historians argue the chain of pressures helped set up the Thirty Years War (1618–1648), which devastated the same territories a century later.
 
-This is the darker version of the Breaking Points thesis. The conditions did not go away. They got worse. And three generations later they exploded again, harder.
+This is the darker version of the Popular Uprisings thesis. The conditions did not go away. They got worse. And three generations later they exploded again, harder.
 
 ## Sources
 

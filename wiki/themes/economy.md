@@ -5,7 +5,7 @@ theme_id: economy
 
 # Theme — Economy
 
-One of the six recurring conditions Breaking Points tracks across every rebellion. Economy covers **inflation, price shocks, food scarcity, taxation, wealth concentration, and laws that try to hold wages or prices against market pressure**.
+One of the six recurring conditions Popular Uprisings tracks across every rebellion. Economy covers **inflation, price shocks, food scarcity, taxation, wealth concentration, and laws that try to hold wages or prices against market pressure**.
 
 ## How to rate intensity (0–3)
 

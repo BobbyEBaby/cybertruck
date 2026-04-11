@@ -82,7 +82,7 @@ def build_description(slug: str, title: str) -> str:
     but simplified and filled in."""
     return f"""{title}
 
-Episode 1 of Breaking Points — a history channel analyzing rebellions across time through six recurring themes: economy, royalty, government, wars, environment, and debt. Every episode adds one more rebellion to an open public database of the conditions that produce revolts.
+Episode 1 of Popular Uprisings — a history channel analyzing rebellions across time through six recurring themes: economy, royalty, government, wars, environment, and debt. Every episode adds one more rebellion to an open public database of the conditions that produce revolts.
 
 Source code, research notes, and the public themes database:
 https://github.com/BobbyEBaby/cybertruck

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tools/narrate.py — multi-voice Edge TTS narrator for Breaking Points episodes.
+"""tools/narrate.py — multi-voice Edge TTS narrator for Popular Uprisings episodes.
 
 Usage:
     python tools/narrate.py <video-slug>

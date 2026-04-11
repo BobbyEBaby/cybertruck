@@ -26,7 +26,7 @@ The third in a series of head taxes imposed by the English Parliament to finance
 
 ## Why it belongs to three themes at once
 
-The Poll Tax of 1381 is one of the clearest single examples of how the Breaking Points themes overlap in practice. It was simultaneously:
+The Poll Tax of 1381 is one of the clearest single examples of how the Popular Uprisings themes overlap in practice. It was simultaneously:
 
 - **[[../themes/economy]] (3/3)** — a flat tax on the poor
 - **[[../themes/government]] (3/3)** — corrupt in enforcement, tied to a failed administrative apparatus

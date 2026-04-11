@@ -22,7 +22,7 @@ Duke of Lancaster. Third surviving son of Edward III. Uncle of [[richard-ii]]. T
 
 [[richard-ii]] was 14 and personally untargetable (see [[../themes/royalty]] intensity 1/3). [[simon-sudbury]] was the name on the tax. But John of Gaunt was the *symbol* — the visible excess, the wealth concentration, the failing war, the council that ran the king. He was the closest the rebels could come to attacking the system without attacking the crown itself.
 
-This is a recurring pattern Breaking Points will see in future episodes: when the monarch is untouchable (too young, too loved, or too far), rebels pick a proxy — a powerful regent, a royal favorite, an archbishop — and concentrate their rage there. The proxy becomes the lightning rod that protects the throne.
+This is a recurring pattern Popular Uprisings will see in future episodes: when the monarch is untouchable (too young, too loved, or too far), rebels pick a proxy — a powerful regent, a royal favorite, an archbishop — and concentrate their rage there. The proxy becomes the lightning rod that protects the throne.
 
 ## After 1381
 

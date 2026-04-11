@@ -28,14 +28,14 @@ Every episode tells the story of a specific rebellion — pre-Roman to modern �
 
 ## Channel name — three candidates, pick one
 
-- **Breaking Points** — the inflection moments when tolerable grievance becomes revolt
+- **Popular Uprisings** — the inflection moments when tolerable grievance becomes revolt
 - **Powder Keg** — the accumulation of tension that eventually explodes
 - **Rising** — short, direct, evocative of popular movements
 
-**Default: Breaking Points** unless Robert picks a different one. Rationale: names the analytical framework ("what was breaking?") and is already associated with serious editorial content.
+**Default: Popular Uprisings** unless Robert picks a different one. Rationale: names the analytical framework ("what was breaking?") and is already associated with serious editorial content.
 
 ## Video format
-- **Length:** 8–12 minutes. Rationale: enough room for the story + the thematic analysis + the cross-episode "previously on Breaking Points" callbacks; also clears the ≥10 min mid-roll-ad threshold once the channel hits YPP. The 2026 research sweet spot is 7–15 min; 8–12 is the educational-content peak.
+- **Length:** 8–12 minutes. Rationale: enough room for the story + the thematic analysis + the cross-episode "previously on Popular Uprisings" callbacks; also clears the ≥10 min mid-roll-ad threshold once the channel hits YPP. The 2026 research sweet spot is 7–15 min; 8–12 is the educational-content peak.
 - **Structure:**
   - **0:00–0:30 Hook** — a vivid 2-sentence opening scene from the climax of the rebellion
   - **0:30–1:30 Context** — when, where, who, what the world looked like
@@ -46,7 +46,7 @@ Every episode tells the story of a specific rebellion — pre-Roman to modern �
 - **Visuals:** **AI-generated imagery via Pollinations.ai**, prompted per narration beat with period-appropriate style (e.g., "oil painting, 14th century English countryside, serfs with scythes, warm brown tones, museum quality"). 15–25 unique generated images per video. Ken Burns pan/zoom via ffmpeg. For specific famous paintings that audiences recognize (the Vermeer of the Dutch Golden Age, etc.), use the public-domain original instead of a generation. The mix is: ~80% generated, ~20% real historical art when the real art is iconic.
 - **Narration:** **Microsoft Edge TTS** as the default (free, decent intonation, zero setup). **StyleTTS2** as the quality-upgrade path for any episode we want to push harder on — it produces genuinely studio-grade narration that rivals ElevenLabs for long-form content. StyleTTS2 requires a local GPU (tested working on RTX 3060 12GB via one-click Microsoft Store installer). If Robert's machine has a capable GPU, we default to StyleTTS2; if not, Edge TTS for the first batch of episodes and we re-evaluate.
 - **Music:** Public domain classical (IMSLP) or CC-BY from incompetech.com / YouTube Audio Library. Score the video to the narrative beats — ominous during the context setup, driving during the rebellion itself, contemplative during the analysis.
-- **Human creative layer (strongly recommended, final call is Robert's):** A short (10–20 second) hand-recorded intro per video from Robert: *"I'm [voice], this is Breaking Points. Today: the peasants who nearly toppled an English king."* That small human element is the single biggest cheap hedge against the inauthentic-content policy. Without it we rely entirely on content quality to pass.
+- **Human creative layer (strongly recommended, final call is Robert's):** A short (10–20 second) hand-recorded intro per video from Robert: *"I'm [voice], this is Popular Uprisings. Today: the peasants who nearly toppled an English king."* That small human element is the single biggest cheap hedge against the inauthentic-content policy. Without it we rely entirely on content quality to pass.
 
 ## Publishing cadence
 - **When it's ready, ship it.** No weekly deadline pressure. A channel of 6 excellent videos in 6 months beats a channel of 24 mediocre ones.

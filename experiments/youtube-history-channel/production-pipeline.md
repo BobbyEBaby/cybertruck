@@ -1,4 +1,4 @@
-# Production Pipeline — YouTube "Breaking Points" Channel (REVISED 2026-04-11)
+# Production Pipeline — YouTube "Popular Uprisings" Channel (REVISED 2026-04-11)
 
 End-to-end flow for turning a rebellion topic into a published video. Designed for **remote-doable build** with **local-only rendering and upload** where necessary.
 
@@ -46,7 +46,7 @@ Before writing a single line, collect:
 - A list of provable facts with inline citations (as HTML comments in the script file)
 - An honest assessment of any disputed points (avoid definitive claims on contested history)
 
-Then write the script following the **Breaking Points structure** (see `strategy.md`):
+Then write the script following the **Popular Uprisings structure** (see `strategy.md`):
 - Hook (30 sec, vivid climax snippet)
 - Context (60 sec)
 - Story (4.5 min, three beats)

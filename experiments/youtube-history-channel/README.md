@@ -1,4 +1,4 @@
-# YouTube History Channel — "Breaking Points"
+# YouTube History Channel — "Popular Uprisings"
 
 **Existing channel:** https://studio.youtube.com/channel/UCv8vMc6ZN9Tkc0K5gx53iAA
 **Status:** Episode 1 shipped **unlisted** 2026-04-11 (v1 SFen0WYnBy4 at 15:00 UTC; v2 sBUTZhrbMPU at 15:39 UTC with a UK narrator voice and slower camera pan). Not yet public. Episode 2 queued (B-018 — German Peasants' War 1524–25).
@@ -8,7 +8,7 @@
 ## What this is
 A YouTube channel about **rebellions across history**, analyzed through six recurring themes (economy, royalty, government, wars, environment, debt) on a 0–3 intensity scale. The channel's central thesis — [[../../wiki/concepts/structural-vs-tactical-victory]] — is that rebellions rarely win in their own time but the conditions that cause them almost always win in the century that follows. Scripts are written by the Cybertruck Autopilot loop; narration is Microsoft Edge TTS (currently a UK voice); illustrations are AI-generated via Pollinations.ai (keyless, free) tailored per narration beat; rendered with `tools/render_video.py`; uploaded via `tools/youtube_upload.py`. Multiple revenue streams day-1 (Ko-fi, Buy Me a Coffee, crypto tips, Gumroad PDFs) — pending the accounts in `human_inbox/0003-youtube-api-and-tips-setup.md`.
 
-> **Niche pivot note (2026-04-11):** this channel was originally conceived as "Margins of History — obscure/forgotten history" with Dancing Plague of 1518 as episode 1. Robert pivoted on 2026-04-11 to rebellions-with-thematic-analysis under the name "Breaking Points". The Dancing Plague script + its 22 PD image candidates are archived in `_archive/` rather than deleted. All B-012..B-017 references elsewhere in state describe the post-pivot version.
+> **Niche pivot note (2026-04-11):** this channel was originally conceived as "Margins of History — obscure/forgotten history" with Dancing Plague of 1518 as episode 1. Robert pivoted on 2026-04-11 to rebellions-with-thematic-analysis under the name "Popular Uprisings". The Dancing Plague script + its 22 PD image candidates are archived in `_archive/` rather than deleted. All B-012..B-017 references elsewhere in state describe the post-pivot version.
 
 ## Why this will take a while to pay off
 Honest: YouTube Partner Program is far off (1,000 subs + 4,000 watch hours), most faceless channels never hit it, and the near-term revenue comes from direct tips — which are rare. See `state/honest-expectations.md`. We are not building this expecting ad revenue tomorrow. We are building it because it has a real ceiling, costs $0, and the production pipeline is automatable.
@@ -26,7 +26,7 @@ Honest: YouTube Partner Program is far off (1,000 subs + 4,000 watch hours), mos
 | `_archive/` | Pre-pivot Dancing Plague 1518 script + 22 PD source manifest + pre-pivot source_images.py helper |
 
 ## Critical non-file assumptions
-1. ~~Robert's existing YouTube channel will be rebranded as "Margins of History"~~ — **resolved 2026-04-11**: channel was rebranded to "Breaking Points" (ep1 shipped under that name).
+1. ~~Robert's existing YouTube channel will be rebranded as "Margins of History"~~ — **resolved 2026-04-11**: channel was rebranded to "Popular Uprisings" (ep1 shipped under that name).
 2. ~~Robert will provide a YouTube Data API v3 OAuth refresh token when ready~~ — **resolved 2026-04-11**: token exists in Robert's local `.env` (ep1 uploaded twice via `tools/youtube_upload.py`).
 3. Ko-fi and Buy Me a Coffee accounts for `bobbyebaby` — **still pending** per `human_inbox/0003-youtube-api-and-tips-setup.md`. Video description templates currently skip the tip-rail links until the accounts exist. Not blocking.
 4. Gumroad link pointing at the Power Prompts pack from B-002 — cross-promotion target exists but is still pending Gumroad upload (B-002 build phase done, upload blocked on Gumroad cred).
@@ -64,6 +64,6 @@ If by week 4:
 ## Decision history
 **Original (2026-04-11 morning):** agent picked "obscure/forgotten history" niche under the name "Margins of History" per the minimal-interaction directive. First episode queued was Dancing Plague of 1518.
 
-**Pivot (2026-04-11 afternoon):** Robert pivoted the niche to "rebellions across history with 6-theme analysis" under the name "Breaking Points". The six themes are [[../../wiki/themes/economy|Economy]], [[../../wiki/themes/royalty|Royalty]], [[../../wiki/themes/government|Government]], [[../../wiki/themes/wars|Wars]], [[../../wiki/themes/environment|Environment]], [[../../wiki/themes/debt|Debt]]. Every episode rates 0–3 per theme and the running database is in `themes.md`. The channel thesis is [[../../wiki/concepts/structural-vs-tactical-victory]]. Dancing Plague was archived (not deleted) in `_archive/`. Episode 1 was rewritten to the Peasants' Revolt of 1381 (intensity 14/18, outcome `partial_win`) and shipped unlisted the same day.
+**Pivot (2026-04-11 afternoon):** Robert pivoted the niche to "rebellions across history with 6-theme analysis" under the name "Popular Uprisings". The six themes are [[../../wiki/themes/economy|Economy]], [[../../wiki/themes/royalty|Royalty]], [[../../wiki/themes/government|Government]], [[../../wiki/themes/wars|Wars]], [[../../wiki/themes/environment|Environment]], [[../../wiki/themes/debt|Debt]]. Every episode rates 0–3 per theme and the running database is in `themes.md`. The channel thesis is [[../../wiki/concepts/structural-vs-tactical-victory]]. Dancing Plague was archived (not deleted) in `_archive/`. Episode 1 was rewritten to the Peasants' Revolt of 1381 (intensity 14/18, outcome `partial_win`) and shipped unlisted the same day.
 
 **Ongoing:** every new episode (B-018 onward) must append a new row to `themes.md`, create a rebellion page in `wiki/rebellions/`, stub any new figures/concepts/themes, and update `wiki/index.md`. This is part of the episode-scripted definition of done.

@@ -29,7 +29,7 @@ Last episode, I told you that the conditions causing a rebellion usually win ove
 
 That was a clean story. Today's episode is not.
 
-I'm your narrator. This is Breaking Points, episode two, and today we are going to Germany, 1524. The German Peasants' War — the largest popular uprising anywhere in Europe before the French Revolution almost three hundred years later. Up to three hundred thousand people in arms. Up to a hundred thousand of them killed. <!-- source: https://en.wikipedia.org/wiki/German_Peasants%27_War --> Martin Luther publicly endorsed them, and then publicly called for them to be slaughtered like mad dogs, in writing, within a single year.
+I'm your narrator. This is Popular Uprisings, episode two, and today we are going to Germany, 1524. The German Peasants' War — the largest popular uprising anywhere in Europe before the French Revolution almost three hundred years later. Up to three hundred thousand people in arms. Up to a hundred thousand of them killed. <!-- source: https://en.wikipedia.org/wiki/German_Peasants%27_War --> Martin Luther publicly endorsed them, and then publicly called for them to be slaughtered like mad dogs, in writing, within a single year.
 
 And here's why this episode matters for the channel. The thesis I gave you last week — that the structural conditions always win, eventually — is the kind of claim you should not trust until you've watched someone honestly try to break it. So today, I am going to try to break it with this rebellion. Because the honest answer for 1525 is messier than 1381, and the viewer deserves the mess.
 
@@ -93,7 +93,7 @@ If you want to support independent history research that isn't paywalled, the ch
 
 Next episode, we go somewhere different. Somewhere the thesis gets tested from a completely different angle. Subscribe if you want to find out where.
 
-I'm your narrator. This has been Breaking Points. Until next time... be careful of anyone selling you a rule that always works.
+I'm your narrator. This has been Popular Uprisings. Until next time... be careful of anyone selling you a rule that always works.
 
 ## Theme intensities (for themes.md)
 

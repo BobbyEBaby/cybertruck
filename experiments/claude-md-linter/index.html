@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLAUDE.md Linter — check your Claude Code project instructions</title>
+<meta name="description" content="Paste your CLAUDE.md and get a lint report: leaked secrets, token cost, structure issues, vague rules, and other Claude Code project-instruction pitfalls. Runs entirely in your browser — nothing uploaded.">
+<meta property="og:title" content="CLAUDE.md Linter">
+<meta property="og:description" content="Lint your Claude Code CLAUDE.md file. Runs 100% in-browser.">
+<style>
+  :root {
+    --bg: #0f1117;
+    --panel: #161922;
+    --panel-2: #1c2030;
+    --border: #2a2f42;
+    --text: #e6e8ef;
+    --muted: #8a90a4;
+    --accent: #7cc4ff;
+    --err: #ff6b6b;
+    --warn: #ffc857;
+    --info: #7cc4ff;
+    --ok: #63d48a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.5; }
+  a { color: var(--accent); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 80px; }
+  header h1 { margin: 0 0 4px; font-size: 26px; letter-spacing: -0.01em; }
+  header p.sub { margin: 0 0 20px; color: var(--muted); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .panel h2 { margin: 0 0 12px; font-size: 15px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
+  textarea {
+    width: 100%; min-height: 380px; resize: vertical;
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 13px; line-height: 1.5;
+  }
+  textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  button, label.filebtn {
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px;
+    padding: 8px 14px; font-size: 14px; cursor: pointer;
+    font-family: inherit;
+  }
+  button.primary { background: var(--accent); color: #0a0d15; border-color: var(--accent); font-weight: 600; }
+  button:hover, label.filebtn:hover { border-color: var(--accent); }
+  input[type=file] { display: none; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+  .stat { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+  .stat .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat .v { font-size: 20px; font-weight: 600; margin-top: 2px; }
+  .stat .v.err { color: var(--err); }
+  .stat .v.warn { color: var(--warn); }
+  .stat .v.info { color: var(--info); }
+  .stat .v.ok { color: var(--ok); }
+  .findings { max-height: 480px; overflow-y: auto; }
+  .finding {
+    border-left: 3px solid var(--border);
+    padding: 10px 12px; margin-bottom: 8px;
+    background: var(--panel-2); border-radius: 0 6px 6px 0;
+    font-size: 14px;
+  }
+  .finding.err { border-left-color: var(--err); }
+  .finding.warn { border-left-color: var(--warn); }
+  .finding.info { border-left-color: var(--info); }
+  .finding .head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+  .badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; }
+  .badge.err { background: rgba(255,107,107,0.15); color: var(--err); }
+  .badge.warn { background: rgba(255,200,87,0.15); color: var(--warn); }
+  .badge.info { background: rgba(124,196,255,0.15); color: var(--info); }
+  .rule { color: var(--muted); font-size: 11px; font-family: ui-monospace, monospace; }
+  .loc { color: var(--muted); font-size: 12px; font-family: ui-monospace, monospace; }
+  .msg { color: var(--text); }
+  .snippet { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); background: rgba(0,0,0,0.25); padding: 6px 8px; border-radius: 4px; margin-top: 6px; white-space: pre-wrap; word-break: break-all; }
+  .empty { color: var(--muted); text-align: center; padding: 40px 20px; font-size: 14px; }
+  footer { margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+  footer a { margin-right: 14px; }
+  .privacy { color: var(--muted); font-size: 12px; margin-top: 10px; }
+  .privacy strong { color: var(--ok); }
+  details { margin-top: 10px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  details ul { margin: 8px 0 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+  details li { margin-bottom: 4px; }
+  .toolbar-right { margin-left: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>CLAUDE.md Linter</h1>
+    <p class="sub">Paste your <code>CLAUDE.md</code> (or any Claude Code project instructions file) and get a lint report: leaked secrets, token cost, structure issues, and vague rules. Runs 100% in your browser.</p>
+  </header>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>Input</h2>
+      <textarea id="input" spellcheck="false" placeholder="# CLAUDE.md
+
+## Project
+...
+
+(paste your CLAUDE.md here, or drop a file)"></textarea>
+      <div class="controls">
+        <button class="primary" id="lintBtn">Lint</button>
+        <label class="filebtn" for="file">Load file…</label>
+        <input type="file" id="file" accept=".md,.markdown,.txt,text/markdown,text/plain">
+        <button id="sampleBtn">Load sample</button>
+        <button id="clearBtn" class="toolbar-right">Clear</button>
+      </div>
+      <p class="privacy"><strong>Privacy:</strong> your file never leaves this page. There is no server, no analytics, no upload. View source to verify.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Report</h2>
+      <div class="stats">
+        <div class="stat"><div class="k">Chars</div><div class="v" id="statChars">—</div></div>
+        <div class="stat"><div class="k">~ Tokens</div><div class="v" id="statTokens">—</div></div>
+        <div class="stat"><div class="k">Errors</div><div class="v err" id="statErr">—</div></div>
+        <div class="stat"><div class="k">Warnings</div><div class="v warn" id="statWarn">—</div></div>
+      </div>
+      <div class="findings" id="findings">
+        <div class="empty">Paste a <code>CLAUDE.md</code> and click <b>Lint</b>.</div>
+      </div>
+      <details>
+        <summary>What this linter checks (17 rules)</summary>
+        <ul id="rulelist"></ul>
+      </details>
+    </section>
+  </div>
+
+  <footer>
+    <p>
+      <a href="https://github.com/BobbyEBaby/claude-md-linter">Source on GitHub</a>
+      <a href="https://ko-fi.com/">Tip on Ko-fi</a>
+      <span style="color:var(--muted);">USDC-Solana: <code style="font-size:12px;">EQwtTPe3GfcAGAiQAh3AxmCZ1WAyCviDsNnBmfCaQwf7</code></span>
+    </p>
+    <p>Built by the <a href="https://github.com/BobbyEBaby/cybertruck">Cybertruck Autopilot</a> project — a <code>CLAUDE.md</code> actively iterated on across many Claude Code runs. This linter reflects what that iteration taught us.</p>
+  </footer>
+</div>
+
+<script>
+// ---------- rules ----------
+// Each rule: { id, severity, title, describe, check(text, lines) -> [{line, col?, snippet?, note?}] }
+const RULES = [];
+
+function addRule(r) { RULES.push(r); }
+
+// ----- secrets & PII -----
+const SECRET_PATTERNS = [
+  { name: "Anthropic API key", re: /sk-ant-[A-Za-z0-9_\-]{20,}/ },
+  { name: "OpenAI API key",    re: /sk-(?:proj-)?[A-Za-z0-9_\-]{20,}/ },
+  { name: "GitHub token",      re: /gh[pousr]_[A-Za-z0-9]{20,}/ },
+  { name: "AWS access key",    re: /AKIA[0-9A-Z]{16}/ },
+  { name: "Google API key",    re: /AIza[0-9A-Za-z_\-]{35}/ },
+  { name: "Slack token",       re: /xox[baprs]-[A-Za-z0-9\-]{10,}/ },
+  { name: "Stripe live key",   re: /sk_live_[A-Za-z0-9]{20,}/ },
+  { name: "JWT",               re: /eyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}/ },
+  { name: "Private key block", re: /-----BEGIN (?:RSA |OPENSSH |EC |DSA |PGP )?PRIVATE KEY-----/ },
+  { name: "Bearer token",      re: /[Bb]earer\s+[A-Za-z0-9_\-\.=]{20,}/ },
+];
+
+addRule({
+  id: "no-secrets",
+  severity: "error",
+  title: "Credentials must never appear in CLAUDE.md",
+  describe: "CLAUDE.md is typically committed to git. Any token, key, or private-key block in this file is a leak. Store secrets in .env (gitignored) instead.",
+  check(text, lines) {
+    const out = [];
+    lines.forEach((line, i) => {
+      for (const p of SECRET_PATTERNS) {
+        const m = line.match(p.re);
+        if (m) out.push({ line: i + 1, snippet: p.name + " detected: " + redact(m[0]), note: "Rotate this credential immediately if this file is in a real repo." });
+      }
+    });
+    return out;
+  },
+});
+
+addRule({
+  id: "assignment-secret",
+  severity: "error",
+  title: "Explicit key=value secret assignments",
+  describe: "Lines like `API_KEY=sk-...` or `password: \"hunter2\"` leak credentials even when the value doesn't match a known prefix.",
+  check(text, lines) {
+    const out = [];
+    const re = /\b(api[_\- ]?key|secret|password|passwd|token|auth[_\- ]?token|bearer|access[_\- ]?key)\b\s*[:=]\s*["']?([^\s"'`]{6,})/i;
+    lines.forEach((line, i) => {
+      // skip obvious placeholders
+      if (/\b(your|example|xxx+|placeholder|<.*>|\$\{?[A-Z_]+\}?)\b/i.test(line)) return;
+      const m = line.match(re);
+      if (m && !/\b(never|don't|do not|avoid|warn|redact|forbid|prohibit)/i.test(line)) {
+        out.push({ line: i + 1, snippet: line.trim().slice(0, 140), note: "Looks like a literal secret. Redact or move to .env." });
+      }
+    });
+    return out;
+  },
+});
+
+addRule({
+  id: "pii-email",
+  severity: "warn",
+  title: "Email addresses in CLAUDE.md",
+  describe: "Emails in an LLM-loaded context file can leak into prompts and logs. Usually only a project owner's public contact email is intentional.",
+  check(text, lines) {
+    const out = [];
+    const re = /[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/;
+    lines.forEach((line, i) => {
+      const m = line.match(re);
+      if (m) out.push({ line: i + 1, snippet: m[0], note: "Confirm this email is meant to be public." });
+    });
+    return out;
+  },
+});
+
+addRule({
+  id: "absolute-home-path",
+  severity: "warn",
+  title: "Hard-coded absolute home paths",
+  describe: "Paths like `/Users/alice/projects/...` or `C:\\Users\\alice\\...` break for anyone else on the team and leak the author's username.",
+  check(text, lines) {
+    const out = [];
+    const re = /(?:\/Users\/[A-Za-z0-9._\-]+|\/home\/[A-Za-z0-9._\-]+|C:\\Users\\[A-Za-z0-9._\-]+)/;
+    lines.forEach((line, i) => {
+      const m = line.match(re);
+      if (m) out.push({ line: i + 1, snippet: m[0], note: "Use a relative path or a project-root reference instead." });
+    });
+    return out;
+  },
+});
+
+// ----- length & budget -----
+addRule({
+  id: "length-budget",
+  severity: "warn",
+  title: "Token budget check (soft cap ~4000)",
+  describe: "CLAUDE.md loads on every turn. Above ~4000 tokens you're paying that cost repeatedly and pushing useful context out of the window. 8000+ is usually a sign the file should be split.",
+  check(text, lines) {
+    const toks = estimateTokens(text);
+    if (toks > 8000) return [{ line: 1, note: `~${toks} tokens — very large. Split into CLAUDE.md + @-imported sub-files, or move reference material out of the loaded context.` }];
+    if (toks > 4000) return [{ line: 1, note: `~${toks} tokens — above the soft cap. Every turn of every run pays this. Consider trimming.` }];
+    return [];
+  },
+});
+
+addRule({
+  id: "long-line",
+  severity: "info",
+  title: "Very long single lines",
+  describe: "Lines over 240 chars are usually prose that should be bullets. LLMs follow short imperative bullets more reliably than paragraphs.",
+  check(text, lines) {
+    const out = [];
+    lines.forEach((line, i) => {
+      if (line.length > 240 && !line.trim().startsWith("<!--")) {
+        out.push({ line: i + 1, snippet: line.slice(0, 120) + "…", note: `${line.length} chars. Consider breaking into a bulleted list.` });
+      }
+    });
+    return out;
+  },
+});
+
+// ----- structure -----
+addRule({
+  id: "no-h1",
+  severity: "info",
+  title: "Missing top-level heading",
+  describe: "A single H1 at the top gives the file an identity and helps Claude Code know what it is.",
+  check(text, lines) {
+    const hasH1 = lines.some(l => /^# [^#]/.test(l.trim()));
+    return hasH1 ? [] : [{ line: 1, note: "No `# Title` heading found. Consider adding one." }];
+  },
+});
+
+addRule({
+  id: "heading-skip",
+  severity: "info",
+  title: "Heading level jumps (e.g. H2 → H4)",
+  describe: "Skipping heading levels makes outline tools (and LLMs) misread the structure.",
+  check(text, lines) {
+    const out = [];
+    let last = 0;
+    lines.forEach((line, i) => {
+      const m = line.match(/^(#{1,6})\s+\S/);
+      if (!m) return;
+      const lvl = m[1].length;
+      if (last && lvl > last + 1) {
+        out.push({ line: i + 1, snippet: line.trim().slice(0, 100), note: `Jumped from H${last} to H${lvl}.` });
+      }
+      last = lvl;
+    });
+    return out;
+  },
+});
+
+addRule({
+  id: "empty-section",
+  severity: "info",
+  title: "Empty headings",
+  describe: "A heading with no content under it is either a TODO or dead weight that still costs tokens.",
+  check(text, lines) {
+    const out = [];
+    for (let i = 0; i < lines.length; i++) {
+      if (/^#{1,6}\s+\S/.test(lines[i])) {
+        let j = i + 1;
+        let hasContent = false;
+        while (j < lines.length && !/^#{1,6}\s+\S/.test(lines[j])) {
+          if (lines[j].trim().length > 0) { hasContent = true; break; }
+          j++;
+        }
+        if (!hasContent) out.push({ line: i + 1, snippet: lines[i].trim(), note: "Heading has no content before the next heading / end of file." });
+      }
+    }
+    return out;
+  },
+});
+
+addRule({
+  id: "unclosed-fence",
+  severity: "warn",
+  title: "Unclosed code fence",
+  describe: "A leftover triple-backtick with no matching closer eats the rest of the file as a code block. This is one of the most common ways a CLAUDE.md quietly breaks.",
+  check(text, lines) {
+    let open = false;
+    let openedAt = -1;
+    lines.forEach((line, i) => {
+      if (/^\s*```/.test(line)) {
+        open = !open;
+        if (open) openedAt = i + 1;
+      }
+    });
+    if (open) return [{ line: openedAt, note: "A code fence was opened but never closed." }];
+    return [];
+  },
+});
+
+// ----- clarity -----
+addRule({
+  id: "vague-hedge",
+  severity: "info",
+  title: "Vague / hedging language in rules",
+  describe: "Words like 'maybe', 'try to', 'consider', 'if possible' create rules the model can ignore. Use imperative voice: 'do X', 'never Y'.",
+  check(text, lines) {
+    const out = [];
+    const hedges = /\b(maybe|perhaps|try to|try and|consider(?:ing)?|if possible|kind of|sort of|somewhat|generally|usually|often|sometimes|probably|might want to)\b/i;
+    lines.forEach((line, i) => {
+      if (line.trim().startsWith("#")) return;
+      if (line.length < 20) return;
+      const m = line.match(hedges);
+      if (m) out.push({ line: i + 1, snippet: line.trim().slice(0, 140), note: `Hedging word: "${m[0]}". Prefer imperative voice.` });
+    });
+    return out;
+  },
+});
+
+addRule({
+  id: "todo-marker",
+  severity: "warn",
+  title: "TODO / FIXME / XXX markers",
+  describe: "These cost tokens on every turn and imply the instructions aren't finished. Either resolve them or move them out of the loaded file.",
+  check(text, lines) {
+    const out = [];
+    lines.forEach((line, i) => {
+      const m = line.match(/\b(TODO|FIXME|XXX|HACK)\b/);
+      if (m) out.push({ line: i + 1, snippet: line.trim().slice(0, 140), note: `\"${m[0]}\" marker in an LLM-loaded file.` });
+    });
+    return out;
+  },
+});
+
+addRule({
+  id: "trailing-whitespace",
+  severity: "info",
+  title: "Trailing whitespace",
+  describe: "Invisible trailing spaces still cost tokens and create noisy diffs.",
+  check(text, lines) {
+    const out = [];
+    lines.forEach((line, i) => {
+      if (/[ \t]+$/.test(line) && line.trim().length > 0) out.push({ line: i + 1, note: "Trailing whitespace." });
+    });
+    return out;
+  },
+});
+
+addRule({
+  id: "crlf",
+  severity: "info",
+  title: "CRLF line endings",
+  describe: "Windows line endings mixed with Unix ones cause diff churn on cross-platform teams.",
+  check(text, lines) {
+    if (/\r\n/.test(text)) return [{ line: 1, note: "File uses CRLF line endings. Convert to LF." }];
+    return [];
+  },
+});
+
+addRule({
+  id: "tab-indent",
+  severity: "info",
+  title: "Tabs for indentation",
+  describe: "Markdown renders inconsistently with tabs across tools. Use 2-space indentation for nested lists.",
+  check(text, lines) {
+    const out = [];
+    lines.forEach((line, i) => {
+      if (/^\t+/.test(line)) out.push({ line: i + 1, note: "Tab-indented line. Prefer spaces for markdown." });
+    });
+    return out.slice(0, 5); // don't flood
+  },
+});
+
+addRule({
+  id: "link-text-bare-url",
+  severity: "info",
+  title: "Bare URLs in prose",
+  describe: "`<https://...>` or `[label](url)` render and copy better than raw URLs glued to punctuation.",
+  check(text, lines) {
+    const out = [];
+    const re = /(?<![<\(\[])https?:\/\/\S+/;
+    lines.forEach((line, i) => {
+      if (/^\s*```/.test(line)) return;
+      const m = line.match(re);
+      if (m) out.push({ line: i + 1, snippet: m[0], note: "Wrap in `<...>` or `[text](url)`." });
+    });
+    return out.slice(0, 5);
+  },
+});
+
+addRule({
+  id: "duplicate-heading",
+  severity: "info",
+  title: "Duplicate headings",
+  describe: "Same heading text appearing twice usually means the file was merged and not reconciled.",
+  check(text, lines) {
+    const seen = new Map();
+    const out = [];
+    lines.forEach((line, i) => {
+      const m = line.match(/^#{1,6}\s+(.+?)\s*$/);
+      if (!m) return;
+      const key = m[1].trim().toLowerCase();
+      if (seen.has(key)) {
+        out.push({ line: i + 1, snippet: line.trim().slice(0, 100), note: `Duplicate of line ${seen.get(key)}.` });
+      } else {
+        seen.set(key, i + 1);
+      }
+    });
+    return out;
+  },
+});
+
+// ---------- utility ----------
+function estimateTokens(text) {
+  // Crude but widely-used heuristic: ~4 chars per token for English prose.
+  // Code and non-English trend shorter per token; this is close enough for a budget warning.
+  if (!text) return 0;
+  return Math.ceil(text.length / 4);
+}
+
+function redact(s) {
+  if (s.length <= 10) return s[0] + "…";
+  return s.slice(0, 6) + "…" + s.slice(-4);
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+// ---------- runner ----------
+function lint(text) {
+  const lines = text.split(/\r?\n/);
+  const findings = [];
+  for (const rule of RULES) {
+    const hits = rule.check(text, lines) || [];
+    for (const h of hits) {
+      findings.push({
+        ruleId: rule.id,
+        severity: rule.severity,
+        title: rule.title,
+        describe: rule.describe,
+        ...h,
+      });
+    }
+  }
+  // sort by severity then line
+  const order = { error: 0, warn: 1, info: 2 };
+  findings.sort((a, b) => order[a.severity] - order[b.severity] || (a.line || 0) - (b.line || 0));
+  return findings;
+}
+
+function render(text) {
+  const findings = lint(text);
+  const errCount  = findings.filter(f => f.severity === "error").length;
+  const warnCount = findings.filter(f => f.severity === "warn").length;
+  const infoCount = findings.filter(f => f.severity === "info").length;
+
+  document.getElementById("statChars").textContent = text.length.toLocaleString();
+  document.getElementById("statTokens").textContent = "~" + estimateTokens(text).toLocaleString();
+  const e = document.getElementById("statErr"); e.textContent = errCount; e.className = "v " + (errCount ? "err" : "ok");
+  const w = document.getElementById("statWarn"); w.textContent = warnCount; w.className = "v " + (warnCount ? "warn" : "ok");
+
+  const host = document.getElementById("findings");
+  if (findings.length === 0) {
+    host.innerHTML = `<div class="empty"><b style="color:var(--ok)">Clean.</b><br>No lint findings on ${text.length.toLocaleString()} chars (~${estimateTokens(text).toLocaleString()} tokens).</div>`;
+    return;
+  }
+  host.innerHTML = findings.map(f => {
+    const sev = f.severity === "error" ? "err" : f.severity === "warn" ? "warn" : "info";
+    const badge = f.severity === "error" ? "error" : f.severity === "warn" ? "warn" : "info";
+    return `<div class="finding ${sev}">
+      <div class="head">
+        <span class="badge ${sev}">${badge}</span>
+        <span class="msg"><b>${escapeHtml(f.title)}</b></span>
+        <span class="loc">line ${f.line}</span>
+        <span class="rule">[${f.ruleId}]</span>
+      </div>
+      ${f.note ? `<div class="msg" style="color:var(--muted);font-size:13px;">${escapeHtml(f.note)}</div>` : ""}
+      ${f.snippet ? `<div class="snippet">${escapeHtml(f.snippet)}</div>` : ""}
+    </div>`;
+  }).join("");
+}
+
+// ---------- wiring ----------
+const input = document.getElementById("input");
+document.getElementById("lintBtn").addEventListener("click", () => render(input.value));
+document.getElementById("clearBtn").addEventListener("click", () => {
+  input.value = "";
+  document.getElementById("findings").innerHTML = `<div class="empty">Paste a <code>CLAUDE.md</code> and click <b>Lint</b>.</div>`;
+  document.getElementById("statChars").textContent = "—";
+  document.getElementById("statTokens").textContent = "—";
+  document.getElementById("statErr").textContent = "—";
+  document.getElementById("statErr").className = "v err";
+  document.getElementById("statWarn").textContent = "—";
+  document.getElementById("statWarn").className = "v warn";
+});
+document.getElementById("file").addEventListener("change", (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { input.value = r.result; render(input.value); };
+  r.readAsText(f);
+});
+
+// drag-drop onto textarea
+input.addEventListener("dragover", (e) => { e.preventDefault(); });
+input.addEventListener("drop", (e) => {
+  const f = e.dataTransfer.files && e.dataTransfer.files[0];
+  if (!f) return;
+  e.preventDefault();
+  const r = new FileReader();
+  r.onload = () => { input.value = r.result; render(input.value); };
+  r.readAsText(f);
+});
+
+// sample
+const SAMPLE = `# My Project
+
+## Mission
+Build a cool thing. Maybe ship it somewhere.
+
+## Rules
+- Try to write tests when possible
+- The API key is sk-ant-api03-abcdefghijklmnopqrstuvwxyz1234
+- Work from /Users/alice/code/my-project
+- Consider running the linter before committing
+
+\`\`\`
+some example output
+
+## Workflow
+1. Open the repo
+2. Edit files
+3.
+
+## TODO
+- finish this file
+- figure out deployment
+
+## Contact
+alice@example.com
+`;
+document.getElementById("sampleBtn").addEventListener("click", () => {
+  input.value = SAMPLE;
+  render(input.value);
+});
+
+// populate rule list
+const rl = document.getElementById("rulelist");
+rl.innerHTML = RULES.map(r => `<li><code>${r.id}</code> — ${escapeHtml(r.title)}</li>`).join("");
+</script>
+</body>
+</html>

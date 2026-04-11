@@ -77,7 +77,19 @@ Append to `state/runlog.md`:
 ## Step 8 — Write any new human asks
 If you need anything from Robert (especially: "I built X, run `tools/deploy_pages.sh X experiments/X` locally to ship it"), create `human_inbox/NNNN-<slug>.md` (next unused number).
 
-## Step 9 — Stop
+## Step 9 — Model-switch handoff (Opus → Sonnet at run 10)
+After appending the runlog entry, count the total number of `remote run` entries in `state/runlog.md` (lines matching `## .* UTC remote run`). The user wants the first 10 runs on Opus and run 11+ on Sonnet for cost reasons.
+
+- If count is **< 10**: do nothing — you're still in the Opus window.
+- If count is **exactly 10**: write `human_inbox/NNNN-switch-to-sonnet.md` (next unused number) telling Robert:
+  > **What:** flip the model on the `cybertruck-autopilot-daily` trigger from `claude-opus-4-6` to `claude-sonnet-4-6`.
+  > **How:** open https://claude.ai/code/scheduled/, find the `cybertruck-autopilot-daily` trigger, edit, change the model field. Or ask Claude Code locally to do it.
+  > **Why:** Robert's standing rule — Opus for the first 10 runs (early framing matters most), Sonnet for the steady state.
+  > **How to report back:** drop a file in `human_outbox/` saying "switched to sonnet" once done.
+- If count is **> 10** and the inbox note exists: do nothing — already handled.
+- If count is **> 10** and the inbox note does NOT exist: a previous run skipped this step. Create the note now with the same content.
+
+## Step 10 — Stop
 Do not loop. Do not start another task. The next run will pick up.
 
 ## Hard rules (restated for emphasis)

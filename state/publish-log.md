@@ -17,3 +17,9 @@ _(empty — first ship will populate this)_
 - url: https://bobbyebaby.github.io/prompt-cleaner/
 - experiment: prompt-cleaner
 - repo: https://github.com/BobbyEBaby/prompt-cleaner
+
+## 2026-04-11 06:46
+- platform: github-pages
+- url: https://bobbyebaby.github.io/llm-cost-calculator/
+- experiment: llm-cost-calculator
+- repo: https://github.com/BobbyEBaby/llm-cost-calculator

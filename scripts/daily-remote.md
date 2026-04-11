@@ -25,8 +25,13 @@ For each unprocessed file in `human_outbox/`:
 - Update the matching task in `state/backlog.md`.
 - Move the file to `human_outbox/processed/YYYY-MM-DD-<original-name>`.
 
-## Step 3 — Honor the pause switch
-If a file named `PAUSE` or `pause.md` exists anywhere in the repo, do **nothing** this run except append a runlog entry confirming the pause. Stop.
+## Step 3 — Honor the pause switches
+
+**Global pause:** If a file named `PAUSE` or `pause.md` exists at the repo root, do **nothing** this run except append a runlog entry confirming the pause. Stop.
+
+**Experiment-level pause:** If you're about to pick a task that touches a specific experiment directory, first check for `experiments/<experiment-name>/PAUSED.md`. If it exists, **skip any task that references that experiment entirely** — do not work around it, do not try to help, do not add wiki pages "to support" it. Pick the next available non-paused task instead. Record the skip in the runlog so the pause is visible in the history. If every active task is also blocked or paused, append an honest "nothing to do" entry and stop — do not invent busywork for a paused experiment.
+
+The experiment-level pause is a `PAUSED.md` file, NOT a `PAUSE` file — the difference is deliberate: `PAUSE` halts the whole loop, `PAUSED.md` halts one experiment. Do not conflate them.
 
 ## Step 4 — Pick the next task (build/research only)
 Open `state/backlog.md`. Pick the highest-priority task in the "Active" section that:

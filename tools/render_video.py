@@ -94,23 +94,37 @@ def build_video(image_paths: list[Path], narration: Path, out_path: Path) -> Non
         raise RuntimeError("no images to render")
 
     per_image = total_duration / n_images
-    # Ken Burns with zoompan: start at zoom 1.0, end at zoom 1.15 over the shot duration
-    # Zoompan works on integer frames — multiply by FPS
+    # Ken Burns via zoompan.
+    # Quality choices (2026-04-11 update after user feedback):
+    # - Gentler zoom range: 1.00 -> 1.08 (was 1.00 -> 1.18)
+    # - Slower per-frame delta: derived from shot duration so the full
+    #   zoom is spread evenly across the whole image's screen time,
+    #   regardless of how long per_image ends up being. The previous
+    #   version had a fixed delta that made short shots feel jumpy and
+    #   long shots feel like the camera had stopped.
     frames_per_shot = int(round(per_image * FPS))
-    # Alternate zoom direction per image for variety
-    # zoompan filter: z='zoom+0.0015' (zoom in), z='if(eq(on,0),1.15,zoom-0.0015)' (zoom out)
+    zoom_min = 1.00
+    zoom_max = 1.08
+    zoom_range = zoom_max - zoom_min
+    # delta per frame = total range / total frames. Keep a small floor so
+    # ffmpeg never gets a zero increment (which causes a static frame).
+    zoom_delta = max(zoom_range / max(frames_per_shot, 1), 0.00005)
 
     with tempfile.TemporaryDirectory() as td:
         td_path = Path(td)
-        # Render each image to an individual MP4 clip, then concat
         clip_paths: list[Path] = []
         for idx, img in enumerate(image_paths):
             clip = td_path / f"clip_{idx:02d}.mp4"
             direction = "in" if idx % 2 == 0 else "out"
             if direction == "in":
-                zoom_expr = "min(zoom+0.0012,1.18)"
+                # Start at 1.0, end at 1.08. Smooth zoom-in.
+                zoom_expr = f"min(zoom+{zoom_delta:.6f},{zoom_max})"
             else:
-                zoom_expr = "if(lte(zoom,1.0),1.18,max(zoom-0.0012,1.0))"
+                # Start at 1.08, end at 1.0. Smooth zoom-out.
+                # Initialize to zoom_max on frame 0 (on==0), then decrement.
+                zoom_expr = (
+                    f"if(eq(on,0),{zoom_max},max(zoom-{zoom_delta:.6f},{zoom_min}))"
+                )
             # Build zoompan filter
             filter_complex = (
                 f"scale=3840:2160:force_original_aspect_ratio=decrease,"

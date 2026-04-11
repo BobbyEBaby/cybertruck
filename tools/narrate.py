@@ -53,9 +53,15 @@ SKIP_SECTIONS = [
     "Metrics to track",
 ]
 
-VOICE_NARRATOR = "en-US-GuyNeural"
-VOICE_THEMATIC = "en-US-JennyNeural"
-VOICE_OUTRO = "en-US-AriaNeural"
+VOICE_NARRATOR = "en-GB-RyanNeural"   # older British gentleman, thoughtful
+VOICE_THEMATIC = "en-GB-RyanNeural"   # same voice for narrative cohesion
+VOICE_OUTRO = "en-GB-RyanNeural"      # same voice for consistency
+# Slow pace + natural intonation. -15% rate creates a thoughtful cadence
+# without being ponderous. Edge TTS honors punctuation for pauses, and
+# the script uses em-dashes, ellipses, and short sentences for additional
+# natural phrasing breaks.
+NARRATION_RATE = "-15%"
+NARRATION_PITCH = "-2Hz"  # slightly lower pitch for older-gentleman feel
 
 
 def find_script(slug: str) -> Path:
@@ -167,7 +173,9 @@ def build_segment_plan(script_text: str) -> list[dict]:
 
 async def synthesize(text: str, voice: str, out_path: Path) -> None:
     import edge_tts  # type: ignore
-    communicate = edge_tts.Communicate(text, voice)
+    communicate = edge_tts.Communicate(
+        text, voice, rate=NARRATION_RATE, pitch=NARRATION_PITCH
+    )
     await communicate.save(str(out_path))
 
 

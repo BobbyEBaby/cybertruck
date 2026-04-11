@@ -23,7 +23,7 @@ Top scores from Phase 0:
 **Next concrete step:** Create the experiment folder, write a working single-file HTML/JS tool that takes pasted text and offers cleanups (strip markdown, normalize whitespace, etc.), write the ship checklist.
 
 ### B-002 — Build & ship a Gumroad digital download (highest-ceiling first product)
-**Status:** [pending] — blocked on B-000 (Gumroad account) AND on B-001 having shipped
+**Status:** [in_progress 2026-04-11 remote] — build phase unblocked (no creds needed). Upload phase still blocked on Gumroad account + `GUMROAD_ACCESS_TOKEN` in `.env` (local-run only).
 **Why:** Highest score in Phase 0 (17/20). Gumroad's free tier handles checkout and delivery; the agent can author the product (template, prompt pack, ebook). See `research/markets/03-gumroad-digital-downloads.md`.
 **Definition of done:** `experiments/<slug>/` with the digital asset (zipped if multi-file), `README.md` (hypothesis + audience + pricing), and `ship.md` (Gumroad listing copy + tags + price + upload steps).
 **Next concrete step:** After B-001 ships, decide product based on what we now know about traffic source. Default candidate: a Claude Code / AI agent prompt + template pack aimed at the same audience that found B-001.

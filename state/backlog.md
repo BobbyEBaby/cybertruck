@@ -76,7 +76,7 @@ Top scores from Phase 0:
 **Next concrete step:** Local-run agent executes `bash tools/deploy_pages.sh llm-cost-calculator experiments/llm-cost-calculator` (needs `GITHUB_TOKEN` already in `.env`). Then optionally posts to r/LocalLLaMA via `tools/post_reddit.py` once Reddit creds are filled in.
 
 ### B-009 — Refresh remaining 6 market research files
-**Status:** [pending] — fully remote-doable, no creds needed
+**Status:** [in_progress 2026-04-11 remote] — rolling refresh, one file per remote run. **Done so far:** 02-itchio-microgames (2026-04-11, this run). **Still stale:** 04 (niche content), 05 (Chrome ext), 06 (faceless YouTube), 07 (POD), 08 (OSS donations). Next remote run should pick the next oldest.
 **Why:** Files 02 (itch.io), 04 (niche content), 05 (Chrome ext), 06 (faceless YouTube), 07 (POD), 08 (OSS donations) still have stale data from May 2025 cutoff. Refresh each with a "Refreshed YYYY-MM-DD" section + 3 cited sources. The remote agent should pick the oldest unrefreshed one each run.
 **Next concrete step:** Pick one file. Use WebSearch to find current 2026 data. Append a "Refreshed" section with rescored values. Commit. Move to next file on next run.
 

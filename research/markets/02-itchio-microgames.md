@@ -30,5 +30,64 @@ Tiny browser-playable games (HTML5 canvas, single mechanic, often <1 hour to pla
 ## First concrete experiment idea
 A 1-mechanic 1-screen "incremental" or "puzzle" game in vanilla canvas/JS. Target a topical theme (election, holiday, recent meme) so it can be distributed via a small Reddit post.
 
-## Refreshed
-_(pending B-004)_
+## Refreshed 2026-04-11
+
+Sources:
+- [itch.io official "Accepting Payments and Getting Paid" docs](https://itch.io/docs/creators/payments)
+- [itch.io Creator FAQ](https://itch.io/docs/creators/faq)
+- [itch.io Payment Processor Fees thread](https://itch.io/t/1606243/payment-processor-fees)
+- [itch.io "How much money is earned on itch.io" thread](https://itch.io/t/1048532/how-much-money-is-earned-on-itchio)
+- ["Itch.io Game Publishing: Complete Indie Developer Guide 2025" — generalistprogrammer.com](https://generalistprogrammer.com/tutorials/itch-io-game-publishing-complete-indie-developer-guide-2025)
+- [itch.io Creator Day explainer (Nov 28, 2025 — 15,000+ participating projects)](https://itch.io/updates/what-is-creator-day)
+- [itch.io "2025 Finances" blog post](https://itch.io/blog/1137874/2025-finances)
+
+### Revenue share (still open-slider as of 2025)
+- itch.io's **open revenue-share slider** is unchanged: creators pick the platform's cut from **0–100%**. Default is **10%**. No sign that itch.io plans to standardize to a fixed cut like Steam's 30%.
+- **Creator Day** (launched 2024, re-run Nov 28 2025 alongside Black Friday, 24 hours, 15,000+ projects participated): itch.io's cut drops to **0%** for the window. The platform keeps running this — it's a genuine recurring promo, not a one-off. **Actionable implication for our loop:** if we ever ship a paid itch.io product, scheduling the *launch* to align with the next Creator Day is a free ~10%-of-revenue uplift, and the event itself drives extra traffic to the featured pages.
+
+### Payment processor fees (the fee that actually hurts small sales)
+itch.io's 10% platform cut is not the expensive fee on a micro-game. The real bite is the payment processor:
+- **PayPal / Stripe fee: $0.30 fixed + 2.9% per transaction.**
+- At a **$1** sale price that's **~32%** of the transaction gone to the processor alone, before itch.io's cut or PayPal's payout fee.
+- At **$3** it's **~12.9%**. At **$5** it's **~8.9%**. The fixed $0.30 is what makes cheap pay-what-you-want tips economically nonsense — a $0.50 tip would hand ~60% to Stripe/PayPal.
+- Honest consequence: **a zero-minimum PWYW game where most tippers give $1 or less will lose a huge share of revenue to per-transaction fees.** Either price the suggested tip at ≥$3 so the fixed fee stops dominating, or ship the game totally free and route tipping to a flat-rate rail (Ko-fi, or a USDC address — see `research/markets/08-open-source-donations.md`).
+
+### Payout thresholds and frictions
+- **Minimum payout: $5** after deductions. Any balance below $5 is stuck on the platform.
+- **One-time $3 tax interview fee** deducted from first payment (handled by an external tax-compliance vendor).
+- **PayPal payout fee: $0.25 (US) or up to 2% capped at $25 (international).**
+- Combined: a first-time creator's first payout doesn't clear until they've grossed roughly **$8–$10** after processor fees — i.e. ≥3–4 sales at $3. This is a real time-to-first-dollar delay on top of the "will anyone buy it" question.
+
+### Earnings reality for small games (anchor to honest-expectations.md)
+Developer-reported earnings from the 2023–2025 itch.io community threads are consistent with the `$0 median` anchor in `state/honest-expectations.md`. Representative data points:
+- **$1 total earned in ~3 years** (one dev).
+- **~$50 lifetime** from asset-pack sales (another dev).
+- **~$170 profit from ~300 copies** of a visual novel (a "modest success" story).
+- **$500–$5,000 lifetime** is achievable but concentrated in active **niche communities** — the canonical example is **PICO-8 games/tools sold at $1–$5** where there's an existing audience for the fantasy console.
+- itch.io's own **2025 Finances** post confirms the platform is profitable but the long-tail distribution of creator revenue is extremely skewed — a small fraction of creators capture most of the payout volume.
+
+**Updated takeaway:** the PICO-8 pattern is the best analogue for our loop. We don't need a big audience — we need to ship into an *existing small audience* that already browses itch.io for a specific kind of thing. A generic "I made a platformer" lands in a flood; a PICO-8 puzzle or a devtool-flavored mini-game aimed at a subculture is what actually earns $50–$500.
+
+### Discoverability in 2025 (what actually works)
+From the 2025 generalistprogrammer.com guide and community threads:
+1. **Smaller themed game jams (100–500 participants)** give a real shot at ranking in the top 10 of a jam, which is a meaningful discoverability spike. Huge jams (thousands of entries) bury all but the top ~0.5%.
+2. **Tags matter more than titles.** itch.io's browse/search is tag-driven. Use 5–15 tags, mixing 2–3 broad tags (platformer, puzzle, pixel-art) with 5–10 narrow/niche tags. Missing tags = invisible game.
+3. **Ratings > views.** The 5-star system is the primary social-proof signal. Games that reach an average ≥4 stars get a meaningful conversion bump. There is **no way to automate this** — it requires real humans who liked the game.
+4. **Post-jam publish.** After submitting to a jam, flip the game public so non-participants can find it — several creators report most of their traffic arrived *after* the jam closed, via tag browsing.
+5. **Thumbnails are judged by humans.** A bad thumbnail will sink a good game. This remains a weak spot for a fully-automated agent; we don't have reliable autonomous image generation within the $0 budget that produces itch.io-grade art. **Honest constraint:** either (a) use a pixel-art generator with zero-budget license terms, (b) ship "programmer art" deliberately as an aesthetic choice (monochrome, ASCII, 8-bit), or (c) flag thumbnail creation as a human-in-the-loop step in the ship.md.
+
+### Scoring update
+No change to the 2026-04-10 rubric scores after this refresh:
+- Time-to-first-dollar: **2** — confirmed. Fees + $5 payout minimum + "most earn $0" data all push against fast first-dollar.
+- $0 viability: **5** — confirmed. Host free, no card required.
+- Automation-friendliness: **4** — confirmed, with the caveat that **thumbnails remain the hardest part to automate**. The game code itself is trivial for the agent; the cover art is not.
+- Ceiling: **3** — confirmed. Niche communities can hit $500–$5k. Breakouts happen but are rare.
+- **Total: 14 / 20 (unchanged).**
+
+### Actionable updates to B-002b
+When B-002b is eventually greenlit:
+1. **Price floor:** suggested tip **≥$3**, PWYW minimum **$1**. Below $1 the processor eats everything.
+2. **Launch timing:** aim for the next **Creator Day** (likely late Nov 2026) for the initial public push — free platform cut + extra traffic.
+3. **Target an existing micro-community**, not "indie gamers" in general. Candidate niches worth scoring later: PICO-8 carts, Bitsy games, one-button-mobile, typing-practice-as-game, terminal/TUI games.
+4. **Thumbnail decision:** commit upfront to one of (a) deliberate programmer-art aesthetic, or (b) a single human-in-the-loop image step flagged in ship.md. Don't pretend the agent has autonomous cover-art capability it doesn't have.
+5. **Discoverability checklist** in ship.md must include: 5–15 tags, 4+ relevant jams to consider entering, post-jam-public flip.

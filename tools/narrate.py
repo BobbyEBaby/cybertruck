@@ -80,6 +80,24 @@ def strip_markers_and_comments(text: str) -> str:
     # but for now we route everything through TTS with section-based
     # voice rotation instead of per-marker voice assignment
     text = re.sub(r"\[HUMAN_[A-Z_]*\]", "", text)
+    # Strip markdown headers at ANY level — TTS engines read literal "#"
+    # as "hash hash hash" which is obviously wrong. Drop entire header
+    # lines so section titles don't get read at all. Critical bug fix
+    # after v3 XTTS upload had the narrator saying "hash hash hash
+    # introduction" out loud.
+    text = re.sub(r"^#+\s+.*$", "", text, flags=re.MULTILINE)
+    # Strip bold/italic markdown so TTS doesn't say "star star"
+    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)
+    text = re.sub(r"\*([^*]+)\*", r"\1", text)
+    text = re.sub(r"__([^_]+)__", r"\1", text)
+    text = re.sub(r"_([^_]+)_", r"\1", text)
+    # Strip markdown link syntax: [text](url) -> text
+    text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
+    # Strip Obsidian wiki-link syntax: [[target|text]] -> text, [[target]] -> target
+    text = re.sub(r"\[\[([^\]|]+)\|([^\]]+)\]\]", r"\2", text)
+    text = re.sub(r"\[\[([^\]]+)\]\]", r"\1", text)
+    # Collapse multiple blank lines that header stripping may have left
+    text = re.sub(r"\n{3,}", "\n\n", text)
     return text
 
 

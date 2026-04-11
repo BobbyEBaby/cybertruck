@@ -70,5 +70,25 @@ Top scores from Phase 0:
 **Unblocks:** B-001, B-002, B-004, B-005, B-006
 **Note:** This is the *only* expected human-action backlog item under normal operation. After it's done, the agent operates hands-off on the daily cron until something earns money or the circuit breaker fires.
 
+### B-008 — LLM API Cost Calculator (browser tool, second AI-tooling shot)
+**Status:** [built — awaiting ship via tools/deploy_pages.sh]
+**Why:** Same audience as B-001 (AI tooling crowd), different angle (cost-conscious devs/decision-makers vs prompt engineers). Single static file, $0 to ship via the existing pipeline. Full build is done — see `experiments/llm-cost-calculator/`.
+**Next concrete step:** Local-run agent executes `bash tools/deploy_pages.sh llm-cost-calculator experiments/llm-cost-calculator` (needs `GITHUB_TOKEN` already in `.env`). Then optionally posts to r/LocalLLaMA via `tools/post_reddit.py` once Reddit creds are filled in.
+
+### B-009 — Refresh remaining 6 market research files
+**Status:** [pending] — fully remote-doable, no creds needed
+**Why:** Files 02 (itch.io), 04 (niche content), 05 (Chrome ext), 06 (faceless YouTube), 07 (POD), 08 (OSS donations) still have stale data from May 2025 cutoff. Refresh each with a "Refreshed YYYY-MM-DD" section + 3 cited sources. The remote agent should pick the oldest unrefreshed one each run.
+**Next concrete step:** Pick one file. Use WebSearch to find current 2026 data. Append a "Refreshed" section with rescored values. Commit. Move to next file on next run.
+
+### B-010 — Build a third browser tool (open category)
+**Status:** [pending] — fully remote-doable, no creds for build phase
+**Why:** Inventory expansion. Two browser tools (B-001 + B-008) is a small portfolio. A third widens the surface area. Constraints: must be single static file, must target AI tooling audience or adjacent dev audience, must not duplicate B-001 or B-008.
+**Next concrete step:** Pick one of: (a) Anthropic tool-definition validator (paste JSON schema, get validated tool def), (b) prompt diff viewer (paste two prompts, see line-by-line diff), (c) markdown→plaintext converter, (d) regex tester with named-capture support, (e) JWT decoder, (f) something else suggested by current research. Build it as `experiments/<slug>/`. Hand off to local for ship.
+
+### B-011 — Author a second Gumroad digital asset (queue behind B-002)
+**Status:** [pending] — remote-doable for build phase
+**Why:** B-002 (Claude Code Power Prompts) is a single product. Once it ships, having a second asset ready to upload back-to-back is the right move (one-product creators almost never make sales; clusters do). Candidates: "AI agent CLAUDE.md template pack", "Cybertruck-Autopilot-style operating-loop starter kit", "100 prompts for X niche".
+**Next concrete step:** Decide on the second product after B-002 is shipped and we have measurement data. Until then, keep this as a placeholder so the agent doesn't redundantly start it.
+
 ## Done
-_(none yet)_
+_(none yet — note: B-001 prompt-cleaner is shipped externally as of 2026-04-11, see runlog. Should be moved here on a future cleanup pass.)_

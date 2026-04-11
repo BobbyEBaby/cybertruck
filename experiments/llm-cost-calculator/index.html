@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LLM API Cost Calculator — compare Claude, GPT, Gemini per call & per month</title>
+<meta name="description" content="Free, instant cost calculator for LLM API calls. Compare Claude, GPT-4, Gemini and others side-by-side. Per-call and monthly projections. 100% client-side, no signup, no tracking.">
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1d222c;
+    --border: #2a313d;
+    --text: #e7ebf3;
+    --text-dim: #8b94a7;
+    --accent: #7cf9c7;
+    --accent-2: #fdb86b;
+    --row-alt: #1a1f29;
+    --winner: #1d3328;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    padding: 1.5rem 1.25rem 0.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1 {
+    margin: 0 0 0.25rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent { color: var(--accent); }
+  .tagline { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 3rem;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+  }
+  .panel h2 {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .field { margin-bottom: 0.85rem; }
+  .field label {
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    margin-bottom: 0.25rem;
+  }
+  .field input[type=number], .field select {
+    width: 100%;
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.6rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--accent); }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .preset-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.85rem;
+  }
+  .preset {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .preset:hover { border-color: var(--accent); }
+  .preset.active { background: var(--accent); color: #0a1410; border-color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+  }
+  th {
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--panel-2);
+  }
+  tr.winner td { background: var(--winner); }
+  tr.winner td:first-child::after { content: " ★"; color: var(--accent); }
+  td.num { text-align: right; }
+  .provider { color: var(--text-dim); font-size: 0.75rem; }
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.25rem 2.5rem;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  details {
+    margin-top: 1rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+  details summary { cursor: pointer; color: var(--text-dim); user-select: none; }
+  details summary:hover { color: var(--text); }
+  details ul { margin: 0.6rem 0 0; padding-left: 1.2rem; color: var(--text-dim); }
+  details li { margin: 0.2rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LLM <span class="accent">Cost</span> Calculator</h1>
+  <p class="tagline">Compare Claude, GPT, Gemini and others side-by-side. Per-call and monthly projections. 100% client-side. No signup. No tracking.</p>
+</header>
+
+<main>
+  <section class="panel">
+    <h2>Inputs</h2>
+
+    <div class="field">
+      <label>Preset scenario</label>
+      <div class="preset-row" id="presets"></div>
+    </div>
+
+    <div class="field row-2">
+      <div>
+        <label>Input tokens / call</label>
+        <input type="number" id="inTok" min="0" step="100" value="2000">
+      </div>
+      <div>
+        <label>Output tokens / call</label>
+        <input type="number" id="outTok" min="0" step="100" value="500">
+      </div>
+    </div>
+
+    <div class="field row-2">
+      <div>
+        <label>Calls / day</label>
+        <input type="number" id="callsDay" min="0" step="1" value="100">
+      </div>
+      <div>
+        <label>Days / month</label>
+        <input type="number" id="daysMonth" min="0" max="31" step="1" value="30">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Cached input tokens / call (optional, Anthropic/OpenAI prompt-cache)</label>
+      <input type="number" id="cachedTok" min="0" step="100" value="0">
+    </div>
+
+    <details>
+      <summary>About the numbers</summary>
+      <ul>
+        <li>Prices are per 1 million tokens, in USD, sourced from public pricing pages as of early 2026. They will drift — verify against the provider before betting real money.</li>
+        <li>Cached input tokens use the cache-read price (typically ~10% of standard input). Uncached input still counts at the normal rate.</li>
+        <li>Output is almost always more expensive than input — usually 3–5×.</li>
+        <li>Token counts are model-specific in reality. This tool treats them as comparable for planning purposes; for exact accounting use the provider's tokenizer.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="panel">
+    <h2>Results — sorted by monthly cost</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th class="num">$ / call</th>
+          <th class="num">$ / day</th>
+          <th class="num">$ / month</th>
+        </tr>
+      </thead>
+      <tbody id="results"></tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  <p>
+    Prices are USD per 1M tokens, gathered from public pricing pages in early 2026. They go out of date — confirm with the provider before commitment.
+    Open source: <a href="https://github.com/BobbyEBaby/cybertruck">honest automated indie shipping</a>.
+    No analytics. No cookies. No upload.
+  </p>
+</footer>
+
+<script>
+(function () {
+  // === Pricing table — USD per 1M tokens ===
+  // Sourced from public pricing pages, early 2026. Update as needed.
+  // Each entry: { name, provider, in, out, cache (optional cache-read price) }
+  const MODELS = [
+    { name: "Claude Opus 4.5",        provider: "Anthropic", in: 15.00, out: 75.00, cache: 1.50 },
+    { name: "Claude Sonnet 4.5",      provider: "Anthropic", in:  3.00, out: 15.00, cache: 0.30 },
+    { name: "Claude Haiku 4.5",       provider: "Anthropic", in:  1.00, out:  5.00, cache: 0.10 },
+    { name: "GPT-4o",                 provider: "OpenAI",    in:  2.50, out: 10.00, cache: 1.25 },
+    { name: "GPT-4o mini",            provider: "OpenAI",    in:  0.15, out:  0.60, cache: 0.075 },
+    { name: "GPT-4 Turbo",            provider: "OpenAI",    in: 10.00, out: 30.00 },
+    { name: "o1",                     provider: "OpenAI",    in: 15.00, out: 60.00, cache: 7.50 },
+    { name: "o1-mini",                provider: "OpenAI",    in:  3.00, out: 12.00, cache: 1.50 },
+    { name: "Gemini 2.5 Pro",         provider: "Google",    in:  1.25, out: 10.00 },
+    { name: "Gemini 2.0 Flash",       provider: "Google",    in:  0.10, out:  0.40 },
+    { name: "DeepSeek V3",            provider: "DeepSeek",  in:  0.27, out:  1.10, cache: 0.07 },
+    { name: "Llama 3.3 70B (Groq)",   provider: "Groq",      in:  0.59, out:  0.79 },
+    { name: "Mistral Large",          provider: "Mistral",   in:  2.00, out:  6.00 },
+  ];
+
+  // === Preset scenarios ===
+  const PRESETS = [
+    { name: "Daily chat",               inTok: 800,    outTok: 400,    cachedTok: 0,     callsDay: 50  },
+    { name: "RAG with 50k context",     inTok: 50000,  outTok: 800,    cachedTok: 45000, callsDay: 30  },
+    { name: "Customer support bot",     inTok: 2000,   outTok: 500,    cachedTok: 1500,  callsDay: 1000 },
+    { name: "Coding agent (heavy)",     inTok: 15000,  outTok: 3000,   cachedTok: 10000, callsDay: 200 },
+    { name: "Document summarization",   inTok: 8000,   outTok: 1500,   cachedTok: 0,     callsDay: 100 },
+    { name: "Auto-tagging classifier",  inTok: 500,    outTok: 50,     cachedTok: 0,     callsDay: 5000 },
+  ];
+
+  const $ = (id) => document.getElementById(id);
+  const fmtMoney = (n) => {
+    if (n < 0.01) return "$" + n.toFixed(4);
+    if (n < 1)    return "$" + n.toFixed(3);
+    if (n < 100)  return "$" + n.toFixed(2);
+    return "$" + Math.round(n).toLocaleString();
+  };
+
+  function calcRow(m, inTok, outTok, cachedTok, callsDay, daysMonth) {
+    const uncachedIn = Math.max(0, inTok - cachedTok);
+    const cacheRate  = m.cache != null ? m.cache : m.in;
+    const callCost = (uncachedIn * m.in + cachedTok * cacheRate + outTok * m.out) / 1_000_000;
+    return {
+      name: m.name,
+      provider: m.provider,
+      perCall: callCost,
+      perDay: callCost * callsDay,
+      perMonth: callCost * callsDay * daysMonth,
+    };
+  }
+
+  function render() {
+    const inTok     = +$("inTok").value || 0;
+    const outTok    = +$("outTok").value || 0;
+    const cachedTok = Math.min(+$("cachedTok").value || 0, inTok);
+    const callsDay  = +$("callsDay").value || 0;
+    const daysMonth = +$("daysMonth").value || 0;
+
+    const rows = MODELS.map((m) => calcRow(m, inTok, outTok, cachedTok, callsDay, daysMonth));
+    rows.sort((a, b) => a.perMonth - b.perMonth);
+
+    const tbody = $("results");
+    tbody.innerHTML = "";
+    rows.forEach((r, i) => {
+      const tr = document.createElement("tr");
+      if (i === 0) tr.className = "winner";
+      tr.innerHTML = `
+        <td>${r.name}<div class="provider">${r.provider}</div></td>
+        <td class="num">${fmtMoney(r.perCall)}</td>
+        <td class="num">${fmtMoney(r.perDay)}</td>
+        <td class="num">${fmtMoney(r.perMonth)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function buildPresets() {
+    const row = $("presets");
+    PRESETS.forEach((p) => {
+      const btn = document.createElement("button");
+      btn.className = "preset";
+      btn.textContent = p.name;
+      btn.addEventListener("click", () => {
+        $("inTok").value = p.inTok;
+        $("outTok").value = p.outTok;
+        $("cachedTok").value = p.cachedTok;
+        $("callsDay").value = p.callsDay;
+        document.querySelectorAll(".preset").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        render();
+      });
+      row.appendChild(btn);
+    });
+  }
+
+  ["inTok", "outTok", "cachedTok", "callsDay", "daysMonth"].forEach((id) => {
+    $(id).addEventListener("input", render);
+  });
+
+  buildPresets();
+  render();
+})();
+</script>
+</body>
+</html>

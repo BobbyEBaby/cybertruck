@@ -20,6 +20,12 @@ Append-only. Newest entries at the bottom. One entry per scheduled run.
 - outcome: success
 - next: Robert to fill in API tokens in .env. Money-receive side fully wired.
 
+## 2026-04-11 06:03 — first ship 🚀
+- task: B-001 — deploy prompt-cleaner to GitHub Pages
+- did: User dropped GITHUB_TOKEN in .env. First deploy attempt failed: gh CLI not installed on this machine. Rewrote tools/deploy_pages.sh to use raw GitHub REST API via curl + git (no gh dependency). Re-ran. Created public repo BobbyEBaby/prompt-cleaner via POST /user/repos, cloned, copied experiments/prompt-cleaner/ contents in, pushed to main, enabled Pages via POST /repos/.../pages (returned 201 Created). Live URL: https://bobbyebaby.github.io/prompt-cleaner/. Appended entry to state/publish-log.md.
+- outcome: success — first external artifact is live
+- next: Verify the live URL renders the tool correctly (give Pages 30–90s to propagate). Do NOT post to Reddit yet — Reddit credentials not in .env, and we'd want to wait until Robert has actually opened the live URL once and confirmed it works. Update experiments/prompt-cleaner/README.md metrics table with the live URL.
+
 ## 2026-04-10 git repo + first build
 - task: Init git, push to BobbyEBaby/cybertruck, build B-001 prompt-cleaner experiment
 - did: git init, initial commit be8fdf3 (23 files), pushed to https://github.com/BobbyEBaby/cybertruck. Verified .env and secrets/ excluded. Then built experiments/prompt-cleaner/ — a working single-file HTML5 tool (input/output, 6 cleaning toggles incl. strip markdown / collapse blank lines / remove filler phrases / smart-quote conversion / token estimate / copy-to-clipboard, dark UI, no dependencies, ~430 lines). Wrote experiment README.md and ship.md. Refreshed market research 01-browser-utilities and 03-gumroad-digital-downloads with current 2026 data via WebSearch (Gumroad fees: 10%+$0.50 direct / 30% Discover; donation conversion rate for utility tools 0.024–0.5%; Ko-fi noted as 0%-fee tip rail vs Buy Me a Coffee 5%). Wrote tools/deploy_pages.sh (gh-based GitHub Pages auto-deploy with .env loading, idempotent, appends to publish-log) and tools/post_reddit.py (PRAW-based, single post, hard 24h rate-limit check against publish-log, never replies).

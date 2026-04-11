@@ -32,7 +32,8 @@ It scores 16/20 in `research/markets/01-browser-utilities.md`. It's the cheapest
 ## Metrics to track (filled in by future runs)
 | Metric | Value | As of |
 |---|---|---|
-| Live URL | _(not deployed yet)_ | |
+| Live URL | https://bobbyebaby.github.io/prompt-cleaner/ | 2026-04-11 |
+| Source repo | https://github.com/BobbyEBaby/prompt-cleaner | 2026-04-11 |
 | Reddit post URL | _(not posted yet)_ | |
 | Reddit upvotes | — | |
 | GitHub Pages visits (7d) | — | |

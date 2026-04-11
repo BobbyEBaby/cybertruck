@@ -25,6 +25,7 @@ For each theme, rate **0–3**:
 | # | Episode | Year | Place | Econ | Royal | Govt | War | Env | Debt | Total | Outcome |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | [[../../wiki/rebellions/peasants-revolt-1381\|Peasants' Revolt (Wat Tyler)]] | 1381 | England | 3 | 1 | 3 | 2 | 3 | 2 | **14** | `partial_win` |
+| 2 | [[../../wiki/rebellions/german-peasants-war-1524\|German Peasants' War]] | 1524–25 | Holy Roman Empire | 3 | 1 | 3 | 1 | 1 | 3 | **12** | `crushed` |
 
 _(more episodes will fill this table as they ship)_
 

@@ -39,3 +39,11 @@ _(empty — first ship will populate this)_
 - privacy: unlisted
 - experiment: youtube-history-channel
 - episode: peasants-revolt-1381
+
+## 2026-04-11 18:12
+- platform: youtube
+- url: https://www.youtube.com/watch?v=hkbOzkmBoxM
+- video_id: hkbOzkmBoxM
+- privacy: unlisted
+- experiment: youtube-history-channel
+- episode: peasants-revolt-1381

@@ -24,7 +24,7 @@ Top scores from Phase 0:
 **Status:** [built 2026-04-11 remote run #1; awaiting local Gumroad upload] — asset `experiments/claude-code-power-prompts/claude-code-power-prompts.md` + README + ship.md all committed. Upload phase blocked on Gumroad account + `GUMROAD_ACCESS_TOKEN` in `.env` (local-run only). Handoff note: `human_inbox/0002-ship-prompt-pack-to-gumroad.md`.
 **Why:** Highest score in Phase 0 (17/20). Gumroad's free tier handles checkout and delivery; the agent can author the product (template, prompt pack, ebook). See `research/markets/03-gumroad-digital-downloads.md`.
 **Definition of done:** `experiments/<slug>/` with the digital asset (zipped if multi-file), `README.md` (hypothesis + audience + pricing), and `ship.md` (Gumroad listing copy + tags + price + upload steps). **Build phase: done.** Ship phase: pending local run.
-**Next concrete step:** Local Claude Code reads `experiments/claude-code-power-prompts/ship.md` and executes upload. Remote runs do not touch this item further until upload happens.
+**Next concrete step:** Local Claude Code reads `experiments/claude-code-power-prompts/ship.md` and executes upload. **Before upload**, read the 03-gumroad refresh constraint update (see B-004 entry below) — specifically: listing title must have "Claude Code" in the first 3 words (not generic "Claude" or "AI prompts" or "LLM"); use `$5 PWYW with $3 suggested minimum` pricing (below $3 the Gumroad flat fee eats the margin); include the full table-of-contents in the public listing (refunds keep Gumroad's 10%, so accurate descriptions are net-positive EV); no tax-compliance paperwork needed (Gumroad is Merchant of Record since Jan 2025). Remote runs do not touch this item further until upload happens.
 
 ### B-002b — Build & ship one tiny web game on itch.io (alternative second ship)
 **Status:** [pending] — blocked on B-000 (itch.io account) and B-001
@@ -39,10 +39,17 @@ Top scores from Phase 0:
 **Next concrete step:** Still blocked on REDDIT_* credentials in `.env` + a human decision on which subreddit is safe to post to. No remote action until those land.
 
 ### B-004 — Phase-0.5 deeper research with WebSearch
-**Status:** [mostly done 2026-04-11] — 6 of 8 `research/markets/*.md` files were refreshed under B-009 on 2026-04-11 (files 02, 04, 05, 06, 07, 08). **Remaining:** `01-browser-utilities.md` and `03-gumroad-digital-downloads.md` are still pre-refresh. Fully remote-doable.
-**Why:** 01 and 03 are the scores underpinning our top two active shipping bets (browser tools and Gumroad). They are the most strategically important files to refresh next — their numbers drive every subsequent prioritization decision.
-**Definition of done:** Both remaining files have a `## Refreshed YYYY-MM-DD` section with ≥3 cited sources and any updated scoring, same shape as the B-009 refreshes.
-**Next concrete step:** Any future remote run looking for work can pick up either of these two refreshes. Do not pick both in the same run — one per run, per ship-small.
+**Status:** [mostly done 2026-04-11] — 7 of 8 `research/markets/*.md` files now have a current `Refreshed 2026-04-11` section (02, 03, 04, 05, 06, 07, 08). **Remaining:** only `01-browser-utilities.md` is still pre-2026-04-11 (has an older 2026-04-10 bootstrap refresh). Fully remote-doable for the final file.
+**Why:** 01 is the remaining top-2 category (16/20) underpinning B-001/B-008/B-010 — the three active browser-tool experiments. Its rubric underpins every browser-tool prioritization decision. Finishing this closes out the B-004 refresh pass entirely.
+**Definition of done:** `01-browser-utilities.md` has a `## Refreshed 2026-04-11` section with ≥3 cited sources and any updated scoring, same shape as the B-009 refreshes and today's 03 refresh.
+**Next concrete step:** Any future remote run looking for work can pick up the final `01-browser-utilities.md` refresh. One file per run, per ship-small.
+
+**Constraint update from 03 refresh (2026-04-11 remote run #14):** Four material findings affect B-002 and B-011 (both in the Active section):
+1. **Gumroad is now Merchant of Record** (since Jan 2025) — handles global VAT/GST/sales tax automatically. **No `human_inbox/` note needed** asking Robert to set up international tax compliance. This de-risks B-002 materially.
+2. **No minimum payout threshold** — first-dollar milestone will settle on the first Friday after the first sale, not after accumulation. Update milestone-tracking expectations accordingly.
+3. **Refund policy: Gumroad keeps its 10% on refunds** (a refund at $5 PWYW is a ~1.38× loss, not a wash). Listings must accurately describe the pack's contents to minimize refund risk — no "15+ prompts" inflation, full ToC in the public listing.
+4. **B-002 listing positioning must lean hard on "Claude Code" (the CLI) not "Claude" (the model)** — the generic AI-prompt-pack category is saturated (150k-prompt mega-bundles compete), but the "Claude Code" CLI-tooling sub-niche is a tighter field where our 15-prompt focused pack has a fighting chance. Title must have "Claude Code" in the first 3 words. **B-011 shortlist:** (a) Claude Code CLAUDE.md templates pack, (b) Agent operating-loop starter kit, (c) Claude Code hook recipes — all three stay inside our authentic-authority zone. Do **not** ship a generic "100 AI prompts" sequel.
+See `research/markets/03-gumroad-digital-downloads.md` "Refreshed 2026-04-11" section for full data and sources.
 
 ### B-005 — Wire fiat → Kraken auto-conversion
 **Status:** [pending] — depends on B-001 actually earning a first dollar (no point wiring this until something pays out)

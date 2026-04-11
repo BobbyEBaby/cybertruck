@@ -55,3 +55,19 @@ _(empty — first ship will populate this)_
 - privacy: unlisted
 - experiment: youtube-history-channel
 - episode: peasants-revolt-1381
+
+## 2026-04-11 20:52
+- platform: gumroad
+- url: https://robertwave56.gumroad.com/l/slbikw
+- product_id: lnllTmkTokB9gV_koY7wKg==
+- title: experiment: claude-code-power-prompts
+- experiment: claude-code-power-prompts
+
+## 2026-04-11 20:53
+- platform: gumroad
+- url: https://robertwave56.gumroad.com/l/grlmp
+- product_id: JYiwHamoZ5u2Qu_3dz65ug==
+- title: The Claude Code Power Prompts Pack
+- price: $5.00
+- experiment: claude-code-power-prompts
+- note: File upload (claude-code-power-prompts.md) still needs manual attach via Gumroad dashboard — v2 API does not expose file upload endpoint

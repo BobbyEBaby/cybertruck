@@ -54,7 +54,11 @@ Then write the script following the **Popular Uprisings structure** (see `strate
 - Why it matters now (60 sec, non-partisan)
 - Outro + CTA (60 sec)
 
-Word count target: **1,500–1,700 words** (at 160 wpm = 9.4–10.6 minutes). The slightly slower pace than generic faceless channels is intentional — gives room for breath and intonation, avoids the "rapid-fire monotone" pattern that YouTube's inauthentic-content classifier flags.
+Word count target: **500–700 words** (at ~130 wpm effective = 3.8–5.4 minutes). The narration rate is `-15%` so wpm is lower than the Edge-TTS baseline — the math already bakes that in. The slightly slower pace than generic faceless channels is intentional — gives room for breath and intonation, avoids the "rapid-fire monotone" pattern that YouTube's inauthentic-content classifier flags.
+
+**Format change history:** Ep1 (1,650 words / ~11 min) and ep2 (1,710 words / ~11 min) were written under the original 1,500–1,700 word / 8–12 minute target. That target was revised down to 500–700 words / 3–5 minutes on 2026-04-11 while the channel sits paused. The ep1/ep2 scripts remain as long-form archive — do not rewrite them. The new format applies from ep3 onward.
+
+**Pollinations image count:** ep1/ep2 used 20 prompts at ~11 min (~33 sec/image). For 3–5 min episodes, drop to **6–10 prompts** so Ken Burns pacing stays in the ~30–50 sec/image sweet spot. At 20 prompts against a 4-minute runtime, images flash every 12 seconds and pacing feels frantic. Fewer images = faster to curate per episode; same narrative beats, just denser.
 
 **Every script file MUST end with two sections (not spoken):**
 

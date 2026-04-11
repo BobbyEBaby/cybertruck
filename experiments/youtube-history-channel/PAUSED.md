@@ -44,3 +44,13 @@ Recommended resume sequence when the time comes:
 Robert decided to pause after reviewing v4 (the Hoch voice clone + clean Popular Uprisings script + parser fix). **Explicit reason:** *"I want to focus on other tasks."* This is a reallocation of effort, not a rejection of the approach. YouTube stays shelved until Robert says resume. In the meantime the rest of the backlog (browser tools, Gumroad, research refreshes, wiki maintenance, other experiments) runs normally.
 
 The v4 video remains unlisted at https://youtu.be/mkFbc00S3ig as a preserved artifact — it's the canonical version if the channel ever resumes.
+
+## Format lock for when we resume (added 2026-04-11)
+
+While paused, Robert decided two format changes to reduce per-episode production cost:
+
+1. **Target length drops from 8–12 min to 3–5 min** (~500–700 words). Ep1 and ep2 (both ~1,650 words / ~11 min) stay as **long-form archive** — do **not** rewrite them. The new short-form format starts at **ep3**.
+2. **Pollinations image count drops from 20 to 6–10 per episode** to match the shorter runtime without frantic pacing.
+3. **Narrator voice is locked to `en-GB-RyanNeural`** (Edge TTS, UK male, older tone, rate `-15%`, pitch `-2Hz`). See `strategy.md` "Narrator voice (locked 2026-04-11)" section for the full guardrail.
+
+See `experiments/youtube-history-channel/strategy.md` and `production-pipeline.md` for the detailed updates. When PAUSED.md is eventually deleted, the resumer should read those two files before writing a single word of ep3.

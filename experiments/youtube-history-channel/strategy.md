@@ -35,14 +35,15 @@ Every episode tells the story of a specific rebellion — pre-Roman to modern �
 **Default: Popular Uprisings** unless Robert picks a different one. Rationale: names the analytical framework ("what was breaking?") and is already associated with serious editorial content.
 
 ## Video format
-- **Length:** 8–12 minutes. Rationale: enough room for the story + the thematic analysis + the cross-episode "previously on Popular Uprisings" callbacks; also clears the ≥10 min mid-roll-ad threshold once the channel hits YPP. The 2026 research sweet spot is 7–15 min; 8–12 is the educational-content peak.
-- **Structure:**
-  - **0:00–0:30 Hook** — a vivid 2-sentence opening scene from the climax of the rebellion
-  - **0:30–1:30 Context** — when, where, who, what the world looked like
-  - **1:30–6:00 The story** — three narrative beats, each ending on a beat of tension
-  - **6:00–8:30 Thematic analysis** — walk through the six themes, calling out which ones were present with what intensity. Cite earlier episodes where the same pattern appeared ("we saw this same fiscal overreach in the Boxer Rebellion two episodes ago")
-  - **8:30–9:30 Why it matters now** — the through-line to 2026, never preachy, never political-tribe-coded
-  - **9:30–10:30 Outro + CTA** — rotate one tip rail per video in the spoken copy
+- **Length:** 3–5 minutes (~500–700 words at ~130 wpm effective rate, given the -15% narration rate). Changed 2026-04-11 from the original 8–12 min long-form format. Rationale: ep1 and ep2 were written at 11 min / ~1,650 words and the production cost per episode was too high relative to the unknown-channel discovery ceiling; short-form is cheaper to iterate and matches the 2026 YouTube-Shorts-adjacent attention pattern. Ep1 and ep2 remain as long-form archive — the new format starts at ep3.
+- **Short-form structure (ep3 onward, ~3–5 min):**
+  - **0:00–0:20 Hook** — the climax-first opening, one vivid sentence
+  - **0:20–1:00 Context** — when, where, who, stripped to essentials
+  - **1:00–3:00 The story** — two narrative beats, not three; each ends on tension
+  - **3:00–4:00 Thematic analysis** — hit 2–3 themes max at high intensity, don't force all six
+  - **4:00–4:30 Why it matters now + outro + CTA** — one tip rail rotation per video
+- **Deprecated long-form structure (ep1/ep2 only, archived):**
+  - 0:00–0:30 Hook / 0:30–1:30 Context / 1:30–6:00 Story (3 beats) / 6:00–8:30 Thematic analysis (all 6 themes) / 8:30–9:30 Why it matters / 9:30–10:30 Outro. Listed here so the ep1/ep2 scripts still match a documented format — do not use for new episodes.
 - **Visuals:** **AI-generated imagery via Pollinations.ai**, prompted per narration beat with period-appropriate style (e.g., "oil painting, 14th century English countryside, serfs with scythes, warm brown tones, museum quality"). 15–25 unique generated images per video. Ken Burns pan/zoom via ffmpeg. For specific famous paintings that audiences recognize (the Vermeer of the Dutch Golden Age, etc.), use the public-domain original instead of a generation. The mix is: ~80% generated, ~20% real historical art when the real art is iconic.
 - **Narration:** **Microsoft Edge TTS** as the default (free, decent intonation, zero setup). **StyleTTS2** as the quality-upgrade path for any episode we want to push harder on — it produces genuinely studio-grade narration that rivals ElevenLabs for long-form content. StyleTTS2 requires a local GPU (tested working on RTX 3060 12GB via one-click Microsoft Store installer). If Robert's machine has a capable GPU, we default to StyleTTS2; if not, Edge TTS for the first batch of episodes and we re-evaluate.
 - **Music:** Public domain classical (IMSLP) or CC-BY from incompetech.com / YouTube Audio Library. Score the video to the narrative beats — ominous during the context setup, driving during the rebellion itself, contemplative during the analysis.
@@ -90,3 +91,8 @@ Sponsorships: year 1+, only when audience is real.
 
 ## Honesty anchor
 From `state/honest-expectations.md`: most creators never break 1,000 subs. The "rebellions with thematic analysis" concept is strong but unproven. The loop's job is to make the *highest-quality attempt possible at $0*, measure honestly, and kill the experiment if it doesn't work by month 3.
+
+### Narrator voice (locked 2026-04-11)
+The canonical narrator is **`en-GB-RyanNeural`** (Edge TTS, UK male, older tone). Rate `-15%`, pitch `-2Hz`. Hardcoded in `tools/narrate.py` (lines 56–64). This is the voice ep1 v2 shipped with. **Do not change it silently.** If a future run wants to swap to StyleTTS2 or a different Edge voice, it must open a decision note in `human_inbox/` first and get Robert's sign-off.
+
+Reason for the lock: an earlier commit message ("clean XTTS") suggested an engine/voice swap that did not actually correspond to a code change — the tool was still Edge TTS UK throughout — which made the v4 voice state ambiguous for later runs. The lock eliminates that ambiguity. The voice decision is part of the brand, not an implementation detail.

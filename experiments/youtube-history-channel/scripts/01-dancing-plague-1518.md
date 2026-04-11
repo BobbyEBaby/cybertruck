@@ -1,5 +1,5 @@
 ---
-status: scripted
+status: sourced
 title: "The 1518 Dancing Plague That Killed Dozens"
 slug: dancing-plague-1518
 target_length_seconds: 480
@@ -15,6 +15,10 @@ sources:
   - https://www.history.com/articles/what-was-the-dancing-plague-of-1518
 topic_queue_position: 1
 scripted_on: 2026-04-11
+sourced_on: 2026-04-11
+image_sources_file: assets/dancing-plague-1518/sources.md
+image_count_identified: 22
+image_count_downloaded: 0
 ---
 
 # Episode 1 — The 1518 Dancing Plague

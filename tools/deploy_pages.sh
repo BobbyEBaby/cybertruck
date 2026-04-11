@@ -91,14 +91,17 @@ elif [[ "$REPO_STATUS" != "200" ]]; then
 fi
 
 # 3. Clone (or init if clone of empty repo behaves oddly), copy files, push
+# Use HTTP header-based auth (no username in URL) to avoid Credential Manager
+# caching a bogus "x-access-token" entry. Auth via -c http.extraheader.
 cd "$WORK_DIR"
-# Use a credential-embedded URL but never echo it. Redirect git output to /dev/null to be safe.
-CLONE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO_FULL}.git"
-if ! git clone --quiet "$CLONE_URL" repo 2>/dev/null; then
+PLAIN_URL="https://github.com/${REPO_FULL}.git"
+GIT_AUTH_HDR="Authorization: Bearer ${GITHUB_TOKEN}"
+
+if ! git -c "http.extraheader=${GIT_AUTH_HDR}" clone --quiet "$PLAIN_URL" repo 2>/dev/null; then
   mkdir -p repo
   cd repo
   git init -b main -q
-  git remote add origin "$CLONE_URL"
+  git remote add origin "$PLAIN_URL"
   cd ..
 fi
 
@@ -110,14 +113,11 @@ find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
 cp -R "$ROOT_DIR/$SOURCE_DIR/." .
 
 git add -A
-if git diff --cached --quiet 2>/dev/null && [[ -z "$(git status --porcelain)" ]]; then
-  : # nothing to commit
-fi
 git -c user.email="autopilot@cybertruck.local" \
     -c user.name="Cybertruck Autopilot" \
     commit -q -m "deploy: $(date -u +%Y-%m-%dT%H:%M:%SZ)" 2>/dev/null || true
 
-git push -q -u origin main 2>/dev/null
+git -c "http.extraheader=${GIT_AUTH_HDR}" push -q -u origin main 2>/dev/null
 
 # 4. Enable Pages on main / (root) — idempotent (POST returns 409 if already enabled)
 PAGES_BODY='{"source":{"branch":"main","path":"/"}}'

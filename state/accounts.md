@@ -50,7 +50,18 @@ When proposing a payout method via inbox, prefer in order:
 The XRP address is shared across many Kraken users. The destination tag `2272490000` is what tells Kraken which user the deposit belongs to. **Sending XRP without the tag = funds credited to the wrong account or held indefinitely.** Any payout configuration involving XRP must transmit the tag. If a platform's payout form has no destination-tag field, **do not use XRP from that platform.**
 
 ## Active accounts
-_(none yet — see human_inbox/0001-setup.md)_
+
+- platform: Gumroad
+  username: robertwave56
+  profile_url: https://robertwave56.gumroad.com/
+  payout_method: PayPal (personal)
+  notes: Merchant of Record (handles global VAT/GST automatically since Jan 2025). No minimum payout threshold. Fees: 10% + $0.50 direct sales. Live product: The Claude Code Power Prompts Pack at https://robertwave56.gumroad.com/l/grlmp ($3 fixed). Published 2026-04-11 after payout setup unblocked the publish gate.
+
+- platform: Ko-fi
+  username: bobbyebaby
+  profile_url: https://ko-fi.com/bobbyebaby
+  payout_method: PayPal (personal) + Stripe — both connected 2026-04-11
+  notes: 0% platform fee on Ko-fi free tier. PayPal charges its own ~2.9% + $0.30 per transaction; Stripe charges 2.9% + $0.30 (CA) but adds card / Apple Pay / Google Pay / Venmo support (higher conversion than PayPal-only on dev audiences). Stripe account is a brand-new account created via Ko-fi Connect flow; Robert completed the legal-name / DOB / address / bank / SIN steps manually. Focus: tips for the browser tools and other free products. Categories: Software / Science & Tech / Education. Live tip links embedded in: https://bobbyebaby.github.io/prompt-cleaner/ and https://bobbyebaby.github.io/llm-cost-calculator/ (deployed 2026-04-11).
 
 ## Suggested first accounts to create (zero-cost, no card required)
 - itch.io — host free or paid web games / digital downloads

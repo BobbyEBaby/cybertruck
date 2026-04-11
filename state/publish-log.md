@@ -71,3 +71,15 @@ _(empty — first ship will populate this)_
 - price: $3.00 (Robert adjusted from initial $5.00 in the Gumroad dashboard; PWYW with minimum was not available on his tier)
 - experiment: claude-code-power-prompts
 - note: File upload (claude-code-power-prompts.md) still needs manual attach via Gumroad dashboard — v2 API does not expose file upload endpoint
+
+## 2026-04-11 21:43
+- platform: github-pages
+- url: https://bobbyebaby.github.io/prompt-cleaner/
+- experiment: prompt-cleaner
+- repo: https://github.com/BobbyEBaby/prompt-cleaner
+
+## 2026-04-11 21:43
+- platform: github-pages
+- url: https://bobbyebaby.github.io/llm-cost-calculator/
+- experiment: llm-cost-calculator
+- repo: https://github.com/BobbyEBaby/llm-cost-calculator

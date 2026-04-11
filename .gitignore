@@ -27,3 +27,9 @@ experiments/youtube-history-channel/assets/**/final.mp4
 .obsidian/cache
 .obsidian/graph.json
 .obsidian/hotkeys.json
+
+# Playwright MCP session artifacts (local-only browser snapshots + screenshots)
+.playwright-mcp/
+*.png
+!experiments/**/*.png
+!wiki/**/*.png

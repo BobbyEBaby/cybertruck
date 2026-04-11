@@ -70,7 +70,26 @@ fi
 
 REPO_FULL="$GH_USER/$REPO_NAME"
 WORK_DIR="$(mktemp -d)"
-trap 'rm -rf "$WORK_DIR"' EXIT
+
+# Askpass helper: git calls GIT_ASKPASS with a prompt string as $1. We reply
+# "x-access-token" for Username prompts and $GITHUB_TOKEN for Password prompts.
+# This keeps the token out of command-line args (visible via `ps`) and out of
+# .git/config. The helper script itself holds no secret — it only reads from
+# the environment.
+ASKPASS_SCRIPT="$(mktemp)"
+cat > "$ASKPASS_SCRIPT" <<'HELPER'
+#!/usr/bin/env bash
+case "$1" in
+  Username*) echo "x-access-token" ;;
+  Password*) echo "$GITHUB_TOKEN" ;;
+esac
+HELPER
+chmod +x "$ASKPASS_SCRIPT"
+export GIT_ASKPASS="$ASKPASS_SCRIPT"
+# Keep GITHUB_TOKEN exported so the helper can read it from its env.
+export GITHUB_TOKEN
+
+trap 'rm -f "$ASKPASS_SCRIPT"; rm -rf "$WORK_DIR"' EXIT
 
 # 2. Create repo if it does not exist (404 from GET means not found)
 REPO_STATUS="$(curl -sS -o /dev/null -w '%{http_code}' \
@@ -95,9 +114,12 @@ fi
 # caching a bogus "x-access-token" entry. Auth via -c http.extraheader.
 cd "$WORK_DIR"
 PLAIN_URL="https://github.com/${REPO_FULL}.git"
-GIT_AUTH_HDR="Authorization: Bearer ${GITHUB_TOKEN}"
 
-if ! git -c "http.extraheader=${GIT_AUTH_HDR}" clone --quiet "$PLAIN_URL" repo 2>/dev/null; then
+# Disable Git Credential Manager so our GIT_ASKPASS helper is the only auth
+# path. Otherwise GCM intercepts and opens a browser/device-code prompt.
+GIT_OPTS=(-c "credential.helper=")
+
+if ! git "${GIT_OPTS[@]}" clone --quiet "$PLAIN_URL" repo 2>/dev/null; then
   mkdir -p repo
   cd repo
   git init -b main -q
@@ -117,7 +139,7 @@ git -c user.email="autopilot@cybertruck.local" \
     -c user.name="Cybertruck Autopilot" \
     commit -q -m "deploy: $(date -u +%Y-%m-%dT%H:%M:%SZ)" 2>/dev/null || true
 
-git -c "http.extraheader=${GIT_AUTH_HDR}" push -q -u origin main 2>/dev/null
+git "${GIT_OPTS[@]}" push -q -u origin main
 
 # 4. Enable Pages on main / (root) — idempotent (POST returns 409 if already enabled)
 PAGES_BODY='{"source":{"branch":"main","path":"/"}}'

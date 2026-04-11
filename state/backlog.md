@@ -17,10 +17,8 @@ Top scores from Phase 0:
 ## Active
 
 ### B-001 — Build & ship a tiny browser tool: "AI Prompt Cleaner"
-**Status:** [pending] — blocked on B-000 (needs `.env` populated with `GITHUB_TOKEN`). Once unblocked the agent ships this fully autonomously via `gh` → GitHub Pages and posts to one relevant subreddit via PRAW.
-**Why this is first:** Cheapest possible shot. A single static HTML page with a paste box and a "clean" button can ship to GitHub Pages or itch.io in minutes. No backend, no account costs, no servers. See `research/markets/01-browser-utilities.md`.
-**Definition of done:** `experiments/prompt-cleaner/` contains a working `index.html` (single file, no build step), a `README.md` with the hypothesis, and a `ship.md` checklist for the user telling them exactly which platform to upload to.
-**Next concrete step:** Create the experiment folder, write a working single-file HTML/JS tool that takes pasted text and offers cleanups (strip markdown, normalize whitespace, etc.), write the ship checklist.
+**Status:** [done 2026-04-11] — live at https://bobbyebaby.github.io/prompt-cleaner/. Repo: https://github.com/BobbyEBaby/prompt-cleaner. Shipped by the local run 2026-04-11 06:03 (see runlog + publish-log).
+**Follow-up:** 7-day measurement window is running. No Reddit post yet — deferred until the live URL is visually confirmed and REDDIT_* credentials are in `.env`.
 
 ### B-002 — Build & ship a Gumroad digital download (highest-ceiling first product)
 **Status:** [in_progress 2026-04-11 remote] — build phase unblocked (no creds needed). Upload phase still blocked on Gumroad account + `GUMROAD_ACCESS_TOKEN` in `.env` (local-run only).

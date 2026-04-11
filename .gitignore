@@ -21,3 +21,9 @@ human_inbox/processed/
 
 # Large derived video artifacts (rebuildable from script + images + tools)
 experiments/youtube-history-channel/assets/**/final.mp4
+
+# Obsidian workspace config (user-specific, not project config)
+.obsidian/workspace*
+.obsidian/cache
+.obsidian/graph.json
+.obsidian/hotkeys.json

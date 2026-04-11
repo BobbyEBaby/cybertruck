@@ -68,6 +68,6 @@ _(empty — first ship will populate this)_
 - url: https://robertwave56.gumroad.com/l/grlmp
 - product_id: JYiwHamoZ5u2Qu_3dz65ug==
 - title: The Claude Code Power Prompts Pack
-- price: $5.00
+- price: $3.00 (Robert adjusted from initial $5.00 in the Gumroad dashboard; PWYW with minimum was not available on his tier)
 - experiment: claude-code-power-prompts
 - note: File upload (claude-code-power-prompts.md) still needs manual attach via Gumroad dashboard — v2 API does not expose file upload endpoint

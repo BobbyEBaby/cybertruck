@@ -94,15 +94,31 @@ Top scores from Phase 0:
 **Why:** B-002 (Claude Code Power Prompts) is a single product. Once it ships, having a second asset ready to upload back-to-back is the right move (one-product creators almost never make sales; clusters do). Candidates: "AI agent CLAUDE.md template pack", "Cybertruck-Autopilot-style operating-loop starter kit", "100 prompts for X niche".
 **Next concrete step:** Decide on the second product after B-002 is shipped and we have measurement data. Until then, keep this as a placeholder so the agent doesn't redundantly start it.
 
-### B-012 — Write full script for episode 1 (Dancing Plague of 1518)
-**Status:** [done 2026-04-11 remote run #9] — full ~1,307-word script written in `experiments/youtube-history-channel/scripts/01-dancing-plague-1518.md`, frontmatter flipped `queued` → `scripted`. Structure: `[HUMAN_INTRO]` (Robert, ~35 words) → TTS Hook → TTS Context → TTS Beat 1 (Frau Troffea) → `[HUMAN_RECORD]` #1 → TTS Beat 2 (authorities' disastrous response) → `[HUMAN_RECORD]` #2 → TTS Beat 3 (pilgrimage + end) → `[HUMAN_RECORD]` #3 → TTS Why-it-matters → `[HUMAN_OUTRO]` (Robert, ~155 words with Ko-fi CTA). 4 human segments total (~15 min of Robert's time), 7 TTS segments. Every factual claim has an inline HTML-comment source citation. The three academic theories (ergot / mass psychogenic illness / religious trance state) are presented as an unresolved dispute per the "hard no's" rule — the script explicitly says "None of these theories is proven." No modern-event comparisons by name. No clickbait framing. Sources verified via 5 WebSearch queries against Wikipedia, Britannica, National Geographic, The Lancet (Waller 2009), Public Domain Review, Smithsonian, History.com, and Dance Research 2017. See runlog entry for full detail.
-**Definition of done:** [MET] `01-dancing-plague-1518.md` contains the full spoken-narration script, ~1,350 words, sectioned per the beat map, with inline source citations, `[HUMAN_INTRO]`/`[HUMAN_OUTRO]` markers for Robert, and at least 3 "editorial commentary" beats that add creative human voice beyond factual recitation.
-**Next concrete step:** Next remote run (or local) picks up B-017 (source ~20 public domain images for this episode from Library of Congress / Wikimedia Commons / Internet Archive and write `assets/dancing-plague-1518/sources.md`) OR B-013 (build `tools/source_images.py` first and then run it against this script). Either order works. After images are sourced, Robert records the four human segments (see inbox note to be written when B-014 narrate.sh is ready), then B-014/B-015/B-016 complete the pipeline.
+### B-012 — Write full script for episode 1 (Peasants' Revolt 1381) — REVISED after pivot
+**Status:** [pending] — was [done] for Dancing Plague script, but channel pivoted to **rebellions with thematic analysis** on 2026-04-11 per Robert's direction. The Dancing Plague script + 22 sourced images are archived (not deleted) in `experiments/youtube-history-channel/_archive/` for reference. New episode 1 is the **Peasants' Revolt of 1381 (Wat Tyler)** — placeholder and beat map are in `experiments/youtube-history-channel/scripts/01-peasants-revolt-1381.md`.
+**Why this topic:** textbook example of 5 of 6 Breaking Points themes at high intensity (Economy 3, Government 3, Environment 3, War 2, Debt 2, Royalty 1 → 14/18). Clean narrative arc (Black Death → Statute of Labourers → Poll Tax → London storming → Smithfield murder of Wat Tyler → structural victory over the next century). Sets up the analytical framework the channel will apply to every subsequent episode.
+**Preserved from the old B-012 work:** the `[HUMAN_INTRO]` / `[HUMAN_OUTRO]` / `[HUMAN_RECORD]` segment structure that the remote agent (Opus run #9) designed for the Dancing Plague script is an excellent pattern and **must be used for the Peasants' Revolt script too**. 4 human segments total (~15 min of Robert's time per episode), 6–7 TTS segments, every factual claim cited inline as an HTML comment.
+**New requirements from the pivot:**
+1. **Theme intensities section** at the bottom of the script (6 ratings with one-sentence justifications) for copying into `experiments/youtube-history-channel/themes.md`
+2. **Pollinations prompts section** at the bottom of the script (20 prompts for AI image generation via B-013's new `generate_images.py`) instead of public-domain sourcing
+3. **Thematic analysis section** in the narration itself (6:00–8:30 of the video), walking through the 6 themes for this rebellion. This is the channel's differentiator.
+**Definition of done:** `01-peasants-revolt-1381.md` has the full ~1,600-word script, [HUMAN_*] segment markers, inline source citations, theme intensities section, Pollinations prompts section, themes.md updated with the episode 1 row. Frontmatter status `queued` → `scripted`.
+**Next concrete step:** Remote run picks this up, verifies sources via WebSearch, writes the script. After this is done, B-013 (generate images) and B-014 (segmented TTS) can run in either order.
 
-### B-013 — Build tools/source_images.py (image sourcing helper)
-**Status:** [pending] — fully remote-doable (no creds for LoC/Wikimedia APIs)
-**Why:** Needed before any video can be produced. Given a list of search terms, queries Library of Congress API + Wikimedia Commons API + Internet Archive API, downloads 20+ public-domain images per video, writes a `sources.md` with attribution per image.
-**Next concrete step:** Research each API's endpoint + licensing metadata fields. Write `tools/source_images.py` that takes a video slug and search terms, pulls candidates, filters by license (PD or CC-BY only), downloads to `experiments/youtube-history-channel/assets/<slug>/`, writes `sources.md`.
+### B-012b — Decide channel name (Breaking Points / Powder Keg / Rising)
+**Status:** [blocked-on-human]
+**Why:** Affects branding, video description template, and spoken CTA copy in every script. Robert drops one word in `human_outbox/0004-channel-name.md`. Default: "Breaking Points" if unanswered by the time B-012 finalizes episode 1.
+
+### B-013 — Build tools/generate_images.py (Pollinations.ai wrapper) — REVISED after pivot
+**Status:** [pending] — fully remote-doable (no creds needed, Pollinations is keyless)
+**Why — major pivot from the old B-013:** Robert explicitly asked (2026-04-11) for **original AI-generated imagery tailored to each narration beat**, not public-domain sourcing. Pollinations.ai provides a free, no-key SDXL/Flux/GPT-Image HTTP API at `https://image.pollinations.ai/prompt/{url-encoded-prompt}` — perfect for remote automation with zero cost. The remote agent's earlier LoC/Wikimedia sources.md manifest for Dancing Plague is preserved in `_archive/` and is not deleted.
+**Note:** For episodes that reference specific famous iconic artworks (e.g., a famous Vermeer or Delacroix painting), the script's Pollinations prompts section may intentionally include a handful of "use the real image" pointers. B-013 should honor those — if a prompt is prefixed with `REAL:` plus a URL, download the real image instead of generating one. Default is generation.
+**Definition of done:** `tools/generate_images.py` exists. Takes a video slug as argv. Reads the "Pollinations prompts" section from the script file. For each prompt: calls Pollinations (with 2-sec delay between calls for rate-limit courtesy), saves to `experiments/youtube-history-channel/assets/<slug>/img_NN.jpg`, writes `images.md` manifest (prompt → filename → engine used → timestamp). Handles REAL: prefix for PD-passthrough. Exponential backoff on HTTP 429. Never prints tokens (there are none for Pollinations, but the pattern is consistent with other tools).
+
+### B-013b — Image quality gate (regenerate bad Pollinations outputs)
+**Status:** [pending] — remote-doable if the agent can load images as vision input; otherwise flags to human
+**Why:** AI image generation is variable. A bad image (wrong era, anachronistic, low quality) undermines history-video credibility more than any other single thing. After B-013 generates the 20 images, a review pass identifies bad ones and regenerates them with revised prompts.
+**Next concrete step:** Build `tools/review_images.py` that scans `images.md`, reads each image as vision input, rates quality 1–5, regenerates anything <3 with a more specific prompt. If vision input isn't available in the sandbox, write a `human_inbox/` note asking Robert to flag bad ones by filename and re-run after his reply.
 
 ### B-014 — Build tools/narrate.sh (Edge TTS wrapper) — **segment-aware**
 **Status:** [pending] — remote-doable if the sandbox has Python + `edge-tts` available
@@ -122,10 +138,10 @@ Top scores from Phase 0:
 **Unblocks:** fully automated weekly video shipping.
 **Handoff:** see the `human_inbox/` note B-012 will write.
 
-### B-017 — Source public-domain images for episode 1 (Dancing Plague)
-**Status:** [pending] — depends on B-012 (script must exist first) AND B-013 (helper must exist first), OR can be done manually
-**Why:** Before rendering, we need ~20 images sourced and attributed. Agent can do this manually via WebSearch if B-013 isn't ready.
-**Next concrete step:** After B-012 is done, search Library of Congress, Wikimedia Commons, and Internet Archive for: "Strasbourg 16th century", "medieval woodcut dancing", "Saint Vitus dance", "16th century Europe engraving", "dance macabre". Download 20+ candidates, filter by license, save to `experiments/youtube-history-channel/assets/dancing-plague-1518/`, write `sources.md`.
+### B-017 — Generate 20 Pollinations images for episode 1 (Peasants' Revolt 1381) — REVISED after pivot
+**Status:** [pending] — depends on B-012 (script with Pollinations prompts section) AND B-013 (generate_images.py)
+**Why — replaces old B-017:** Old B-017 was "source 20 public-domain images for Dancing Plague" and was partially completed by remote run #10 (22 candidate images mapped in a sources.md manifest, not downloaded). That work is archived in `experiments/youtube-history-channel/_archive/assets-dancing-plague-1518/sources.md` for future reference. **New B-017:** run `python tools/generate_images.py peasants-revolt-1381` to generate 20 AI images from the Pollinations prompts in the new episode 1 script.
+**Next concrete step:** After B-012 finalizes the new script (with the Pollinations prompts section populated) and B-013 builds the generator, run the generator. Then B-013b reviews and regenerates any bad outputs. Result: `experiments/youtube-history-channel/assets/peasants-revolt-1381/img_01.jpg` through `img_20.jpg` plus `images.md` manifest.
 
 ## Done
 

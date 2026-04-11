@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>Flipline — a one-button gravity game</title>
+<meta name="description" content="A one-button gravity-flip arcade game. Flip gravity to dodge obstacles and survive as long as you can. Single HTML file, plays in any browser, no tracking.">
+<style>
+  :root {
+    --bg: #05070f;
+    --fg: #e6f0ff;
+    --acc: #62d4ff;
+    --danger: #ff5577;
+    --line: #1a2238;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    min-height: 100%;
+    background: #0b0f1a;
+    color: var(--fg);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #wrap { text-align: center; padding: 8px; max-width: 100vw; }
+  h1 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--acc);
+    text-transform: uppercase;
+  }
+  canvas {
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    max-width: 96vw;
+    height: auto;
+    touch-action: none;
+  }
+  .hint {
+    margin: 8px 0 0;
+    font-size: 11px;
+    opacity: 0.55;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <h1>Flipline</h1>
+  <canvas id="c" width="800" height="450" aria-label="Flipline game canvas"></canvas>
+  <p class="hint">SPACE / CLICK / TAP to flip gravity &nbsp;&middot;&nbsp; dodge the bars &nbsp;&middot;&nbsp; survive</p>
+</div>
+<script>
+(() => {
+  "use strict";
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width;
+  const H = canvas.height;
+
+  const STORAGE_KEY = 'flipline:hi';
+  const getHi = () => { try { return parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10) || 0; } catch (_) { return 0; } };
+  const setHi = v => { try { localStorage.setItem(STORAGE_KEY, String(v)); } catch (_) {} };
+
+  // Constants
+  const PLAYER_X = 120;
+  const PLAYER_SIZE = 18;
+  const GRAVITY = 2200;
+  const FLIP_COOLDOWN = 0.05;
+  const FLOOR_Y = H - 30;
+  const CEIL_Y = 30;
+
+  // Mutable game state
+  let state;       // 'ready' | 'play' | 'dead'
+  let startSpeed, speed, time, score, hi, flipCd;
+  let obstacles, stars, player, spawnTimer;
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  function reset() {
+    state = 'ready';
+    startSpeed = 260;
+    speed = startSpeed;
+    time = 0;
+    score = 0;
+    flipCd = 0;
+    obstacles = [];
+    stars = [];
+    spawnTimer = 0.8;
+    hi = getHi();
+    player = {
+      y: FLOOR_Y - PLAYER_SIZE,
+      vy: 0,
+      gDir: 1,
+      trail: []
+    };
+    for (let i = 0; i < 70; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        s: Math.random() * 1.4 + 0.4,
+        z: Math.random() * 0.8 + 0.2
+      });
+    }
+  }
+
+  function flip() {
+    if (flipCd > 0) return;
+    player.gDir *= -1;
+    flipCd = FLIP_COOLDOWN;
+  }
+
+  function handleInput() {
+    if (state === 'ready') { state = 'play'; return; }
+    if (state === 'dead') { reset(); state = 'play'; return; }
+    flip();
+  }
+
+  function spawnObstacle() {
+    const side = Math.random() < 0.5 ? 'floor' : 'ceiling';
+    const h = rand(55, 170);
+    const w = rand(22, 42);
+    obstacles.push({
+      x: W + 20,
+      y: side === 'floor' ? FLOOR_Y - h : CEIL_Y,
+      w, h,
+      side,
+      passed: false,
+    });
+  }
+
+  function endGame() {
+    state = 'dead';
+    if (score > hi) { hi = score; setHi(hi); }
+  }
+
+  function update(dt) {
+    // Idle: only advance time and stars
+    if (state === 'ready' || state === 'dead') {
+      time += dt;
+      for (const s of stars) {
+        s.x -= 30 * s.z * dt;
+        if (s.x < 0) { s.x = W; s.y = Math.random() * H; }
+      }
+      return;
+    }
+
+    // Playing
+    time += dt;
+    speed = startSpeed + Math.min(time * 16, 300); // caps near 560
+    flipCd = Math.max(0, flipCd - dt);
+
+    // Physics
+    const g = GRAVITY * player.gDir;
+    player.vy += g * dt;
+    player.y += player.vy * dt;
+
+    const bottom = FLOOR_Y - PLAYER_SIZE;
+    const top = CEIL_Y;
+    if (player.y >= bottom) {
+      player.y = bottom;
+      if (player.gDir === 1) player.vy = 0;
+    } else if (player.y <= top) {
+      player.y = top;
+      if (player.gDir === -1) player.vy = 0;
+    }
+
+    // Trail
+    player.trail.push({ x: PLAYER_X, y: player.y + PLAYER_SIZE / 2, life: 0.25 });
+    if (player.trail.length > 24) player.trail.shift();
+    for (const t of player.trail) t.life -= dt;
+    player.trail = player.trail.filter(t => t.life > 0);
+
+    // Spawn
+    spawnTimer -= dt;
+    if (spawnTimer <= 0) {
+      spawnObstacle();
+      spawnTimer = rand(0.55, 1.05) * (300 / speed);
+    }
+
+    // Move obstacles, score, collide
+    for (const o of obstacles) {
+      o.x -= speed * dt;
+      if (!o.passed && o.x + o.w < PLAYER_X) {
+        o.passed = true;
+        score++;
+      }
+      if (
+        PLAYER_X + PLAYER_SIZE > o.x &&
+        PLAYER_X < o.x + o.w &&
+        player.y + PLAYER_SIZE > o.y &&
+        player.y < o.y + o.h
+      ) {
+        endGame();
+        return;
+      }
+    }
+    obstacles = obstacles.filter(o => o.x + o.w > -10);
+
+    // Parallax stars
+    for (const s of stars) {
+      s.x -= speed * 0.15 * s.z * dt;
+      if (s.x < 0) { s.x = W; s.y = Math.random() * H; }
+    }
+  }
+
+  function draw() {
+    // Background
+    ctx.fillStyle = '#05070f';
+    ctx.fillRect(0, 0, W, H);
+
+    // Stars
+    for (const s of stars) {
+      ctx.fillStyle = 'rgba(255,255,255,' + (0.25 + s.z * 0.5) + ')';
+      ctx.fillRect(Math.floor(s.x), Math.floor(s.y), s.s, s.s);
+    }
+
+    // Rails
+    ctx.fillStyle = '#1a2238';
+    ctx.fillRect(0, FLOOR_Y, W, 2);
+    ctx.fillRect(0, CEIL_Y - 2, W, 2);
+
+    // Scrolling grid notches
+    const notch = (time * speed * 0.5) % 40;
+    ctx.fillStyle = '#0f1626';
+    for (let x = -notch; x < W; x += 40) {
+      ctx.fillRect(x, FLOOR_Y + 3, 20, 1);
+      ctx.fillRect(x, CEIL_Y - 4, 20, 1);
+    }
+
+    // Obstacles
+    for (const o of obstacles) {
+      ctx.fillStyle = '#ff5577';
+      ctx.fillRect(o.x, o.y, o.w, o.h);
+      ctx.fillStyle = '#ff88a0';
+      const capY = o.side === 'floor' ? o.y : o.y + o.h - 3;
+      ctx.fillRect(o.x, capY, o.w, 3);
+    }
+
+    // Trail
+    for (let i = 0; i < player.trail.length; i++) {
+      const t = player.trail[i];
+      const a = Math.max(0, t.life / 0.25) * (i / Math.max(1, player.trail.length));
+      ctx.fillStyle = 'rgba(98,212,255,' + (a * 0.6) + ')';
+      ctx.fillRect(t.x - i, t.y - 2, 6, 4);
+    }
+
+    // Player
+    ctx.fillStyle = '#62d4ff';
+    ctx.fillRect(PLAYER_X, player.y, PLAYER_SIZE, PLAYER_SIZE);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(PLAYER_X + 4, player.y + 4, 3, 3);
+
+    // HUD
+    ctx.fillStyle = '#e6f0ff';
+    ctx.font = '16px ui-monospace, Menlo, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('SCORE ' + score, 12, 20);
+    ctx.textAlign = 'right';
+    ctx.fillText('BEST ' + hi, W - 12, 20);
+
+    if (state === 'ready') {
+      overlay('FLIPLINE', 'press SPACE / tap to start');
+    } else if (state === 'dead') {
+      overlay('GAME OVER', 'score ' + score + '   \u00B7   best ' + hi + '   \u00B7   press SPACE / tap');
+    }
+  }
+
+  function overlay(title, sub) {
+    ctx.fillStyle = 'rgba(5,7,15,0.72)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#62d4ff';
+    ctx.font = '36px ui-monospace, Menlo, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(title, W / 2, H / 2 - 8);
+    ctx.fillStyle = '#e6f0ff';
+    ctx.font = '14px ui-monospace, Menlo, monospace';
+    ctx.fillText(sub, W / 2, H / 2 + 24);
+  }
+
+  // Loop
+  let last = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.033, (now - last) / 1000);
+    last = now;
+    update(dt);
+    draw();
+    requestAnimationFrame(frame);
+  }
+
+  // Input
+  window.addEventListener('keydown', e => {
+    if (e.code === 'Space' || e.code === 'Enter' || e.code === 'ArrowUp' || e.code === 'KeyW') {
+      e.preventDefault();
+      handleInput();
+    }
+  }, { passive: false });
+  canvas.addEventListener('pointerdown', e => { e.preventDefault(); handleInput(); });
+  canvas.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+
+  reset();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -68,12 +68,15 @@ See `research/markets/03-gumroad-digital-downloads.md` "Refreshed 2026-04-11" se
 **Definition of done:** First fiat payout has been observed converting to USDC in Kraken without per-payout human action, recorded in runlog.
 
 ### B-006 — Direct-crypto earning experiments
-**Status:** [pending] — parallel-eligible after B-001
-**Why:** Skip the fiat onramp entirely by earning crypto directly. Targets:
-- **Polar.sh** — sponsorships and issue funding for OSS projects (free, crypto + fiat payouts)
-- **Gitcoin Grants / bounties** — bounties for OSS contributions
-- **GitHub Sponsors** — ties into B-008-ish OSS shipping
-**Definition of done:** At least one experiment is published with a "support this in USDC" link wired to the Kraken deposit address or a self-custody wallet, even if it earns nothing.
+**Status:** [in_progress remote run #18 2026-04-12] — building `experiments/support-usdc/` as the canonical direct-crypto tip rail: a single static HTML page displaying the USDC-Solana Kraken deposit address from `state/accounts.md` (the already-public `EQwtTPe3...` address), with copy button, Solscan verification link, honest framing (custodial, not self-custody), cross-link to Ko-fi fiat rail, and cross-links back to the repo / runlog / goal.json / honest-expectations.md for transparency. Zero dependencies, zero network calls, zero analytics. Phase-1 (build + deploy static page) is fully remote-doable. Phase-2 (cross-link the three live tools) is a 5-min local edit. Phase-3 (Polar.sh primary rail per the 08-refresh recommendation) and Phase-4 (GitHub Sponsors secondary rail) are human-action extensions documented in `experiments/support-usdc/ship.md` but explicitly NOT gating — B-006's definition-of-done lands after Phase 1+2 alone. Previous status: [pending] — parallel-eligible after B-001. B-001 is done.
+**Why:** Skip the fiat onramp entirely by earning crypto directly. Targets (ordered by the 2026-04-11 08-refresh):
+- **USDC-Solana static page (THIS RUN)** — zero-credential, ships today, canonical rail that all future tools link to. Matches `state/accounts.md` routing rule #1 (USDC-Solana is the primary savings rail).
+- **Polar.sh** — merchant-of-record, 4%+$0.40 fees, supports private repo / Discord / file download / subscription tiers. Primary paid-tier rail per the 08-refresh. Needs `POLAR_ACCESS_TOKEN` in `.env` → handoff.
+- **GitHub Sponsors** — 0% fee on personal sponsorships but human-reviewed eligibility. Secondary rail per the 08-refresh. → handoff.
+- ~~Open Collective~~ — deprioritized by the 08-refresh (overkill for solo operator, wrong shape).
+- **Gitcoin Grants / bounties** — kept on the list but not first-wave; needs a shipped OSS tool with measured traction before a grant application is credible.
+**Definition of done:** At least one experiment is published with a "support this in USDC" link wired to the Kraken deposit address or a self-custody wallet, even if it earns nothing. **Build phase for the static page: in this run.** Ship phase: `human_inbox/0007-ship-support-usdc.md` handoff to local.
+**Next concrete step:** Local Claude Code runs `tools/deploy_pages.sh support-usdc experiments/support-usdc` then adds the one-line cross-link footer to the three live tools (prompt-cleaner, llm-cost-calculator, and claude-md-linter once it ships). Phases 3 and 4 (Polar.sh account creation + GitHub Sponsors application) are optional human-action extensions and can happen whenever convenient — neither gates the B-006 done-state.
 
 ### B-007 — Self-custody migration trigger
 **Status:** [pending] — sleeps until balance crosses $5,000

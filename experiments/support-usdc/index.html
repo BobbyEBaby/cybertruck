@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Cybertruck Autopilot</title>
+<meta name="description" content="Tip the Cybertruck Autopilot project in USDC on Solana or via Ko-fi. Zero analytics, zero tracking, zero network calls from this page.">
+<style>
+  :root {
+    --bg: #0b0d10;
+    --fg: #e6e8eb;
+    --dim: #9aa1a9;
+    --accent: #7fd9ff;
+    --warn: #ffce6b;
+    --code-bg: #14181d;
+    --card-bg: #11151a;
+    --border: #232a32;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.2rem 1.2rem 4rem;
+  }
+  h1 {
+    font-size: 1.85rem;
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.01em;
+  }
+  h2 {
+    font-size: 1.15rem;
+    margin-top: 2.2rem;
+    margin-bottom: 0.55rem;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+  p { margin: 0.55rem 0; }
+  p.lead {
+    color: var(--dim);
+    margin-bottom: 1.2rem;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul { padding-left: 1.2rem; }
+  li { margin: 0.25rem 0; }
+  .addr-block {
+    display: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+    margin: 0.8rem 0 0.4rem;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.7rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .addr-block code {
+    flex: 1 1 auto;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    font-size: 0.92rem;
+    color: var(--fg);
+  }
+  .addr-block button {
+    flex: 0 0 auto;
+    background: var(--accent);
+    color: #0b0d10;
+    border: none;
+    border-radius: 4px;
+    padding: 0.35rem 0.8rem;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    align-self: center;
+  }
+  .addr-block button:hover { filter: brightness(1.08); }
+  .warn {
+    background: #1c1508;
+    border: 1px solid #443318;
+    border-radius: 6px;
+    padding: 0.7rem 0.9rem;
+    color: var(--warn);
+    font-size: 0.9rem;
+    margin: 0.55rem 0 0;
+  }
+  .warn strong { color: #ffd98a; }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.15rem;
+    margin: 0.8rem 0;
+  }
+  .muted { color: var(--dim); font-size: 0.88rem; }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--dim);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  code.inline {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.05rem 0.3rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.88rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Support the Cybertruck Autopilot</h1>
+  <p class="lead">A solo-operator + scheduled-agent experiment trying to earn $100,000 from zero-budget digital products and honestly log every run, failure included.</p>
+
+  <h2>Tip in USDC on Solana</h2>
+  <p>Lowest-friction direct-crypto rail: sub-cent fees, $0.40 minimum, stable in dollars.</p>
+  <div class="addr-block">
+    <code id="addr">EQwtTPe3GfcAGAiQAh3AxmCZ1WAyCviDsNnBmfCaQwf7</code>
+    <button id="copy" type="button" aria-label="Copy Solana address to clipboard">Copy</button>
+  </div>
+  <p class="muted">Verify on Solscan: <a href="https://solscan.io/account/EQwtTPe3GfcAGAiQAh3AxmCZ1WAyCviDsNnBmfCaQwf7" rel="noopener">solscan.io/account/EQwtTPe3…Qwf7</a></p>
+  <div class="warn">
+    <strong>Only send USDC-SPL or SOL native on the Solana network to this address.</strong> Sending any other token or using any other chain will be lost. This is a Kraken custodial deposit address shared with SOL and SPL tokens — Kraken routes credits based on the token mint. It is NOT a self-custody wallet yet (that migration triggers at a $5k balance per this project's <a href="https://github.com/BobbyEBaby/cybertruck/blob/main/state/backlog.md" rel="noopener">B-007</a>).
+  </div>
+
+  <h2>Tip in fiat (Ko-fi)</h2>
+  <p>Card, Apple Pay, Google Pay, PayPal, Venmo: <a href="https://ko-fi.com/bobbyebaby" rel="noopener">ko-fi.com/bobbyebaby</a>. 0% platform fee on Ko-fi free tier; the payment processor still takes its normal cut.</p>
+
+  <h2>What a tip funds</h2>
+  <p>Every dollar accumulates toward one goal: buying Robert Evans a Tesla Cybertruck. That sounds flippant, but it is the literal scope. Progress, intake, and every run of the agent are public:</p>
+  <ul>
+    <li>Goal state: <a href="https://github.com/BobbyEBaby/cybertruck/blob/main/state/goal.json" rel="noopener">state/goal.json</a></li>
+    <li>Run log (every scheduled agent run, honest outcomes): <a href="https://github.com/BobbyEBaby/cybertruck/blob/main/state/runlog.md" rel="noopener">state/runlog.md</a></li>
+    <li>Realistic expectations (read this before you tip): <a href="https://github.com/BobbyEBaby/cybertruck/blob/main/state/honest-expectations.md" rel="noopener">state/honest-expectations.md</a></li>
+    <li>Full repo: <a href="https://github.com/BobbyEBaby/cybertruck" rel="noopener">github.com/BobbyEBaby/cybertruck</a></li>
+  </ul>
+  <p class="muted">The median outcome for a year of this loop is $0. If you're tipping, tip it as a bet on the honesty of the log, not on the probability of the Cybertruck.</p>
+
+  <h2>Free tools shipped so far</h2>
+  <div class="card">
+    <ul>
+      <li><a href="https://bobbyebaby.github.io/prompt-cleaner/" rel="noopener">Prompt Cleaner</a> — one-page utility for normalizing pasted prompt text</li>
+      <li><a href="https://bobbyebaby.github.io/llm-cost-calculator/" rel="noopener">LLM API Cost Calculator</a> — token-cost math for Claude / GPT / Gemini API usage</li>
+    </ul>
+    <p class="muted">More coming; all ship at <code class="inline">bobbyebaby.github.io/&lt;name&gt;/</code>.</p>
+  </div>
+
+  <h2>What this is NOT</h2>
+  <ul>
+    <li>A money printer.</li>
+    <li>A subscription or service — there isn't one.</li>
+    <li>A team — it's one human + one scheduled agent.</li>
+    <li>A self-custody wallet (yet). Funds land in a Kraken custodial deposit until balance ≥ $5k.</li>
+    <li>An analytics page. There are zero network calls on this page after load.</li>
+  </ul>
+
+  <footer>
+    No tracking. No analytics. No cookies. No network calls from this page.<br>
+    Source: <a href="https://github.com/BobbyEBaby/cybertruck/tree/main/experiments/support-usdc" rel="noopener">experiments/support-usdc/</a>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy');
+  var addrEl = document.getElementById('addr');
+  if (!btn || !addrEl) return;
+  btn.addEventListener('click', function () {
+    var addr = addrEl.textContent.trim();
+    var done = function () {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = original; }, 1400);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(addr).then(done, fallback);
+    } else {
+      fallback();
+    }
+    function fallback() {
+      try {
+        var range = document.createRange();
+        range.selectNode(addrEl);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand && document.execCommand('copy');
+        done();
+      } catch (e) {
+        // Give up silently; the address is still visible for manual copy.
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

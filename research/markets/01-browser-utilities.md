@@ -127,3 +127,78 @@ The score is the same but the **distribution story shifted from "passive SEO lon
 - [TokenCalculator — Best AI IDE & CLI Tools April 2026: Claude Code Wins, Codex Catches Up](https://tokencalculator.com/blog/best-ai-ide-cli-tools-april-2026-claude-code-wins)
 - [LogRocket — AI dev tool power rankings March 2026](https://blog.logrocket.com/ai-dev-tool-power-rankings/)
 - [apidog.com — Claude Code vs OpenAI Codex in 2026](https://apidog.com/blog/claude-vs-codex-comparison-2026/)
+
+## Refreshed 2026-04-12
+
+Re-refreshed against the specific competitive and distribution landscape for B-010 (CLAUDE.md linter), which is the highest-leverage pending ship. The 2026-04-11 refresh was comprehensive on macro trends (AI Overviews, hosting, tip rails, niche expansion); this pass focuses on the **competitive moat question** for the tool we already built and the **distribution channels** beyond Reddit/HN.
+
+### What changed since the 2026-04-11 refresh
+
+**1. CLAUDE.md linter competitive landscape is no longer empty — three CLI/IDE tools exist.** This is the most strategically important finding of this refresh. When B-010 was scoped (run #16, 2026-04-11), the CLAUDE.md linter concept was treated as a novel niche. It is no longer novel: <!-- source: GitHub search + agentlinter.com + VS Code Marketplace "agnix" + dev.to "I built a linter that proves 74% of your AGENTS.md is wasting your AI agent's time" -->
+
+| Tool | Form factor | Pricing | Scope | Stars/installs |
+|---|---|---|---|---|
+| **AgentLinter** (`seojoonkim/agentlinter`, agentlinter.com) | CLI (npm) | Unknown (runs locally, open-source repo exists) | 25+ rules, 8 scoring dimensions, web report generation, full `.claude/` directory scanning, auto-fix suggestions | GitHub repo exists; site 403'd on fetch |
+| **cclint** (`carlrannaberg/cclint`) | CLI (npm) | Free / MIT | CLAUDE.md structure, agent definitions, slash commands, settings.json, custom Zod schemas, CI/CD friendly, multiple output formats | 16 GitHub stars |
+| **agnix** (`avifenesh.agnix`) | VS Code / IDE extension | Free (marketplace) | CLAUDE.md + AGENTS.md + SKILL.md + hooks + MCP validation, auto-fixes, all major IDEs | VS Code Marketplace listing live |
+
+**Our B-010 tool (`experiments/claude-md-linter/`) is a browser-based paste-and-check tool — zero-install, single-file HTML, no dependencies.** None of the three competitors offer a browser UX. This is the genuine differentiation: a developer who wants to quickly check a CLAUDE.md without installing anything can paste it into our tool and get results in seconds. The CLI tools serve a different use case (CI/CD integration, ongoing project validation).
+
+**Impact on B-010 strategy:**
+- The HN Show HN post **must not** lead with "I built a CLAUDE.md linter" — that's now commodity. Lead with the **zero-install browser UX** angle: "Show HN: Paste your CLAUDE.md, get instant lint results — no install, no npm, no IDE extension."
+- The r/SideProject post can be more straightforward since that audience cares about "working product" not "novel concept."
+- **Do NOT pivot B-010** — the tool is already built and awaiting deploy. The browser differentiation is real. But honest expectation: the ceiling is lower than when we thought we were first-to-market.
+
+**2. awesome-claude-code (38.1k stars) is the single largest free distribution channel for Claude Code tools.** <!-- source: github.com/hesreallyhim/awesome-claude-code --> This curated GitHub repo lists skills, hooks, slash-commands, agent orchestrators, tooling, and CLAUDE.md files for Claude Code. 38.1k stars is massive — for context, getting listed here likely drives more sustained traffic than a median Show HN post. Categories include a "Tooling > General" section where our browser tool would fit. **Action: after B-010 goes live, submit a PR to awesome-claude-code.** This is free, zero-risk, and high-leverage.
+
+Additional free directories discovered (secondary channels, lower traffic but still zero-cost):
+- `ComposioHQ/awesome-claude-plugins` — plugin-focused curated list
+- `travisvn/awesome-claude-skills` — skills-focused curated list
+- `rohitg00/awesome-claude-code-toolkit` — comprehensive toolkit (135 agents, 176+ plugins, etc.)
+- `claude-hub.com` — resource aggregator with per-tool pages
+- `vibecodekit.dev` — another aggregator
+- `awesome-skills.com` — another aggregator
+
+**Impact on B-010 distribution:** The ship checklist from the 2026-04-11 refresh (r/SideProject + Show HN + Ko-fi footer + USDC link) should now add: (e) awesome-claude-code PR, (f) claude-hub.com submission. These are the first distribution channels that don't require Reddit/HN credentials and can be done via GitHub PRs.
+
+**3. Claude Code ecosystem tools are actively hitting HN — the audience is warm but the stream is crowded.** <!-- source: news.ycombinator.com Show HN search April 2026 --> Multiple "Show HN" posts for Claude Code tools in April 2026: real-time agent team dashboard, agent orchestration visualizer, 600GB index query tool. The audience is receptive (good for B-010), but the posting window is competitive — a Claude Code tool that's derivative or unimpressive will be ignored in a stream of Claude Code launches. Reinforces finding #1: the HN post must lead with the browser-UX differentiation, not the linting concept.
+
+**4. The Claude Code ecosystem has exploded in scale.** <!-- source: github.com/rohitg00/awesome-claude-code-toolkit --> The ecosystem now includes 135+ agents, 400k+ skills (via SkillKit), 176+ plugins, 42 commands, 20+ hooks. This is the audience B-010/B-011 target. The scale validates the niche bet from the 2026-04-11 refresh — this audience is not shrinking. But it also means the tools space within this ecosystem is competitive, not wide-open.
+
+### No-change confirmations
+
+- GitHub Pages free tier: unchanged (1 GB repo, 100 GB/month, 10 builds/hr)
+- Ko-fi: still 0% on tips
+- AI Overviews: trend continuing (~48% of queries, ~60% zero-click)
+- r/SideProject: still the default first Reddit post channel
+- AI-tooling niche: still expanding (Claude Code ~4% of public GitHub commits)
+- Cloudflare Pages: still the backup rail for viral traffic (unchanged)
+
+### Scoring update
+
+- **Time-to-first-dollar: 3** (unchanged)
+- **$0 viability: 5** (unchanged)
+- **Automation-friendliness: 5** (unchanged)
+- **Ceiling: 3** (unchanged — the competitive landscape lowers B-010's specific ceiling but doesn't change the category ceiling)
+- **Total: 16/20 — unchanged**
+
+The score is unchanged because the competitive finding affects one specific tool (B-010), not the browser-utilities category as a whole. The category still scores on the same fundamentals (free hosting, free distribution channels, growing AI-tooling audience). The B-010-specific strategy adjustment is captured in the backlog, not the category score.
+
+### Updated recommendation for the loop
+
+1. **B-010 (CLAUDE.md linter) — ship as planned, but adjust HN messaging.** Do not pivot, do not rebuild, do not add features to "compete" with CLI tools. The browser UX is the differentiation. Ship → measure → learn.
+2. **Distribution checklist (updated):** (a) r/SideProject post, (b) Show HN post — lead with zero-install browser UX, (c) Ko-fi footer link, (d) USDC-Solana donation link, (e) **NEW: awesome-claude-code PR** (38.1k stars, highest sustained-traffic channel), (f) **NEW: claude-hub.com submission**.
+3. **B-011 (second digital asset) — the hook-recipes freemium channel from the 03-refresh is reinforced.** The ecosystem scale (400k+ skills, 176+ plugins) means there's a real audience for curated hook packs. The plugin marketplace + awesome-claude-code listing together form a free distribution funnel that doesn't depend on Reddit/HN.
+4. **Niche discipline remains correct.** The ecosystem scale validates staying in AI-tooling. Do not diversify out.
+
+**Sources:**
+- [AgentLinter — Linter for CLAUDE.md & AI Agents](https://agentlinter.com/)
+- [GitHub — seojoonkim/agentlinter](https://github.com/seojoonkim/agentlinter)
+- [GitHub — carlrannaberg/cclint: Linter for Claude Code project files](https://github.com/carlrannaberg/cclint)
+- [agnix — Agent Config Linter — VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=avifenesh.agnix)
+- [DEV Community — I built a linter that proves 74% of your AGENTS.md is wasting your AI agent's time](https://dev.to/vamshidhar_reddy_392c2302/i-built-a-linter-that-proves-74-of-your-agentsmd-is-wasting-your-ai-agents-time-46an)
+- [GitHub — hesreallyhim/awesome-claude-code (38.1k stars)](https://github.com/hesreallyhim/awesome-claude-code)
+- [GitHub — rohitg00/awesome-claude-code-toolkit](https://github.com/rohitg00/awesome-claude-code-toolkit)
+- [claude-hub.com — cclint resource page](https://www.claude-hub.com/resource/github-cli-carlrannaberg-cclint-cclint/)
+- [Hacker News — Show HN: Real-time dashboard for Claude Code agent teams](https://news.ycombinator.com/item?id=47602986)
+- [Hacker News — Show HN: Real-time visualization of Claude Code agent orchestration](https://news.ycombinator.com/item?id=47569708)

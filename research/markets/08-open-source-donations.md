@@ -81,3 +81,65 @@ Pulled current data via WebSearch for GitHub Sponsors, Polar.sh, Open Collective
 - `state/accounts.md` — confirm Polar.sh and GitHub Sponsors get added to the "Suggested first accounts" list.
 - `state/backlog.md` — B-006 can reference this refreshed section rather than re-researching.
 - `state/honest-expectations.md` — no change; data reconfirms the anchor.
+
+## Refreshed 2026-04-12
+
+Second-pass refresh on remote run #20 (one calendar day after the 2026-04-11 pass). Same-day refreshes are usually theater, but this one surfaced two material new data points that were **not** in the 2026-04-11 section. All other prior guidance (Polar.sh base 4%+$0.40, GitHub Sponsors 0% personal / human-reviewed eligibility, Open Collective deprioritized for solo operators, Polar-as-primary / Sponsors-as-secondary ordering) is reconfirmed unchanged.
+
+### New finding 1: donatr.ee — zero-fee donation link aggregator (not a payment processor)
+- **What it is:** A free, hosted "link tree for donations" that displays wallet addresses and links to external tip rails on one page. It does NOT process payments itself — supporters are routed to the underlying platform (PayPal, Ko-fi, BMaC, Patreon, Revolut, Wise, IBAN) or to a raw crypto wallet address (BTC, ETH, USDT-multichain, **Solana + USDC-SPL**, LTC, DOGE, Monero, TON, TRON). 19+ rails total.
+- **Fees:** **0% to donatr.ee** (it's just a link tree). Whatever the underlying rail charges still applies (e.g., a tip that ends up on Ko-fi is still 0%; a tip that ends up on BMaC is still 5%; a BTC wallet send is still subject to BTC network fees). Donatr.ee itself takes nothing.
+- **Barriers:** Zero. No KYC, no bank account, no approval process, no country restrictions, no API token. You make an account, paste in wallet addresses and links, and share one URL.
+- **Crypto-native features:** Click-to-copy + QR code on each wallet address. Explicitly supports Solana and USDC-SPL — our canonical savings rail — without needing any third-party crypto payment processor or bridge. The operator (us) holds the private key (or in our case, the Kraken custodial wallet controls it — same model as the hand-rolled `experiments/support-usdc/` page).
+- **Source:** https://donatr.ee/ and https://donatr.ee/about/ (platform description); https://donatr.ee/blog/github-sponsors-alternatives/ (positions itself as a GitHub Sponsors alternative for developers).
+
+#### Why this matters to B-006 — and where it does NOT replace what we built
+- The **hand-rolled `experiments/support-usdc/` static page** (shipped run #18) has three specific guarantees donatr.ee cannot offer: (a) zero network calls — the page makes no HTTP requests at all after load, grep-verified; (b) source-code auditable on GitHub down to the byte; (c) hosted on our own GitHub Pages domain, no third-party redirect. Those guarantees are the entire reason the page is credible to a low-trust developer audience reading the HTML.
+- **donatr.ee is a hosted third-party page.** Visitors load it from donatr.ee's servers. It may (almost certainly does) run basic analytics, cookies, or other request flows typical of any SaaS. The CLAUDE.md rule is "never use multiple accounts per platform" and "posting copy must be honest" — neither forbids using a third-party page as a supplement, but the "zero tracking, self-hosted" honesty anchor of our own support page must be preserved as the canonical rail.
+- **The correct integration pattern (NOT this run — run #18's support-usdc rebuild ban holds):** keep `experiments/support-usdc/` as the canonical primary page for USDC-SPL only, and **optionally** add a single footer link at the bottom of our hand-rolled support page pointing to a donatr.ee companion page that covers the 18 *other* rails (PayPal, Ko-fi, BTC, ETH, Monero, etc.) for visitors who have those but not USDC on Solana. This gets us the full multi-rail coverage without compromising the low-trust-audience guarantees of the canonical page. It is a one-file follow-on to B-006, not a replacement.
+- **Critical caveat before ever creating a donatr.ee account:** verify via a test run that donatr.ee supports the **XRP destination tag** field. Our `state/accounts.md` routing rule warns that XRP *requires* the destination tag `2272490000` — sending XRP to our shared Kraken address without the tag loses the funds. If donatr.ee's XRP form has no tag field, the XRP rail must be omitted from any donatr.ee page we create. Default assumption: most third-party tip aggregators do NOT handle destination tags — test before trusting.
+
+#### Honest read
+- Adding donatr.ee as a secondary rail has a **small positive EV** (captures a handful of would-be tippers who have BTC/ETH/Monero but no USDC-SPL) at near-zero build cost (~15 minutes of Robert's time to create the account + paste in addresses + paste one donatr.ee URL in a footer).
+- It does NOT change the underlying median-outcome forecast of $0 per `state/honest-expectations.md`. Adding rails doesn't create demand, it just catches it when it exists. The 2026-04-11 refresh said "donations are rare, most OSS projects net very little." That remains the default expectation.
+- Priority: **low**. Behind the 0005/0006/0007/0008 inbox items already awaiting Robert. Do NOT rebuild `experiments/support-usdc/` to add this — the B-006 ship phase is still pending local deploy and changing it mid-flight violates scope discipline.
+
+### New finding 2: Open Source Endowment (OSE) launched Feb 2026
+- **What it is:** The **world's first dedicated OSS endowment fund.** Structured as a US 501(c)(3) tax-exempt charity. Instead of collecting donations and passing them straight through to maintainers, OSE invests all contributions into a permanent principal and distributes only the **investment income** as grants — the structural goal being "move OSS funding off a donation treadmill onto an endowment-income model."
+- **Size:** ~$700,000 principal as of early 2026, across 60+ founding donors.
+- **Founding donors include:** the founders of ClickHouse, curl, Elastic, Gatsby, HashiCorp, n8n, Nginx, Pydantic, Supabase, and Vue.js. This is a who's-who of established OSS commercial success — the fund is seeded by people who *already made it*, and is designed to help the next generation who are currently drowning in the 60%-unpaid data above.
+- **Sources:** https://www.opensourceforu.com/2026/03/worlds-first-oss-endowment-backs-maintainers-with-investment-income/ and https://www.theregister.com/2026/02/27/open_source_endowment/.
+
+#### Relevance to this loop (low, but not zero)
+- **Not actionable for us today.** OSE is a grant-giving body, not a tip rail. Grant eligibility (though not publicly detailed in the launch coverage) almost certainly requires existing maintainer reputation, measurable public impact, and a track record — none of which a cold-start solo operator shipping browser tools in week 1 has.
+- **Long-run relevance:** IF one of the loop's experiments eventually matures into a real OSS project with measurable user adoption (see `state/honest-expectations.md` year-1 outcomes), OSE becomes one of three things we should apply to alongside Polar.sh paid tiers and GitHub Sponsors. Currently year 0 week 1 — this is filed under "not today, but don't forget it exists." Earliest realistic trigger: a single experiment crosses 1000 measurable active users.
+- **Do NOT** add OSE to `state/accounts.md`'s suggested-first-accounts list. It is not an account we can create; it is an institution we may someday apply to receive a grant from. Different category entirely.
+
+### Everything else — reconfirmed unchanged from 2026-04-11
+- **Polar.sh:** base 4% + $0.40 + 1.5% international card surcharge + 0.5% subscription surcharge + $15 per dispute. No pricing changes announced for 2026 specifically. The pricing page (https://polar.sh/resources/pricing) reserves the right to pass on future Stripe fee changes. Still the recommended primary paid-tier rail for B-006.
+- **GitHub Sponsors:** still 0% on personal-account sponsorships, up to 6% on org-account sponsorships, $100-USD payout threshold on Stripe Connect, payouts on the 22nd of each month. Eligibility still human-reviewed, still requires a supported region and legitimate contribution history. No 2026 policy updates surfaced. Still the recommended secondary 0%-fee rail.
+- **Open Collective:** still non-percentage fee model, still Platform Tips + 5% Crowdfunding Fee depending on host configuration, still overkill for a solo unincorporated operator. Still deprioritized for B-006.
+- **OSS maintainer income data:** still ~25% of maintainers get donation income, still ~86% of contributors receive no pay, still ~60% of maintainers are unpaid hobbyists. The "median new solo maintainer Sponsors income in year 1 is $0" anchor is unchanged and reconfirmed.
+
+### Score update
+- Time-to-first-dollar: **2** (unchanged)
+- $0 viability: **5** (unchanged)
+- Automation-friendliness: **5** (unchanged)
+- Ceiling: **3** (unchanged — OSE and donatr.ee both surface but neither moves the ceiling; the structural median is still $0 for year 1)
+- **Total: 15 / 20** — rank unchanged (tied 4th with B-002b itch.io).
+
+### Actionable updates (layer on top of the 2026-04-11 actionables)
+1. **Keep `experiments/support-usdc/` as the canonical rail.** Do not rebuild it in this run. The hand-rolled "zero network calls, Solscan-verified, auditable HTML" page serves the specific low-trust developer audience better than any hosted aggregator can.
+2. **Optional future enhancement (NOT this run):** one additional footer link at the bottom of `experiments/support-usdc/index.html` pointing to a donatr.ee companion page Robert would create with the full 19-rail spread, for visitors who have BTC/ETH/Monero/PayPal/etc. but not USDC-SPL. Estimated Robert time: ~15 minutes. **Gate this behind the measurement of the existing support page first** — there's no point adding rails if the primary page earns $0 over its 14-day window; measure before expanding.
+3. **XRP destination-tag compatibility check** is a hard precondition for any donatr.ee use of XRP. `state/accounts.md` already flags this as a CRITICAL rule: XRP without the tag = lost funds. Default to omitting XRP from any third-party page unless the tag field is confirmed present.
+4. **OSE is a year-1+ consideration, filed under "the rail that exists when we have something to apply with."** Do not add it to `state/accounts.md`. Do not write an inbox note. Revisit only if the circuit-breaker dashboard ever shows an experiment with ≥1000 active users.
+5. **No change to priority ordering for B-006:** Polar.sh primary (paid tiers, merchant-of-record) → GitHub Sponsors secondary (0% fee, personal trust signal) → USDC-Solana static page (already shipped) → donatr.ee companion (optional, post-measurement) → OSE (year-1+). The rails are now ordered by a combination of ceiling and setup cost.
+
+### Sources (new this refresh)
+- https://donatr.ee/ — platform homepage
+- https://donatr.ee/about/ — feature and fee details
+- https://donatr.ee/blog/github-sponsors-alternatives/ — positioning as dev-maintainer rail
+- https://www.opensourceforu.com/2026/03/worlds-first-oss-endowment-backs-maintainers-with-investment-income/ — OSE launch coverage
+- https://www.theregister.com/2026/02/27/open_source_endowment/ — OSE launch (primary source; 403'd on direct fetch but referenced by the opensourceforu article)
+- https://polar.sh/resources/pricing — Polar fee reconfirmation
+- https://docs.github.com/en/sponsors/sponsoring-open-source-contributors/about-sponsorships-fees-and-taxes — GitHub Sponsors fees reconfirmation

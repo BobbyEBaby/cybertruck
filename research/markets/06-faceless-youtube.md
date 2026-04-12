@@ -128,3 +128,78 @@ These constraints partially invalidate the "hands-free automated shipping" assum
 - The revenue plan (crypto tips + Ko-fi + BMaC + Gumroad cross-sell on day 1, YPP aspirational) is unchanged — good, because it didn't depend on monetization thresholds being forgiving.
 - The long-form 7–9 minute format is unchanged — the Shorts RPM data validates the decision to prioritize long-form for revenue.
 - The public-domain sourcing plan is unchanged.
+
+## Refreshed 2026-04-12
+
+Remote run #24 (see runlog). Re-refresh of the 2026-04-11 pass, targeting developments in the 24 hours since the original refresh — specifically: YouTube Shopping affiliate program changes, the April 2026 "AI slop" advocacy pressure, and the evolving TTS landscape.
+
+### Sources
+16. YouTube Official Blog — "Earn earlier: expanding YouTube Shopping to creators with 500+ subscribers" (https://blog.youtube/creator-and-artist-stories/youtube-shopping-expansion-500-subscribers/) — March 27, 2026
+17. Fortune — "AI 'slop' is flooding YouTube Kids—and more than 200 groups and experts are calling for a ban" (https://fortune.com/2026/04/01/ai-slop-200-organizations-letter-youtube-google/) — April 1, 2026
+18. Fairplay — "YouTube: Stop 'AI Slop' for Kids, Says Letter from Fairplay, Over 200 Experts, Including Jonathan Haidt" (https://fairplayforkids.org/youtube-stop-ai-slop-for-kids-says-letter-from-fairplay-over-200-experts-including-jonathan-haidt/)
+19. Tubefilter — "200 experts tell YouTube to stop recommending AI slop to kids" (https://www.tubefilter.com/2026/04/01/youtube-fairplay-kids-ai-open-letter/) — April 1, 2026
+20. ScaleLab — "YouTube's AI content crackdown in 2026: What changed, who is at risk, how to adapt" (https://scalelab.com/en/why-youtube-is-cracking-down-on-ai-generated-content-in-2026)
+21. Boss Wallah — "YouTube AI Monetisation Policy 2026" (https://bosswallah.com/blog/creator-hub/youtube-ai-monetisation-policy-2026-what-changes-whats-allowed-and-whats-banned/)
+22. BentoML — "The Best Open-Source Text-to-Speech Models in 2026" (https://bentoml.com/blog/exploring-the-world-of-open-source-text-to-speech-models)
+23. Apatero — "Open Source Text to Speech 2026: Free ElevenLabs Alternatives" (https://apatero.com/blog/open-source-text-to-speech-models-beyond-elevenlabs-2026)
+24. Fliki — "YouTube AI Demonetization 2026: How to Protect Your Channel" (https://fliki.ai/blog/youtube-ai-demonetization)
+
+### Material finding #1: YouTube Shopping affiliate threshold lowered to 500 subs (March 27, 2026)
+
+YouTube expanded its Shopping affiliate program to all YPP-enrolled creators with **500+ subscribers** (down from the previous 1,000). Live in 12 markets including the US. Creators can tag products from participating brands in videos, Shorts, and livestreams and earn commissions on resulting purchases.
+
+**Impact on our channel:** Modest positive. For a history channel, the relevant affiliate products are narrowly scoped — primarily books mentioned in episodes (Amazon Associates), possibly documentary streaming links. The practical revenue potential per affiliate click in the history niche is small (book affiliate commissions are typically 4–8% of sale price, so a $15 book = $0.60–$1.20). But it lowers the theoretical first-dollar floor: the channel could start earning (tiny) affiliate commissions at 500 subs instead of waiting for the 1,000-sub full-tier ad-revenue threshold. This is a marginal improvement to the TTF$ assessment, not enough to upgrade the score from 1 but worth noting as a data point.
+
+**Actionable for the channel:** When/if the channel reaches 500 subs, add book affiliate links in video descriptions for the primary sources cited in each episode. Zero upfront cost (Amazon Associates is free to join). Do NOT pursue this before 500 subs — there is no point and no program to join.
+
+### Material finding #2: 200+ organizations demand YouTube ban AI slop from Kids platform (April 1, 2026)
+
+An open letter organized by Fairplay (children's advocacy group), signed by 200+ organizations and experts including Jonathan Haidt (author of *The Anxious Generation*), the American Federation of Teachers, and the American Counseling Association, demands that YouTube/Google prohibit AI-generated content from YouTube Kids entirely. YouTube CEO Neal Mohan has publicly flagged **"managing AI slop" as a top priority** for the platform. Fairplay's research found that top AI slop channels targeting children earned over **$4.25 million in annual revenue**.
+
+**Direct impact on our channel: zero.** Our content is adult-oriented history aimed at a niche educated audience. We don't target children, don't appear on YouTube Kids, and our content would not be classified as children's content under COPPA. The letter and response are specifically about kids' content.
+
+**Indirect risk signal: moderate.** The CEO's public statement that "managing AI slop" is a top priority confirms that the January 2026 enforcement wave was not a one-time cleanup — it is the beginning of an ongoing, intensifying campaign. The political/reputational pressure from 200+ organizations gives YouTube institutional cover (and incentive) to expand enforcement beyond kids' content into all AI-generated content. The direction of travel is clear: more scrutiny, not less. Every future enforcement expansion will use the same "inauthentic content" policy hook that already exists.
+
+**Actionable for the loop:** No immediate action. The existing 06-refresh binding constraints (human creative involvement, cadence limits, no AI-generated visuals) are correctly calibrated for this environment. The risk is that enforcement *standards* for "meaningful human involvement" could rise over time — what passes today might not pass in 6 months. Mitigations: (a) if Robert records his own narration (option A from the 04-11 refresh recommendations), the channel clears any plausible future standard; (b) maintaining the current Edge TTS approach is an acceptable bet for the unlisted/pre-public phase but should be reassessed before any public launch.
+
+### Material finding #3: Appeal process details — 21 days, video appeal recommended
+
+New actionable detail from the ScaleLab/Fliki coverage: creators who receive an inauthentic-content policy action have **21 days to file an appeal**. YouTube explicitly recommends **video appeals** — unlisted videos under five minutes explaining what changes the creator has made to address the policy concern.
+
+**Impact on our channel:** This is insurance, not a plan. If our channel ever gets flagged, the 21-day window + video-appeal format should be noted in the experiment README so Robert knows the drill. The best outcome is never needing it; the second-best is being prepared.
+
+**Actionable:** Add a "Policy flag response plan" note to `experiments/youtube-history-channel/README.md` documenting the 21-day appeal window and video-appeal recommendation. Low priority — do this on a future run, not now.
+
+### Finding #4 (minor): Open-source TTS landscape continues improving
+
+StyleTTS2 is now noted in multiple 2026 roundups as producing "the most natural sounding long-form narration of any open source model" — specifically called out as the best choice for 30-minute clean voiceover. Coqui XTTS-v2 enables cross-lingual voice cloning from a short audio sample. Bark handles non-verbal expressiveness (laughs, sighs, hesitations) better than any alternative.
+
+**Impact on our channel: not actionable now.** Our voice is locked to Edge TTS `en-GB-RyanNeural` per `experiments/youtube-history-channel/strategy.md`. Switching voices mid-series would break viewer continuity and is a worse outcome than staying consistent. However, if the channel ever pivots to a new series (or if Robert records his own voice for the main series and we need TTS only for quoted passages), StyleTTS2 is the clear upgrade candidate. Filed for future reference.
+
+### No-change confirmations
+
+- **YPP thresholds:** unchanged. Early tier still 500 subs + 3k hours; full tier still 1,000 subs + 4k hours.
+- **Inauthentic content policy:** unchanged in wording. Enforcement is ongoing, not one-time (confirmed by CEO statement).
+- **Shorts RPM:** unchanged at ~$0.05. Long-form RPM $3–$6 for history/education. 60–100× ratio stands.
+- **History niche defensibility:** unchanged. "Obscure/forgotten history" still cited as low-competition in 2026 niche analyses.
+- **06-refresh binding constraints (points 1–6):** all unchanged. The new findings reinforce rather than relax them.
+
+### Rescoring
+
+| Dimension | Previous (04-11) | Current (04-12) | Reason |
+|---|---|---|---|
+| Time-to-first-dollar | 1 | 1 | Shopping affiliate at 500 subs is marginally better than the prior 1,000-sub bar, but the channel is at 0 subs / 0 public videos. Months-long floor is unchanged. Not enough to upgrade. |
+| $0 viability | 5 | 5 | All tools still free. Unchanged. |
+| Automation-friendliness | 1 | 1 | CEO's "managing AI slop" priority statement confirms the 04-11 downgrade. No reversal signal. |
+| Ceiling | 5 | 5 | History niche ceiling data unchanged. |
+| **Total** | **12 / 20** | **12 / 20** | |
+
+Score unchanged. The findings reinforce the existing assessment rather than changing it. The most important takeaway is finding #2: the enforcement direction is confirmed as ongoing and intensifying, which validates the conservative constraints from the 04-11 refresh rather than relaxing them.
+
+### What this re-refresh did NOT change
+
+- The 06-refresh binding constraints (human creative involvement, cadence limits, no AI-generated visuals, 3-day minimum between publications) — all reconfirmed.
+- The niche defensibility (obscure/forgotten history as low-competition storytelling niche) — unchanged.
+- The revenue plan (crypto tips + Ko-fi on day 1, YPP aspirational) — unchanged, with a minor addendum that Shopping affiliate at 500 subs adds a small intermediate revenue step.
+- The long-form 7–9 minute target — unchanged (note: the channel has since adopted a 3–5 minute short-form format for ep3+ per `experiments/youtube-history-channel/strategy.md`, which was a production-efficiency decision, not a revenue-per-view decision; long-form RPM data still argues for eventually scaling back up to 7+ minutes per episode once the pipeline is proven).
+- The public-domain sourcing plan — unchanged.

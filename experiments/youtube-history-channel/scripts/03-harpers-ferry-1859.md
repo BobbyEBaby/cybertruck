@@ -21,29 +21,21 @@ sources:
 
 *Short-form episode (~4 minutes / ~600 words). This is the first episode under the short-form format; ep1 and ep2 are the long-form archive.*
 
-## Narration
+## Script
 
-**[0:00 — Hook]**
-
-On October 16, 1859, a fifty-nine-year-old white abolitionist led twenty-one men — Black and white — in an armed seizure of a federal arsenal in Harpers Ferry, Virginia. Thirty-six hours later he was captured. Six weeks later he was hanged. <!-- source: https://en.wikipedia.org/wiki/John_Brown%27s_raid_on_Harpers_Ferry --> Within eighteen months the United States was at war with itself.
-
-**[0:20 — Context]**
+On October 16, 1859, a fifty-nine-year-old white abolitionist led twenty-one men — Black and white — in an armed seizure of a federal arsenal in Harpers Ferry, Virginia. Thirty-six hours later he was captured. <!-- source: https://en.wikipedia.org/wiki/John_Brown%27s_raid_on_Harpers_Ferry --> Six weeks later he was hanged. Within eighteen months, the United States was at war with itself.
 
 The man was John Brown. He was Calvinist, uncompromising, and — unlike nearly every other abolitionist of his generation — he believed slavery was not a political problem to be debated but a sin to be fought with a rifle. By 1859 the United States had been bargaining with slavery for seventy years through one compromise after another. Brown had concluded the bargain was over. <!-- source: https://en.wikipedia.org/wiki/John_Brown_(abolitionist) --> His plan was to ignite a general slave uprising across the American South.
 
-**[1:00 — Beat 1: the raid]**
-
 On the night of October 16, Brown and his men walked unopposed into Harpers Ferry, a town at the confluence of two rivers that also housed the largest federal weapons depot on American soil. They cut the telegraph lines, seized the arsenal, took hostages, and waited. The plan was that enslaved people from the surrounding plantations would hear the alarm and come to arm themselves. None came. By morning the townspeople had organized. By afternoon the militia arrived. <!-- source: https://www.nps.gov/hafe/learn/historyculture/john-browns-raid.htm --> By the next dawn, United States Marines — commanded by a colonel named Robert E. Lee — had Brown and his survivors cornered in a brick engine house. Ten of Brown's men were killed. Brown himself was wounded and captured.
 
-**[2:00 — Beat 2: the trial]**
+Here is where the raid that failed started winning. Virginia rushed Brown to trial — ten days from capture to conviction — hoping to execute him before he could become a symbol. It was already too late. Brown used the courtroom as a pulpit. His final statement, read in full across Northern newspapers, ended with a line that has never stopped echoing. <!-- source: https://www.pbs.org/wgbh/americanexperience/features/brown-last-speech/ --> The crimes of this guilty land, he said, will never be purged away but with blood. On December 2, he walked to the gallows. Church bells rang in every Northern town. Henry David Thoreau called him a transcendent moral hero. Herman Melville called him the meteor of the war. Within eighteen months, South Carolina had seceded.
 
-Here is where the raid that failed started winning. Virginia rushed Brown to trial — ten days from capture to conviction — hoping to execute him before he could become a symbol. It was already too late. Brown used the courtroom as a pulpit. His final statement, read in full across Northern newspapers, ended with a line that has never stopped echoing: <!-- source: https://www.pbs.org/wgbh/americanexperience/features/brown-last-speech/ --> *"The crimes of this guilty land will never be purged away but with blood."* On December 2, he walked to the gallows. Church bells rang in every Northern town. Henry David Thoreau called him a transcendent moral hero. Herman Melville called him the *meteor of the war*. Within eighteen months, South Carolina had seceded.
-
-**[3:00 — Thematic analysis]**
+## Thematic analysis
 
 This channel rates every rebellion on six themes: economy, leadership, government, wars, environment, debt. Harpers Ferry scores an eight out of eighteen. Compare to fourteen for England 1381 and twelve for Germany 1525. The framework captures slavery as the economic foundation of the American South. It captures the government's decades of failed compromise. It captures Bleeding Kansas as a proxy war where Brown himself had already killed men. But it does not capture John Brown. There is no column in our table for one man's Calvinism. And that is the honest lesson from this episode: sometimes a rebellion is ignited not by conditions but by a person who refuses to tolerate a condition the conditions themselves could have tolerated forever.
 
-**[4:00 — Why it matters / outro]**
+## Why it matters
 
 Rebellions don't have to win on their own terms to change the world. Sometimes they only have to happen in front of the right audience. Melville called Brown the meteor of the war, and he meant it literally — the Civil War was already coming. Brown just made it visible in the sky. If you're into stories about failed rebellions that still shifted the ground beneath their enemies, we've done two before this: the Peasants' Revolt of 1381, and the German Peasants' War of 1524. Next time: somewhere in the twentieth century. Until then.
 

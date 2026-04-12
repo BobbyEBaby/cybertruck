@@ -1,0 +1,38 @@
+{
+  "slug": "harpers-ferry-1859",
+  "generated_at": "2026-04-12T00:09:29Z",
+  "segments": [
+    {
+      "index": 1,
+      "role": "narrator",
+      "voice": "en-GB-RyanNeural",
+      "section": "Script",
+      "file": "segment_01_narrator.mp3",
+      "char_count": 1457
+    },
+    {
+      "index": 2,
+      "role": "narrator",
+      "voice": "en-GB-RyanNeural",
+      "section": "Script",
+      "file": "segment_02_narrator.mp3",
+      "char_count": 679
+    },
+    {
+      "index": 3,
+      "role": "thematic",
+      "voice": "en-GB-RyanNeural",
+      "section": "Thematic analysis",
+      "file": "segment_03_thematic.mp3",
+      "char_count": 748
+    },
+    {
+      "index": 4,
+      "role": "outro",
+      "voice": "en-GB-RyanNeural",
+      "section": "Why it matters",
+      "file": "segment_04_outro.mp3",
+      "char_count": 541
+    }
+  ]
+}

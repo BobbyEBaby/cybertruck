@@ -83,3 +83,11 @@ _(empty — first ship will populate this)_
 - url: https://bobbyebaby.github.io/llm-cost-calculator/
 - experiment: llm-cost-calculator
 - repo: https://github.com/BobbyEBaby/llm-cost-calculator
+
+## 2026-04-12 00:11
+- platform: youtube
+- url: https://www.youtube.com/watch?v=tI2OfCTkWp4
+- video_id: tI2OfCTkWp4
+- privacy: unlisted
+- experiment: youtube-history-channel
+- episode: harpers-ferry-1859

@@ -33,3 +33,6 @@ experiments/youtube-history-channel/assets/**/final.mp4
 *.png
 !experiments/**/*.png
 !wiki/**/*.png
+
+# Claude Code local harness state
+.claude/

@@ -91,3 +91,46 @@ When B-002b is eventually greenlit:
 3. **Target an existing micro-community**, not "indie gamers" in general. Candidate niches worth scoring later: PICO-8 carts, Bitsy games, one-button-mobile, typing-practice-as-game, terminal/TUI games.
 4. **Thumbnail decision:** commit upfront to one of (a) deliberate programmer-art aesthetic, or (b) a single human-in-the-loop image step flagged in ship.md. Don't pretend the agent has autonomous cover-art capability it doesn't have.
 5. **Discoverability checklist** in ship.md must include: 5–15 tags, 4+ relevant jams to consider entering, post-jam-public flip.
+
+## Refreshed 2026-04-12
+
+Sources:
+- [itch.io "Update on NSFW content"](https://itch.io/updates/update-on-nsfw-content)
+- [PC Gamer: itch.io reaching out to other payment processors](https://www.pcgamer.com/gaming-industry/game-development/itch-io-is-actively-reaching-out-to-other-payment-processors-after-pressure-from-credit-card-companies-to-curtail-nsfw-content-and-that-compared-to-valve-it-has-limited-ability-to-push-back/)
+- [Game Developer: itch.io deindexing adult content to appease payment providers](https://www.gamedeveloper.com/business/itch-io-deindexing-adult-content-to-appease-payments-providers)
+- [itch.io Reindexing adult NSFW content thread](https://itch.io/t/5149036/reindexing-adult-nsfw-content)
+- [CGMagazine: itch.io restores free NSFW content](https://www.cgmagonline.com/news/itch-io-is-restoring-some-nsfw-content/)
+- [itch.io app v26.6.0 + butler updates](https://itch.io/t/5916124/itch-app-v2660-butler-updates)
+- [How to Make Money on Itch.io: Indie Game Revenue Guide (2026) — generalistprogrammer.com](https://generalistprogrammer.com/tutorials/how-to-make-money-on-itchio-indie-game-guide)
+- [itch.io jams page (platform-wide jam statistics)](https://itch.io/jams)
+
+### Material finding #1: itch.io payment-processor crisis (mid-2025 → ongoing)
+
+itch.io deindexed 20,000+ NSFW-tagged games in mid-2025 after Stripe indicated it "cannot support sexually explicit content due to restrictions from banking partners." itch.io publicly stated it has "limited ability to push back" compared to Steam due to its smaller transaction volume. Free NSFW content has been partially re-indexed; **paid NSFW content remains restricted** as of early 2026. itch.io is "actively reaching out to other payment processors."
+
+**Direct impact on our loop: zero today.** Flipline and any future game we ship are non-NSFW, so the content policy doesn't touch us. The open revenue-share slider, PWYW pricing, and PayPal/Stripe checkout for SFW games are all unchanged.
+
+**Indirect risk worth monitoring: platform financial health.** itch.io is a one-person-founded small company whose entire payment infrastructure depends on two processors (Stripe + PayPal). The NSFW crisis demonstrated that a single external-pressure campaign can force major platform changes within weeks. If itch.io's Stripe relationship deteriorates further — or if a non-NSFW content dispute arises (e.g., AI-generated game content, which is already a hot-button topic on other platforms) — payment processing for *all* sellers could be disrupted. **Probability: low. Severity if it hits: high (no payouts).** Mitigation: our diversification across Gumroad + Ko-fi + direct USDC means itch.io is never our only payout path. No action required now; flag for re-check on the next refresh.
+
+### Material finding #2: donation/tip conversion rate data
+
+The 2026 generalistprogrammer.com revenue guide provides a concrete conversion rate for free games with donations: **1–3% of total downloads result in a donation.** A free game with 10,000 downloads might receive 100–300 donations. PWYW buyers pay approximately **30% more than the minimum** on average (set minimum $5 → average payment ~$6.50).
+
+**Calibration for Flipline (B-002b):** If Flipline launches free and reaches 100 browser plays (a realistic floor for a tagged game with no promotion), expected tip count is 1–3. At $3 suggested (our planned floor from the 2026-04-11 refresh), that's $3–$9 gross. After processor fees (~$0.30 + 2.9% per tx) and itch.io's default 10%, net is roughly **$1.50–$6.00**. To clear itch.io's $5 payout minimum, we need ≥2 tips at $3 or ≥1 tip at $5+. The realistic 14-day expectation for Flipline's first measurement window is still **$0**, but the conversion-rate data tells us the bottleneck is *plays*, not *willingness to tip*. Getting to 1,000+ plays (via jam entry or Reddit post) is where the first dollar lives.
+
+### Material finding #3: butler CLI modernized (v26.6.0)
+
+Butler is now built on Go 1.24, has native ARM64 Linux builds and a universal macOS binary. Build and release infrastructure fully modernized — itch.io stated regular app/butler updates can now be pushed on a regular basis. **Impact on our pipeline:** positive. `butler push` should work reliably on Robert's machine for the Flipline deploy per `experiments/flipline/ship.md`. No changes needed to our ship flow.
+
+### No-change confirmations
+
+- **Open revenue-share slider:** unchanged. Creators still set 0–100%, default 10%.
+- **Creator Day 2026:** no date announced yet. Previous one was Nov 28, 2025. itch.io announces close to the event. Our "likely late Nov 2026" estimate in the 2026-04-11 refresh stands.
+- **Jam ecosystem:** 540,000+ games created for itch.io jams to date. Brackeys Game Jam 2026.1, Godot Wild Jam, and Mini Jam series remain the largest recurring jams (600–1,800 participants). No new HTML5-specific jam surfaced.
+- **Pricing/fees:** no changes to the $0.30 + 2.9% processor fee, $5 payout minimum, or $3 first-payout tax-interview deduction.
+- **Score: 14/20 (unchanged).** No rubric dimension moved.
+
+### Actionable updates to B-002b (incremental from 2026-04-11)
+
+6. **Jam entry is the highest-leverage free discoverability path.** The conversion-rate data (finding #2) confirms that plays are the bottleneck. The itch.io jam ecosystem is the only zero-cost, zero-credential path to 1,000+ plays. When Flipline ships, the first post-ship action should be entering the next relevant jam (candidates: Mini Jam if theme fits, Brackeys Game Jam 2026.2 when announced, or any "one-button" or "minimal" themed jam). This was already implicit in point 5 above; this refresh makes it explicit and primary.
+7. **AI-generated content policy risk is unquantified.** The NSFW crisis shows itch.io will preemptively restrict content categories under external pressure. AI-generated game content is a plausible next target — other platforms (Etsy, Amazon, Steam) have already tightened AI-content policies in 2025. Flipline is hand-coded (vanilla JS, no AI-generated assets or art), so it's clean. **Future games should document their "human-authored" status in README.md** as a preemptive defense in case itch.io adds AI-content disclosure requirements. This is cheap insurance, not paranoia — the platform has demonstrated it will act fast and broadly when pressured.

@@ -122,3 +122,92 @@ Top-selling niches by revenue in 2026: **3D Design, Graphic Design, Business** �
 - [Accio — Top Selling Products Gumroad 2026 Trends & Insights](https://www.accio.com/business/top-selling-products-on-gumroad) — AI prompt packs market "extremely saturated, niche beats broad every time"
 - [InfoProdSpy — What Sells Best on Gumroad 2026 (207k products analyzed)](https://infoprodspy.com/blog/what-sells-best-on-gumroad) — bifurcation of saturated vs. emerging niche sub-pockets
 - [Gumroad Help Center — Gumroad Discover](https://gumroad.com/help/article/79-gumroad-discover) — Discover feature surface, 30% fee trade-off for platform-driven traffic
+
+## Refreshed 2026-04-12
+
+Re-verification pass driven by B-011 scoping (the second Gumroad digital asset) and the 48-hour post-B-002-ship gate approaching. No score change (still **17/20**) but **three material new findings** that affect how we scope B-011 and whether "Gumroad" is the right platform for it.
+
+### 1. Lemon Squeezy is now a material alternative — 5% + $0.50 vs Gumroad's 10% + $0.50
+
+Lemon Squeezy charges **5% + $0.50 per transaction** (all-inclusive for domestic; +1.5% for international) vs Gumroad's **10% + $0.50 + ~2.9%+$0.30 Stripe processor fees**. Both are Merchant of Record (handle global VAT/GST/sales tax). Both support digital downloads. Lemon Squeezy also handles license keys and subscriptions natively, which Gumroad does not.
+
+**Effective fees on our price points:**
+
+| Product price | Gumroad effective fees | Gumroad net | Lemon Squeezy effective fees | LS net |
+|---|---|---|---|---|
+| $3.00 | ~$1.19 (39.7%) | ~$1.81 | ~$0.65 (21.7%) | ~$2.35 |
+| $5.00 | ~$1.45 (29.0%) | ~$3.55 | ~$0.75 (15.0%) | ~$4.25 |
+
+At our $3–$5 price range, **Lemon Squeezy saves $0.54–$0.70 per sale** — roughly 30% more revenue per transaction. On 100 sales at $5, that's $70 more in our pocket.
+
+**Implications for the loop:**
+- **B-002 stays on Gumroad** — already live, measurement window running, switching mid-experiment would break continuity and burn the existing listing.
+- **B-011 should seriously consider Lemon Squeezy** — the second digital asset hasn't been built yet, so there's no switching cost. The fee difference is most material at the $3–$5 micro-price range where the $0.50 flat fee is proportionally brutal and the 5% vs 13% percentage gap widens.
+- **Caveat:** Gumroad has Discover (passive marketplace traffic at 30% fee). Lemon Squeezy has no equivalent passive-discovery surface. For B-011, where all traffic is direct (Reddit/HN/tool footers), this is irrelevant. But if a product ever earned passive Gumroad-Discover sales, the 30% fee would still be cheaper than having zero discovery.
+- **Caveat 2:** Robert already has a Gumroad account with PayPal payout connected. Lemon Squeezy would require a new account + payout setup (~15 min). Not blocking but not zero-effort either.
+
+**Action for B-011:** when the 48-hour gate trips, the scoping run should present the platform choice (Gumroad vs Lemon Squeezy) as a structured decision for Robert, not default to Gumroad. Include this fee table.
+
+### 2. Claude Code plugin marketplace is now officially supported and massive — B-011 freemium distribution channel
+
+The Claude Code plugin ecosystem has matured dramatically since the 2026-04-11 refresh. Key facts:
+- **2,400+ skills and 2,500+ marketplaces** across the ecosystem.
+- **Official Anthropic marketplace** (`claude-plugins-official`) ships built-in with Claude Code — no user action needed to browse it.
+- **Plugin types:** skills, agents, hooks, MCP servers, LSP configs.
+- **Distribution model:** plugins are GitHub repositories. Adding one is `owner/repo` format. Free to distribute, free to install.
+- **Submission to official marketplace:** via [claude.ai/settings/plugins/submit](https://claude.ai/settings/plugins/submit) — human-reviewed by Anthropic.
+
+**Why this matters for B-011:** the plugin marketplace creates a **freemium dual-channel distribution pattern** that wasn't available at the 2026-04-11 refresh:
+1. **Free layer:** distribute a curated set of Claude Code skills/hooks as a GitHub-repo plugin marketplace. Users install via `/plugin marketplace add BobbyEBaby/<repo>`. This gives us distribution inside Claude Code itself (the tool our target audience uses every day) at zero cost.
+2. **Paid layer:** sell the extended/premium version (more recipes, templates, walkthroughs, CLAUDE.md scaffolds) on Gumroad or Lemon Squeezy. The free plugin acts as lead-gen — users who find the free skills useful are the exact audience for the paid pack.
+
+This pattern is structurally identical to the "freemium open-source tool + paid templates" model that the 08-open-source-donations refresh identified as the strongest monetization shape for solo developers.
+
+**Impact on B-011 candidate ranking:**
+- **"Claude Code hook recipes"** moves to **#1** — hooks are one of the five plugin types, and the free-plugin-marketplace → paid-extended-pack funnel is the cleanest fit. We actually run hooks in this project (see CLAUDE.md / the session-start-hook skill), so authentic authority applies.
+- **"Claude Code CLAUDE.md templates pack"** stays **#2** — could also be a plugin (skills that scaffold CLAUDE.md files), but the freemium split is less natural (a CLAUDE.md template is either useful or not; hard to split into free/paid tiers without the free tier feeling crippled).
+- **"Agent operating-loop starter kit"** drops to **#3** — doesn't map cleanly to the plugin model (it's a repo template, not a skill/hook).
+
+### 3. Software Development is a top Gumroad revenue category — our niche is better positioned than previously assessed
+
+A separate dataset analysis (Accio, 2026) finds Software Development products at **$65.8M total tracked revenue, 32% of all tracked revenue, average revenue per product $60,814**. This includes developer tools, code libraries, plugins, and AI-powered utilities.
+
+This partially contradicts the 2026-04-11 finding that "3D Design accounts for ~88% of platform revenue" (from InsightRaider's 146K-product dataset). The discrepancy is methodological: InsightRaider measured GMV (gross merchandise value, including large 3D-asset packs), while the Accio dataset appears to measure tracked revenue across a different product taxonomy. Both are estimates from public sales data.
+
+**Net read:** our AI-tooling/developer-tools niche is likely **mid-to-upper-tail on Gumroad**, not bottom-tail. The $60K average per product in the Software Development category is heavily skewed by outliers (AI tools with 10K+ sales), but even the median is likely above the platform-wide median. This is modestly bullish for B-011 but does not change the honest-expectations.md anchor: our specific product (a 15-prompt pack from an unknown seller with zero distribution) is still a median-curve $0 expected outcome until proven otherwise.
+
+### 4. No Gumroad fee changes since last refresh
+
+Confirmed: still 10% + $0.50 + processor. MoR since Jan 2025. Weekly Friday payouts, no minimum. Refund policy unchanged (Gumroad keeps its 10% on refunds). Gumroad Discover still 30%.
+
+Reports of an unofficial "Pro" tier ($10/month with 3.5% + $0.30 fees) exist in some third-party comparison articles but are **not visible on gumroad.com/pricing** and may be enterprise/invitation-only or regional. Not actionable until confirmed on the official pricing page.
+
+### 5. Scoring — no change
+
+- Time-to-first-dollar: **3** (unchanged)
+- $0 viability: **5** (unchanged — BUT Lemon Squeezy is also $0 viable and cheaper; this score applies to the category, not only to Gumroad specifically)
+- Automation-friendliness: **5** (unchanged)
+- Ceiling: **4** (unchanged — Software Development category data is modestly bullish but doesn't raise the ceiling for our specific product shape)
+- **Total: 17 / 20 — unchanged**
+
+### Recommendation for the loop
+
+1. **B-002 stays on Gumroad, no changes.** Measurement window running. Don't touch it.
+2. **B-011 scoping must now include a platform decision** (Gumroad vs Lemon Squeezy). Present to Robert as a structured choice with the fee table from finding #1. Default recommendation: Lemon Squeezy for B-011 if the product is direct-traffic-only (no Discover benefit), Gumroad if there's any reason to cluster products on one storefront for cross-selling.
+3. **B-011 candidate ranking updated:** (a) Claude Code hook recipes (hooks are a plugin type, freemium dual-channel fits), (b) Claude Code CLAUDE.md templates pack, (c) Agent operating-loop starter kit. The hook-recipes candidate is now strictly dominant because of the plugin-marketplace distribution channel.
+4. **New distribution channel for B-011:** publish a free Claude Code plugin marketplace (GitHub repo with 5–8 curated hooks) alongside the paid Gumroad/Lemon Squeezy pack (15+ hooks with walkthroughs). The free plugin is lead-gen; the paid pack is revenue. This is the first B-011 candidate that has a built-in distribution channel beyond Reddit/HN cold-posting.
+5. **Do not switch B-002 to Lemon Squeezy.** The measurement window is running and the listing is live. Switching mid-experiment = wasted signal. If B-002 earns $0, the platform wasn't the reason.
+
+### Sources (verified 2026-04-12)
+- [SchoolMaker — Gumroad Pricing 2026](https://www.schoolmaker.com/blog/gumroad-pricing) — fee structure reconfirmed, MoR since Jan 2025
+- [Dodo Payments — Gumroad Fees in 2026](https://dodopayments.com/blogs/gumroad-fees-explained) — 10% + $0.50 direct, 30% Discover, Stripe 2.9% + $0.30
+- [Gumroad official pricing](https://gumroad.com/pricing) — flat 10% fee confirmed
+- [WeAreFounders — Gumroad vs Payhip vs Lemon Squeezy 2026](https://www.wearefounders.uk/best-platforms-for-selling-digital-products-in-2026/) — real pricing comparison, fee tables
+- [Lemon Squeezy — Gumroad Alternative](https://www.lemonsqueezy.com/gumroad-alternative) — 5% + $0.50, MoR, license keys, subscriptions
+- [Ruul — Lemon Squeezy vs Gumroad](https://ruul.io/blog/lemonsqueezy-vs-gumroad) — 100 sales at $1K = $100 LS fees vs $150 Gumroad
+- [Accio — Best Selling Products on Gumroad 2026](https://www.accio.com/business/best-selling-products-on-gumroad-2025) — Software Development $65.8M / 32% of tracked revenue
+- [Claude Code Docs — Discover plugins](https://code.claude.com/docs/en/discover-plugins) — official plugin marketplace docs, 2,400+ skills, `/plugin` command
+- [Claude Code Marketplaces](https://claudemarketplaces.com/) — community marketplace aggregator
+- [rohitg00/awesome-claude-code-toolkit](https://github.com/rohitg00/awesome-claude-code-toolkit) — 135 agents, 35 skills, 176+ plugins, 20 hooks ecosystem catalog
+- [TokenCalculator — Best AI IDE & CLI Tools April 2026](https://tokencalculator.com/blog/best-ai-ide-cli-tools-april-2026-claude-code-wins) — Claude Code market position
+- [Latuos — Gumroad Fees 2026 Full Commission Breakdown](https://latuos.com/gumroad-fees/) — unofficial Pro tier reports ($10/mo, 3.5%+$0.30)

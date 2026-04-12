@@ -81,3 +81,45 @@ Do **not** pursue Chrome extensions as a first-dollar path. Specifically:
 - **Whether the Jan 2026 malware-wave enforcement cools off after a year or stays permanent.** If submission rejection rates on new devs drop back below ~25%, the automation-friendliness score can be re-raised.
 - **Whether any of our shipped browser tools (B-001, B-008, or a future B-010) actually attract a "make this an extension" signal from real users.** That signal is the only trigger for revisiting this category.
 
+## Refreshed 2026-04-12
+
+Re-refresh from remote run #26. Targeted searches: CWS fee changes, extension security/malware enforcement 2026, Edge/Firefox store changes, extension monetization alternatives. Six searches + three follow-ups. Conclusion: **score unchanged at 10/20**. No finding warrants a rescore, but three material updates improve the picture's resolution.
+
+### What changed since the 2026-04-11 refresh
+
+**1. CVE-2026-0628: Chrome's Gemini AI panel created a new privilege-escalation attack surface for extensions (patched Jan 2026).**
+Discovered by Palo Alto Networks Unit 42 (researcher: Gal Weizman, reported Nov 23 2025). CVSS 8.8. A malicious extension with only basic `declarativeNetRequest` permissions could inject scripts into Chrome's Gemini Live side panel, which has *elevated* privileges — camera/microphone access, local file reads, screenshot capabilities. The attack required no user interaction beyond installing the extension and opening the Gemini panel ([The Hacker News — Chrome Vulnerability Let Malicious Extensions Escalate Privileges via Gemini Panel](https://thehackernews.com/2026/03/new-chrome-vulnerability-let-malicious.html), [Unit 42 — Taming Agentic Browsers](https://unit42.paloaltonetworks.com/gemini-live-in-chrome-hijacking/), [The Register — Chrome AI panel became privilege escalator](https://www.theregister.com/2026/03/03/google_chrome_bug_gemini/)).
+**Why this matters for our loop:** This is the first high-profile example of browser-integrated AI features (Gemini, Copilot) creating privilege-escalation paths that MV3's permission model wasn't designed to contain. Even with minimal declared permissions, an extension could access the AI panel's elevated surface. Google patched this specific bug in Chrome 143 (Jan 2026), but the *pattern* — AI panels with elevated permissions that extensions can reach — is architectural and will recur as Gemini's capabilities expand. Direction of travel: Google will almost certainly tighten extension-to-AI-panel isolation further, which means (a) more review scrutiny for any extension that interacts with side panels, and (b) the enforcement posture on new developers will stay strict or tighten. This reinforces the 04-11 recommendation to keep permissions minimal (`activeTab` + `storage` only) and avoid anything that touches side panels or AI features.
+
+**2. Massive Feb 2026 malware campaign: 300+ extensions, 37M+ downloads, ongoing ownership-transfer attacks.**
+Security researchers documented 300+ Chrome extensions with 37.4 million combined downloads that leaked browsing history, SERP data, or actively stole user data ([SecurityWeek — Over 300 Malicious Chrome Extensions Caught](https://www.securityweek.com/over-300-malicious-chrome-extensions-caught-leaking-or-stealing-user-data/), [The Dupree Report — 300 Malicious Chrome Extensions](https://www.thedupreereport.com/2026/02/malicious-chrome-extensions-37-million-downloads/)). Of these, 287 transmitted browsing history or SERP data, and ~27.2 million users installed 153 extensions confirmed to leak data on installation. Separately, Socket Security identified 5 extensions targeting enterprise HR platforms (Workday, NetSuite, SAP SuccessFactors) that harvested auth cookies every 60 seconds while blocking security admin pages ([The Hacker News — Malicious Chrome Extensions Caught Stealing Business Data](https://thehackernews.com/2026/02/malicious-chrome-extensions-caught.html)). In March 2026, a separate write-up documented the ownership-transfer attack pattern (buy a legitimate extension, push malicious update) as a distinct repeating tactic ([The Hacker News — Chrome Extension Turns Malicious After Ownership Transfer](https://thehackernews.com/2026/03/chrome-extension-turns-malicious-after.html)).
+**Impact:** This is a continuation and escalation of the ShadyPanda/RedDirection campaigns from 2025 that were already noted in the 04-11 refresh. The scale is larger (300+ vs 16 extensions in RedDirection) and the tactics are more diverse (enterprise-targeting, SERP scraping, cookie harvesting, ownership transfer). Google's enforcement response is correspondingly broader. The 04-11 assessment that Google's review on new/low-reputation developers is "measurably stricter" is confirmed — and the pressure is not abating. No score change (already priced in at the 04-11 refresh) but the data is fresher and the escalation pattern is worth noting.
+
+**3. Edge Add-ons store gains CI/CD API and extension ownership transfer (2025–2026).**
+Microsoft Edge Add-ons now supports REST API endpoints for publishing extension updates directly from CI/CD pipelines without manual Partner Center interaction ([Microsoft Learn — Released features for Edge extensions](https://learn.microsoft.com/en-us/microsoft-edge/extensions/whats-new/released-features)). Also new: sidebar extension support (custom UI in the browser sidebar) and extension ownership transfer between developers. The store remains free — no registration fee, no per-submission fee, no per-update fee.
+**Why this matters for our loop:** The CI/CD REST API is the first concrete signal that *automated* publishing to Edge is more feasible than before. If we ever build an extension wrapper around a validated browser tool (the only honest path per the 04-11 recommendation), the Edge publish step could theoretically be agent-automated via the API + credentials in `.env`, the same way we handle GitHub Pages and Gumroad today. This slightly improves the automation-friendliness picture for the Edge-first path specifically — but not enough to rescore, since the Chrome path (which dominates the category) is still gated on manual review + $5 fee + tightening enforcement.
+
+**4. Dodo Payments emerges as a second monetization backend for extensions (4% + $0.40/tx, MoR, no monthly fee).**
+Dodo Payments is a new alternative to ExtensionPay for extension monetization ([Dodo Payments — How to Monetize a Chrome Extension in 2026](https://dodopayments.com/blogs/monetize-chrome-extension)). Pay-as-you-go pricing: 4% + $0.40 per transaction, no setup fee, no monthly minimum. Merchant of Record (handles global VAT/GST). Supports license keys, subscriptions, and usage-based billing. Credit-based billing launching in 2026 (aimed at AI-powered extensions). Competition with ExtensionPay gives developers a second option if ExtensionPay's terms change.
+**Impact:** Minor positive. Adds a second no-upfront-cost monetization backend to the toolbox. Neither Dodo nor ExtensionPay changes the fundamental calculus: monetization is downstream of traffic, and traffic is the bottleneck for any zero-audience extension. Filed for reference if we ever reach the monetization stage.
+
+### No-change confirmations
+
+- **CWS $5 one-time fee:** unchanged ([Chrome for Developers — Register](https://developer.chrome.com/docs/webstore/register), [Extension Radar — CWS Fee 2026](https://www.extensionradar.com/blog/chrome-web-store-developer-fee-2026)).
+- **CWS rejection rate:** ~35% as of Oct 2024 data, no newer public figure. 60% of rejections involve insufficient permission justification. Average review 3–7 days, longer for broad permissions.
+- **Edge Add-ons:** still free, no registration fee.
+- **Firefox AMO:** still free. June 2025 policy update (privacy-policy hosting flexibility, closed-group extensions allowed) already noted in 04-11.
+- **MV3:** fully enforced since Chrome 139 (July 2025). Already noted.
+- **ExtensionPay:** still available, still free tier for developers.
+- **CWS active extensions:** ~111,933 (early 2026), down from 137k peak. Already noted.
+- Score: **10/20 unchanged**.
+
+### Updated "What's still worth watching" (additions in bold)
+
+- Whether Google tightens CWS fees above $5.
+- Whether Firefox or Edge add payment/license rails.
+- Whether submission rejection rates on new devs drop below ~25%.
+- Whether any shipped browser tool attracts a "make this an extension" signal.
+- **Whether Google's AI-panel isolation improves or whether more CVE-2026-0628-class bugs emerge** — this determines whether the Gemini/Copilot attack surface becomes a permanent new enforcement driver or gets architecturally contained.
+- **Whether Edge's CI/CD API matures enough to be a reliable agent-automated publishing path** — if so, the Edge-first recommendation gains a concrete automation advantage over Chrome that isn't just "free vs $5."
+

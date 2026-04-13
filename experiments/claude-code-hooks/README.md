@@ -255,27 +255,39 @@ If the 14-day window closes at zero paid sales:
 
 ## Definition of done for this experiment
 - [x] Scoping: README.md (this file), PLATFORM.md, hooks outline — **run #65**
-- [ ] Free pack built (5–8 working hooks + install README + `.claude-plugin/marketplace.json`) — next run
-- [ ] Paid pack built (15–18 hooks with walkthroughs, single markdown deliverable) — run after next
-- [ ] `ship.md` written (Gumroad or LS upload instructions + awesome-claude-code PR draft + Show HN title options) — subsequent run
+- [x] Free pack built (5 working hooks + install README + `.claude-plugin/marketplace.json`) — **run #66** (2026-04-13 22:37 UTC). Final 5 from the 8-hook outline: dangerous-command guard, secret-file guard, session logger, auto-format on edit, protected-branch guard. Dropped from the free pack: test-after-edit nudge, desktop notifier, token-budget reminder — these move to the paid pack as they need more setup, more platform-specific code, or more walkthrough content than the free tier should carry.
+- [ ] Paid pack built (15–18 hooks with walkthroughs, single markdown deliverable) — run #67
+- [ ] `ship.md` written (Gumroad or LS upload instructions + awesome-claude-code PR draft + Show HN title options) — run #68
 - [ ] Free repo published on GitHub (blocked-on-human: `gh repo create` via local `GITHUB_TOKEN`)
 - [ ] Paid pack uploaded to chosen storefront (blocked-on-human: `GUMROAD_ACCESS_TOKEN` or LS equivalent)
 - [ ] Plugin marketplace submission (blocked-on-human: Anthropic review)
 - [ ] Distribution posts scheduled (awesome-claude-code PR, Show HN, r/SideProject, r/ClaudeAI)
 - [ ] 14-day measurement window closes → update this README with results
 
-## Status (2026-04-13 21:31 UTC, remote run #65)
-Scoping only. No code written yet. Next remote run begins building the
-free pack.
+## Status (2026-04-13 22:37 UTC, remote run #66)
+Free pack built. 5 POSIX-shell hooks + `plugin.json` + `marketplace.json`
++ install README + LICENSE, all under `free-pack/`. Sanity-tested each
+hook with sample stdin payloads — safe commands pass, destructive
+commands block with clear stderr reasons, parse failures fail-open.
+Next remote run builds the paid pack.
 
 ## Files
 - `README.md` — this file (scoping, hypothesis, outline, pricing, distribution, measurement)
 - `PLATFORM.md` — Gumroad vs Lemon Squeezy decision for Robert (default: Gumroad)
+- `free-pack/` — the free plugin (5 hooks + manifests + README + LICENSE)
+  - `free-pack/hooks/dangerous-command-guard.sh`
+  - `free-pack/hooks/secret-file-guard.sh`
+  - `free-pack/hooks/session-logger.sh`
+  - `free-pack/hooks/auto-format.sh`
+  - `free-pack/hooks/protected-branch-guard.sh`
+  - `free-pack/.claude-plugin/plugin.json`
+  - `free-pack/.claude-plugin/marketplace.json`
+  - `free-pack/README.md`
+  - `free-pack/LICENSE`
 
 (Files to be added in future runs:)
-- `free-pack/` — the 5–8 free hooks + install README + `.claude-plugin/marketplace.json`
-- `claude-code-hooks-paid.md` — the paid deliverable (15–18 hooks with walkthroughs)
-- `ship.md` — handoff for the local agent
+- `claude-code-hooks-paid.md` — the paid deliverable (15–18 hooks with walkthroughs) — run #67
+- `ship.md` — handoff for the local agent — run #68
 
 ## Metrics table (fill in after measurement window)
 | Date | Free installs | Paid views | Paid downloads | Revenue (gross) | Revenue (net) | Notes |

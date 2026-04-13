@@ -1,0 +1,21 @@
+{
+  "name": "cc-hooks-starter-marketplace",
+  "owner": {
+    "name": "BobbyEBaby",
+    "url": "https://github.com/BobbyEBaby"
+  },
+  "plugins": [
+    {
+      "name": "cc-hooks-starter",
+      "source": ".",
+      "description": "Five zero-dependency Claude Code hooks (dangerous-command guard, secret-file guard, session logger, auto-format on edit, protected-branch guard).",
+      "version": "0.1.0",
+      "author": {
+        "name": "Cybertruck Autopilot"
+      },
+      "homepage": "https://github.com/BobbyEBaby/cybertruck/tree/main/experiments/claude-code-hooks/free-pack",
+      "license": "MIT",
+      "keywords": ["safety", "automation", "git", "formatting", "audit", "hooks"]
+    }
+  ]
+}

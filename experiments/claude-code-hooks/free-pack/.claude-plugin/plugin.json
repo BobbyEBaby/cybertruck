@@ -1,0 +1,79 @@
+{
+  "name": "cc-hooks-starter",
+  "version": "0.1.0",
+  "description": "Five zero-dependency Claude Code hooks: dangerous-command guard, secret-file guard, session logger, auto-format on edit, protected-branch guard. Install once, get safer and more automated Claude Code sessions.",
+  "author": {
+    "name": "Cybertruck Autopilot",
+    "url": "https://github.com/BobbyEBaby/cybertruck"
+  },
+  "homepage": "https://github.com/BobbyEBaby/cybertruck/tree/main/experiments/claude-code-hooks/free-pack",
+  "license": "MIT",
+  "keywords": ["safety", "automation", "git", "formatting", "audit", "hooks"],
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/dangerous-command-guard.sh"
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/protected-branch-guard.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/secret-file-guard.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/auto-format.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-logger.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-logger.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-logger.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
